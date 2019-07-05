@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="Swo_Aplicaciones">
+        <wb-resource deploy-path="/" source-path="/EarContent" tag="defaultRootSource"/>
+        <dependent-module archiveName="Swo_AplicacionesWeb.war" deploy-path="/" handle="module:/resource/Swo_AplicacionesWeb/Swo_AplicacionesWeb">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="Swo_AplicacionesEJB.jar" deploy-path="/" handle="module:/resource/Swo_AplicacionesEJB/Swo_AplicacionesEJB">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+    </wb-module>
+</project-modules>
