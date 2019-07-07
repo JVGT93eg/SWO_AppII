@@ -16,7 +16,7 @@ import swo.model.entities.SwoUsuario;
 @Stateless
 @LocalBean
 public class ManagerSwoUsuario {
-	@PersistenceContext(unitName = "usuariosDS")
+	@PersistenceContext
 	private EntityManager em;
     /**
      * Default constructor. 
