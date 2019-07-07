@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:facet name="first">
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
+		<title>MANEJO DE PROCEDIMIENTOS</title>
+	</f:facet>
+</h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+
+	<h:form id="form1">
+		<p:messages>
+			<p:autoUpdate />
+		</p:messages>
+		<p:panel collapsed="#{beanProcedimiento.panelColapso}">
+			<f:facet name="header">
+				<p:commandButton value="Nueva Proceso" icon="fa fa-plus"
+					update="@form"
+					actionListener="#{beanProcedimiento.actionListenerColapsarPanel()}"></p:commandButton>
+			</f:facet>
+			<p:panelGrid columns="2">
+				<h:outputText value="Descripcion Procedimiento:" />
+				<p:inputText value="#{beanProcedimiento.descripcionProc}" />
+				<h:outputText value="Cantidad Procedimiento:" />
+				<p:inputText value="#{beanProcedimiento.cantidadProc}" />
+				<h:outputText value="Detalles Tratamiento:" />
+				<p:selectOneMenu value="#{beanProcedimiento.codigoTra}">
+					<f:selectItems value="#{beanProcedimiento.listaT}" var="t"
+						itemLabel="Descripcion Tratamiento: #{t.descripcionTra}///Estado tratamiento: #{t.estadoTra}" 
+						itemValue="#{t.codigoTra}" />
+				</p:selectOneMenu>
+
+				<p:commandButton value="Insertar" icon="fa fa-save"
+					update="@form,:form2"
+					actionListener="#{beanProcedimiento.actionListenerInsertarProcedimiento()}"></p:commandButton>
+			</p:panelGrid>
+		</p:panel>
+	</h:form>
+	<br />
+	<h:form id="form2">
+		<p:panel header="Datos Procedimiento" />
+		<p:dataTable value="#{beanProcedimiento.lista}" reflow="true" var="p"
+			paginator="true" rows="5">
+			<!-- paginator para crear paginacion de la pag web y rows: cuantas lines de la tabla quiero q se muetren por pagina-->
+			<p:column headerText="Descripcion Procedimiento" filterBy="#{p.descripcionPro}"
+				priority="1" filterMatchMode="contains">
+				<!-- filterBy :realizar busquedas  -->
+				<h:outputText value="#{p.descripcionPro}" />
+			</p:column>
+			<p:column headerText="Cantidad Procedimiento" filterBy="#{p.cantidadProc}"
+				priority="1" filterMatchMode="contains">
+				<h:outputText value="#{p.cantidadProc}" />
+			</p:column>
+			<p:column headerText="Descripcion Tratamoento" filterBy="#{p.swoTratamiento.descripcionTra}" 
+				priority="2" filterMatchMode="contains">
+				<h:outputText value="#{p.swoTratamiento.descripcionTra}" />
+			</p:column>
+			<p:column headerText="Estado Tratamiento" filterBy="#{p.swoTratamiento.estadoTra}" 
+				priority="2" filterMatchMode="contains">
+				<h:outputText value="#{p.swoTratamiento.estadoTra}" />
+			</p:column>
+			<p:column headerText="Precio Tratamiento" priority="2">
+				<h:outputText value="#{p.swoTratamiento.precioTra}" />
+			</p:column>
+
+
+			<p:column headerText="OPCIONES" priority="1">
+				<p:commandButton value="Eliminar" icon="fa fa-close"
+					title="Eliminar" update="@form"
+					actionListener="#{beanProcedimiento.actionListenerEliminarProcedimineto(p.codigoPro)}">
+					<p:confirm header="Confirmación" message="Desea elimnar?"
+						icon="fa fa-exclamation-triangle"></p:confirm>
+				</p:commandButton>
+				<p:commandButton value="Editar" icon="fa fa-edit" title="Editar"
+					actionListener="#{beanProcedimiento.actionListenerSeleccionarProcedimiento(p)}"
+					update=":formEdicion" oncomplete="PF('dlgEdicion').show();"></p:commandButton>
+			</p:column>
+		</p:dataTable>
+	</h:form>
+	<p:dialog header="Editar información" widgetVar="dlgEdicion"
+		modal="true">
+		<h:form id="formEdicion">
+			<p:growl>
+				<p:autoUpdate />
+			</p:growl>
+			<h:outputText value="Cod Procedimiento:" />
+			<h:outputText
+				value="#{beanProcedimiento.procedimientoSeleccionado.codigoPro}" />
+			<p:panelGrid columns="2">
+				<h:outputText value="Descripcion Procedimiento:" />
+				<p:inputText
+					value="#{beanProcedimiento.procedimientoSeleccionado.descripcionPro}" />
+				<h:outputText value="Estado:" />
+				<p:inputText
+					value="#{beanProcedimiento.procedimientoSeleccionado.cantidadProc}" />
+				<h:outputText value="Categoria:" />
+		
+					<p:selectOneMenu value="#{beanProcedimiento.codigoTra}">
+					<f:selectItems value="#{beanProcedimiento.listaT}" var="t"
+						itemLabel="#{t.descripcionTra}\\\\\\#{t.estadoTra}" 
+						itemValue="#{t.codigoTra}" />
+				</p:selectOneMenu>
+
+			</p:panelGrid>
+			<p:commandButton value="Actualizar" icon="fa fa-save"
+				update="@form,:form2"
+				actionListener="#{beanProcedimiento.actionListenerActualizarProcedimiento()}" />
+		</h:form>
+	</p:dialog>
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+		<p:commandButton value="Si" type="button"
+			styleClass="ui-confirmdialog-yes" icon="fa fa-check"></p:commandButton>
+		<p:commandButton value="No" type="button"
+			styleClass="ui-confirmdialog-no" icon="fa fa-times"></p:commandButton>
+	</p:confirmDialog>
+
+</body>
+</html>
