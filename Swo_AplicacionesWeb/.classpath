@@ -14,5 +14,6 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="src" path="/Swo_AplicacionesEJB"/>
+	<classpathentry kind="src" path="/Sis_Web_OdontologicoEJB"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
