@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:facet name="first">
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
+		<title>MANEJO DE TRATAMIENTO</title>
+	</f:facet>
+</h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+
+	<h:form id="form1">
+		<p:messages>
+			<p:autoUpdate />
+		</p:messages>
+		<p:panel collapsed="#{beanTratamiento.panelColapso}">
+			<f:facet name="header">
+				<p:commandButton value="Nueva Tratamiento" icon="fa fa-plus"
+					update="@form"
+					actionListener="#{beanTratamiento.actionListenerColapsarPanel()}"></p:commandButton>
+			</f:facet>
+			<p:panelGrid columns="2">
+				<h:outputText value="Descripcion:" />
+				<p:inputText value="#{beanTratamiento.descripcionTra}" />
+				<h:outputText value="Estado:" />
+				<p:inputText value="#{beanTratamiento.estadoTra}" />
+				<h:outputText value="Categoria:" />
+				<p:selectOneMenu value="#{beanTratamiento.cod_Categoria}">
+					<f:selectItems value="#{beanTratamiento.listaC}" var="tc"
+						itemLabel="#{tc.nombreCat}" 
+						itemValue="#{tc.codigoCat}" />
+				</p:selectOneMenu>
+
+				<h:outputText value="Precio:" />
+				<p:inputText value="#{beanTratamiento.precioTra}" />
+
+
+				<p:commandButton value="Insertar" icon="fa fa-save"
+					update="@form,:form2"
+					actionListener="#{beanTratamiento.actionListenerInsertarTratamiento()}"></p:commandButton>
+			</p:panelGrid>
+		</p:panel>
+	</h:form>
+	<br />
+	<h:form id="form2">
+		<p:panel header="Datos Tratamientos" />
+		<p:dataTable value="#{beanTratamiento.lista}" reflow="true" var="t"
+			paginator="true" rows="5">
+			<!-- paginator para crear paginacion de la pag web y rows: cuantas lines de la tabla quiero q se muetren por pagina-->
+			<p:column headerText="Descripcion" filterBy="#{t.descripcionTra}"
+				priority="1" filterMatchMode="contains">
+				<h:outputText value="#{t.descripcionTra}" />
+			</p:column>
+			<p:column headerText="Categoria" priority="2">
+				<h:outputText value="#{t.swoCategoria.nombreCat}" />
+			</p:column>
+			<p:column headerText="Precio" priority="2">
+				<h:outputText value="#{t.precioTra}" />
+			</p:column>
+
+
+			<p:column headerText="OPCIONES" priority="1">
+				<p:commandButton value="Eliminar" icon="fa fa-close"
+					title="Eliminar" update="@form"
+					actionListener="#{beanTratamiento.actionListenerEliminartratamiento(t.codigoTra)}">
+					<p:confirm header="Confirmación" message="Desea elimnar?"
+						icon="fa fa-exclamation-triangle"></p:confirm>
+				</p:commandButton>
+				<p:commandButton value="Editar" icon="fa fa-edit" title="Editar"
+					actionListener="#{beanTratamiento.actionListenerSeleccionarTratamiento(t)}"
+					update=":formEdicion" oncomplete="PF('dlgEdicion').show();"></p:commandButton>
+			</p:column>
+		</p:dataTable>
+	</h:form>
+	<p:dialog header="Editar información" widgetVar="dlgEdicion"
+		modal="true">
+		<h:form id="formEdicion">
+			<p:growl>
+				<p:autoUpdate />
+			</p:growl>
+			<h:outputText value="Cod Tratamiento:" />
+			<h:outputText
+				value="#{beanTratamiento.tratamientoSeleccionado.codigoTra}" />
+			<p:panelGrid columns="2">
+				<h:outputText value="Descripcion:" />
+				<p:inputText
+					value="#{beanTratamiento.tratamientoSeleccionado.descripcionTra}" />
+				<h:outputText value="Estado:" />
+				<p:inputText
+					value="#{beanTratamiento.tratamientoSeleccionado.estadoTra}" />
+				<h:outputText value="Categoria:" />
+		
+					<p:selectOneMenu value="#{beanTratamiento.cod_Categoria}">
+					<f:selectItems value="#{beanTratamiento.listaC}" var="tc"
+						itemLabel="#{tc.nombreCat}" 
+						itemValue="#{tc.codigoCat}" />
+				</p:selectOneMenu>
+				
+				
+				
+				<h:outputText value="Precio:" />
+				<p:inputText
+					value="#{beanTratamiento.tratamientoSeleccionado.precioTra}" />
+
+			</p:panelGrid>
+			<p:commandButton value="Actualizar" icon="fa fa-save"
+				update="@form,:form2"
+				actionListener="#{beanTratamiento.actionListenerActualizarTratamiento()}" />
+		</h:form>
+	</p:dialog>
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+		<p:commandButton value="Si" type="button"
+			styleClass="ui-confirmdialog-yes" icon="fa fa-check"></p:commandButton>
+		<p:commandButton value="No" type="button"
+			styleClass="ui-confirmdialog-no" icon="fa fa-times"></p:commandButton>
+	</p:confirmDialog>
+
+</body>
+</html>
