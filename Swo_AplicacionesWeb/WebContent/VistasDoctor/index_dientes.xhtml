@@ -13,8 +13,7 @@
 	</f:facet>
 </h:head>
 <body>
-
-
+	
 	<p:growl>
 		<p:autoUpdate />
 	</p:growl>
@@ -82,7 +81,7 @@
 						actionListener="#{beanSwoDiente.actionListenerSeleccinarDiente(swodiente)}"
 						update=":formEdicion" oncomplete="PF('dlgEdicion').show();">
 					</p:commandButton>
-					</p:column>
+				</p:column>
 			</p:dataTable>
 		</p:panel>
 	</h:form>
@@ -98,25 +97,23 @@
 			<h:outputText value="Código:" />
 			<h:outputText value="#{beanSwoDiente.dienteSeleccionado.codigoDie}" />
 			<br />
-			<h:outputText value="Número:" />
-			<h:outputText value="#{beanSwoDiente.dienteSeleccionado.numeroDie}" />
-			<br />
-			<h:outputText value="Nombre:" />
-			<h:outputText value="#{beanSwoDiente.dienteSeleccionado.nombreDie}" />
+
 			<p:panelGrid columns="2">
+				<h:outputText value="Número:" />
+				<p:inputText value="#{beanSwoDiente.dienteSeleccionado.numeroDie}" />
+				<h:outputText value="Nombre:" />
+				<p:inputText value="#{beanSwoDiente.dienteSeleccionado.nombreDie}" />
 				<h:outputText value="Estado:" />
 				<p:inputText value="#{beanSwoDiente.dienteSeleccionado.estadoDie}" />
-
 				<h:outputText value="Descripción:" />
-				<p:inputText
-					value="#{beanSwoDiente.dienteSeleccionado.descripcionDie}" />
+				<p:inputText value="#{beanSwoDiente.dienteSeleccionado.descripcionDie}" />
 			</p:panelGrid>
 			<p:commandButton value="Actualizar" icon="pi pi-save"
 				update="@form,:form2"
 				actionListener="#{beanSwoDiente.actionListenerActualizarDiente()}" />
 		</h:form>
 	</p:dialog>
-	
+
 	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 		<p:commandButton value="Si" type="button"
 			styleClass="ui-confirmdialog-yes" icon="fa fa-check" />

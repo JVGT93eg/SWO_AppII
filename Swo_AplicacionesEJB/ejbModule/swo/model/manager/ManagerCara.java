@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import swo.model.entities.SwoCara;
+import swo.model.entities.SwoDiente;
 
 
 
@@ -48,4 +49,16 @@ public class ManagerCara {
   	  e.setDescripcionCar(cara.getDescripcionCar());
   	  em.merge(e);
     }
+    
+    //Insertar Cara
+    public void insertarCara(SwoCara cara) {
+    	em.persist(cara);   			
+    }
+    //Eliminar Cara
+    public void eliminarCara(Integer codigo_cara) {
+    	SwoCara cara=findSwoCaraBycodigocara(codigo_cara);
+    	if(cara!=null)
+    		em.remove(cara);
+    }
+    
 }
