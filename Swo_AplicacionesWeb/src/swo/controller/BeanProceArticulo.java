@@ -14,6 +14,8 @@ import swo.model.entities.SwoProcedimiento;
 import swo.model.manager.ManagerProceArticulo;
 
 
+
+
 @Named
 @SessionScoped
 public class BeanProceArticulo implements Serializable{
@@ -56,7 +58,6 @@ public class BeanProceArticulo implements Serializable{
     	
     }
      
-	
 	public void actionListenerEliminarProceArticulo(int codigoProArt) {
 		managerProceArticulo.eliminarProcedimiento(codigoProArt);
 		lista = managerProceArticulo.listarProceArticulo();

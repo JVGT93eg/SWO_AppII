@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:facet name="first">
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
+		<title>Manejo de datos Dientes</title>
+	</f:facet>
+</h:head>
+<body>
+
+
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+	<h:form id="form1">
+
+		<p:panel collapsed="#{beanSwoDiente.panelColapsado}">
+			<f:facet name="header">
+				<center>
+					<div>
+						<h1 style="background-color: #669999;">Lista de Dientes</h1>
+					</div>
+				</center>
+				<p:commandButton value="Nuevo Diente" icon="fa fa-plus"
+					update="@form"
+					actionListener="#{beanSwoDiente.actionListenerColapsarPanel()}"></p:commandButton>
+
+			</f:facet>
+			<p:panelGrid columns="2">
+				<h:outputText value="Número:" />
+				<p:inputText value="#{beanSwoDiente.diente.numeroDie}" />
+				<h:outputText value="Nombre:" />
+				<p:inputText value="#{beanSwoDiente.diente.nombreDie}" />
+				<h:outputText value="Estado:" />
+				<p:inputText value="#{beanSwoDiente.diente.estadoDie}" />
+				<h:outputText value="Descripción:" />
+				<p:inputText value="#{beanSwoDiente.diente.descripcionDie}" />
+				<p:commandButton value="Insertar" icon="fa fa-save"
+					update="@form,:form2"
+					actionListener="#{beanSwoDiente.actionListenerInsertarDiente()}"></p:commandButton>
+			</p:panelGrid>
+		</p:panel>
+	</h:form>
+	<br />
+
+
+
+	<h:form id="form2">
+		<p:panel header="Datos de Dientes">
+			<p:dataTable value="#{beanSwoDiente.listaDientes}" var="swodiente"
+				reflow="true" paginator="true" rows="7">
+				<p:column headerText="Código">
+					<h:outputText value="#{swodiente.codigoDie}" />
+				</p:column>
+				<p:column headerText="Número " filterBy="#{swodiente.numeroDie}">
+					<h:outputText value="#{swodiente.numeroDie}" />
+				</p:column>
+				<p:column headerText="Nombre">
+					<h:outputText value="#{swodiente.nombreDie}" />
+				</p:column>
+				<p:column headerText="Estado">
+					<h:outputText value="#{swodiente.estadoDie}" />
+				</p:column>
+				<p:column headerText="Descripción">
+					<h:outputText value="#{swodiente.descripcionDie}" />
+				</p:column>
+
+
+				<p:column headerText="Opciones" priority="1">
+					<p:commandButton icon="fa fa-trash" title="Eliminar" update="@form"
+						actionListener="#{beanSwoDiente.actionListenerEliminarDiente(swodiente.codigoDie)}">
+						<p:confirm header="Confirmación" message="Desea eliminar usuario?"
+							icon="fa fa-exclamation-triangle"></p:confirm>
+					</p:commandButton>
+					<p:commandButton icon="pi pi-pencil" title="Editar"
+						actionListener="#{beanSwoDiente.actionListenerSeleccinarDiente(swodiente)}"
+						update=":formEdicion" oncomplete="PF('dlgEdicion').show();">
+					</p:commandButton>
+					</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+
+
+
+	<p:dialog header="Editar Información" widgetVar="dlgEdicion"
+		modal="true">
+		<h:form id="formEdicion">
+			<p:growl>
+				<p:autoUpdate />
+			</p:growl>
+			<h:outputText value="Código:" />
+			<h:outputText value="#{beanSwoDiente.dienteSeleccionado.codigoDie}" />
+			<br />
+			<h:outputText value="Número:" />
+			<h:outputText value="#{beanSwoDiente.dienteSeleccionado.numeroDie}" />
+			<br />
+			<h:outputText value="Nombre:" />
+			<h:outputText value="#{beanSwoDiente.dienteSeleccionado.nombreDie}" />
+			<p:panelGrid columns="2">
+				<h:outputText value="Estado:" />
+				<p:inputText value="#{beanSwoDiente.dienteSeleccionado.estadoDie}" />
+
+				<h:outputText value="Descripción:" />
+				<p:inputText
+					value="#{beanSwoDiente.dienteSeleccionado.descripcionDie}" />
+			</p:panelGrid>
+			<p:commandButton value="Actualizar" icon="pi pi-save"
+				update="@form,:form2"
+				actionListener="#{beanSwoDiente.actionListenerActualizarDiente()}" />
+		</h:form>
+	</p:dialog>
+	
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+		<p:commandButton value="Si" type="button"
+			styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+		<p:commandButton value="No" type="button"
+			styleClass="ui-confirmdialog-no" icon="fa fa-times" />
+	</p:confirmDialog>
+</body>
+</html>

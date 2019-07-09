@@ -12,6 +12,8 @@ import javax.persistence.Query;
 import swo.model.entities.SwoCategoria;
 import swo.model.entities.SwoTratamiento;
 
+
+
 @Stateless
 @LocalBean
 public class ManagerTratamiento {

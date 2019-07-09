@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+</h:head>
+<body>
+<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+	<h:form id="form1">
+	
+		<p:panel collapsed="#{beanSwoPaciente.panelColapsado}">
+			<f:facet name="header">
+				<p:commandButton value="Nuevo Paciente" icon="fa fa-plus"
+					update="@form"
+					actionListener="#{beanSwoPaciente.actionListenerColapsarPanel()}"></p:commandButton>
+			</f:facet>
+			<br />		
+			<h:panelGrid columns="2">
+				
+					<h:outputText value="Cédula" />
+					<p:inputText value="#{beanSwoPaciente.paciente.cedulaPac}" />
+					<h:outputText value="Nombres" />
+					<p:inputText value="#{beanSwoPaciente.paciente.nombrePac}" />
+					<h:outputText value="Apellidos" />
+					<p:inputText value="#{beanSwoPaciente.paciente.apellidoPac}" />
+					<h:outputText value="Fecha de Nacimiento" />
+					<p:datePicker value="#{beanSwoPaciente.paciente.fechaNaciPac}"/> 
+					<h:outputText value="Género" />	
+				
+					<p:selectOneMenu value="" >
+						<f:selectItem itemLabel="Masculino" itemValue="1"  />
+						<f:selectItem itemLabel="Femenino" itemValue="2" />
+					</p:selectOneMenu>
+							
+					<h:outputText value="Dirección" />								
+					<h:inputText  value="#{beanSwoPaciente.paciente.direccionPac}"/>								
+					<h:outputText value="Teléfono" />						
+					<h:inputText value="#{beanSwoPaciente.paciente.telefonoPac}"/>
+					<h:outputText value="Correo Electrónico" />
+				<h:inputText value="#{beanSwoPaciente.paciente.emailPac}"/>
+				<p:commandButton value="Registrar" icon="ui-icon-pencil"
+				update="@form,:form2"
+				actionListener="#{beanSwoPaciente.actionListenerInsertarPaciente()}" ></p:commandButton>
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+	
+<br />
+	<h:form id="form2">
+		<p:panel header="Datos Pacientes">
+			<p:dataTable value="#{beanSwoPaciente.listaPacientes}" reflow="true"
+				var="paciente" paginator="true" rows="5">
+
+				<p:column headerText="Código" style="width:50px">
+					<h:outputText value="#{paciente.codigoPac}" />
+				</p:column>
+
+				<p:column headerText="Cédula" filterBy="#{paciente.cedulaPac}"
+					filterMatchMode="contains" priority="1">
+					<h:outputText value="#{paciente.cedulaPac}" />
+				</p:column>
+
+				<p:column headerText="Apellidos" filterBy="#{paciente.apellidoPac}"
+					filterMatchMode="contains" priority="1">
+					<h:outputText value="#{paciente.apellidoPac}" />
+				</p:column>
+
+				<p:column headerText="Nombres" priority="2">
+					<h:outputText value="#{paciente.nombrePac}" />
+				</p:column>
+
+				<p:column headerText="Fecha de Nacimiento">
+					<h:outputText  value="#{paciente.fechaNaciPac}" />
+				</p:column>
+
+				<p:column headerText="Dirección">
+					<h:outputText value="#{paciente.direccionPac}" />
+				</p:column>
+
+				<p:column headerText="Teléfono">
+					<h:outputText value="#{paciente.telefonoPac}" />
+				</p:column>
+
+				<p:column headerText="Email" style="width:180px">
+					<h:outputText value="#{paciente.emailPac}" />
+				</p:column>
+
+
+				<p:column headerText="Género">
+					<h:outputText value="#{paciente.swoGenero.descripcionGen}" />
+				</p:column>
+
+				<p:column headerText="OPCIONES" priority="1">
+
+						<p:commandButton icon="pi pi-pencil" title="Editar"
+						actionListener="#{beanSwoPaciente.actionListenerSeleccinarPaciente(paciente)}"
+						update=":formEdicion" oncomplete="PF('dlgEdicion').show();">
+					</p:commandButton>
+					
+					<p:commandButton icon="pi pi-times" title="eliminar" update="@form"
+						actionListener="#{beanSwoPaciente.actionListenerEliminarPaciente(paciente.codigoPac)}">
+						<p:confirm header="Confirmación" message="Desea eliminar?"
+							icon="pi pi-exclamation-circle"></p:confirm>
+					</p:commandButton>
+				
+
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+
+
+	<p:dialog header="Editar Información" widgetVar="dlgEdicion"
+		modal="true">
+		<h:form id="formEdicion">
+			<p:growl>
+				<p:autoUpdate />
+			</p:growl>
+			<h:outputText value="Código:" />
+			<h:outputText value="#{beanSwoPaciente.pacienteSelecionado.codigoPac}" />
+			<p:panelGrid columns="2">
+				
+				<h:outputText value="Cédula:" />
+				<p:inputText
+					value="#{beanSwoPaciente.pacienteSelecionado.cedulaPac}" />
+				<h:outputText value="Nombres:" />
+				<p:inputText
+					value="#{beanSwoPaciente.pacienteSelecionado.nombrePac}" />
+				<h:outputText value="Apellidos:" />
+				<p:inputText value="#{beanSwoPaciente.pacienteSelecionado.apellidoPac}" />
+				<h:outputText value="Fecha Nacimiento:" />
+				<p:datePicker value="#{beanSwoPaciente.pacienteSelecionado.fechaNaciPac}" />
+				<h:outputText value="Dirección:" />
+				<p:inputText value="#{beanSwoPaciente.pacienteSelecionado.direccionPac}" />
+				<h:outputText value="Teléfono:" />
+				<p:inputText value="#{beanSwoPaciente.pacienteSelecionado.telefonoPac}" />
+				<h:outputText value="Email:" />
+				<p:inputText value="#{beanSwoPaciente.pacienteSelecionado.emailPac}" />
+				<h:outputText value="Género:" />
+				<p:inputText value="#{beanSwoPaciente.pacienteSelecionado.swoGenero.descripcionGen}" />
+			</p:panelGrid>
+			<p:commandButton value="Actualizar" icon="pi pi-save"
+				update="@form,:form2"
+				actionListener="#{beanSwoPaciente.actionListenerActualizarPaciente()}"/>
+		</h:form>
+	</p:dialog>
+
+
+
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+		<p:commandButton value="Sí" type="button"
+			styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+		<p:commandButton value="No" type="button"
+			styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+	</p:confirmDialog>
+
+</body>
+</html>

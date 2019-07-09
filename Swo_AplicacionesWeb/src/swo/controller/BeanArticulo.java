@@ -21,6 +21,8 @@ import swo.model.manager.ManagerArticulo;
 
 
 
+
+
 @Named
 @SessionScoped
 public class BeanArticulo implements Serializable{

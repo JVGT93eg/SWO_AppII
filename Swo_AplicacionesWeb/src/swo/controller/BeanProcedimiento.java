@@ -16,6 +16,8 @@ import swo.model.manager.ManagerProcedimiento;
 
 
 
+
+
 @Named
 @SessionScoped
 public class BeanProcedimiento implements Serializable{
