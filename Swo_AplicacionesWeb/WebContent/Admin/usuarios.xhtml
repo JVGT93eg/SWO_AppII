@@ -95,7 +95,7 @@
 					priority="4">
 					<h:outputText value="#{swousuario.direccionUsu}" />
 				</p:column>
-				<p:column headerText="OPCIONES" priority="1">
+				<p:column headerText="OPCIONES" style="width:70px" priority="1">
 					<p:commandButton icon="fa fa-trash" title="Eliminar" update="@form"
 						actionListener="#{beanSwoUsuario.actionListenerEliminarSwoUsuario(swousuario.codigoUsu)}">
 						<p:confirm header="Confirmación" message="Desea eliminar usuario?"
