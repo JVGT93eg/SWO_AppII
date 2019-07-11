@@ -12,6 +12,8 @@ import swo.model.entities.SwoCategoria;
 import swo.model.manager.ManagerCategorias;
 
 
+
+
 @Named
 @SessionScoped
 public class BeanCategoria implements Serializable{

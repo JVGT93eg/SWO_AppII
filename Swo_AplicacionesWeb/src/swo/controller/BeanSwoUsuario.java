@@ -22,6 +22,7 @@ public class BeanSwoUsuario implements Serializable {
 	private boolean panelColapsado;
 	private SwoUsuario swoUsuarioSeleccionado;
 	
+	
 	@PostConstruct
 	public void inicializar() {
 		listaSwoUsuarios=managerSwoUsuario.findAllSwoUsuarios();

@@ -13,7 +13,6 @@ import swo.model.entities.SwoTratamiento;
 import swo.model.manager.ManagerTratamiento;
 
 
-
 @Named
 @SessionScoped
 public class BeanTratamiento implements Serializable{

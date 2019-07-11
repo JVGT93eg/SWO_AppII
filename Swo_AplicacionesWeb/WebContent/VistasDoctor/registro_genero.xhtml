@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+</h:head>
+<body>
+<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+	
+	<h:form id="form1">
+		<p:panel collapsed="#{beanSwoGenero.panelColapsado}">
+			<f:facet name="header">
+				<p:commandButton value="Nuevo Genero" icon="fa fa-plus"
+					update="@form"
+					actionListener="#{beanSwoGenero.actionListenerColapsarPanel()}"></p:commandButton>
+			</f:facet>
+			<br />		
+			<h:panelGrid columns="2">
+				
+					<h:outputText value="Descripción" />
+					<p:inputText value="#{beanSwoGenero.genero.descripcionGen}" />
+				<p:commandButton value="Registrar" icon="ui-icon-pencil"
+				update="@form,:form2"
+				actionListener="#{beanSwoGenero.actionListenerInsertarGenero()}" ></p:commandButton>
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+	
+<br />
+	<h:form id="form2">
+		<p:panel header="Datos de Género">
+			<p:dataTable value="#{beanSwoGenero.listaGenero}" reflow="true"
+				var="genero" paginator="true" rows="5">
+
+				<p:column headerText="Código" style="width:50px">
+					<h:outputText value="#{genero.codigoGen}" />
+				</p:column>
+
+				<p:column headerText="Descripción" filterBy="#{genero.descripcionGen}"
+					filterMatchMode="contains" priority="1">
+					<h:outputText value="#{genero.descripcionGen}" />
+				</p:column>
+
+				<p:column headerText="OPCIONES" priority="1">
+
+						<p:commandButton icon="pi pi-pencil" title="Editar"
+						actionListener="#{beanSwoGenero.actionListenerSeleccionarGenero(genero)}"
+						update=":formEdicion" oncomplete="PF('dlgEdicion').show();">
+					</p:commandButton>
+					
+					<p:commandButton icon="pi pi-times" title="eliminar" update="@form"
+						actionListener="#{beanSwoGenero.actionListenerEliminarGenero(genero.codigoGen)}">
+						<p:confirm header="Confirmación" message="Desea eliminar?"
+							icon="pi pi-exclamation-circle"></p:confirm>
+					</p:commandButton>
+				
+
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+
+
+	<p:dialog header="Editar Información" widgetVar="dlgEdicion"
+		modal="true">
+		<h:form id="formEdicion">
+			<p:growl>
+				<p:autoUpdate />
+			</p:growl>
+			<h:outputText value="Código:" />
+			<h:outputText value="#{beanSwoGenero.generoSeleccionado.codigoGen}" />
+			<p:panelGrid columns="2">
+				
+				<h:outputText value="Descripción:" />
+				<p:inputText
+					value="#{beanSwoGenero.generoSeleccionado.descripcionGen }" />
+			</p:panelGrid>
+			<p:commandButton value="Actualizar" icon="pi pi-save"
+				update="@form,:form2"
+				actionListener="#{beanSwoGenero.actionListenerActualizarGenero()}"/>
+		</h:form>
+	</p:dialog>
+
+
+
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+		<p:commandButton value="Sí" type="button"
+			styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+		<p:commandButton value="No" type="button"
+			styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+	</p:confirmDialog>
+
+</body>
+</html>
+
