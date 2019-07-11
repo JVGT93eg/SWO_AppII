@@ -12,11 +12,7 @@ import javax.persistence.Query;
 import swo.model.entities.SwoCategoria;
 import swo.model.entities.SwoTratamiento;
 
-<<<<<<< HEAD
-=======
 
-
->>>>>>> branch 'master' of https://github.com/JVGT93eg/SWO_AppII.git
 @Stateless
 @LocalBean
 public class ManagerTratamiento {
