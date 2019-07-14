@@ -30,8 +30,6 @@ public class ManagerSwoGenero {
     	String consulta=("SELECT s FROM SwoGenero s");
     	Query q=em.createQuery(consulta,SwoGenero.class);
     	return q.getResultList();
-    	
- 
     }
     //metodo para insertar un genero
     public void insertarGenero(SwoGenero genero) throws Exception {  		

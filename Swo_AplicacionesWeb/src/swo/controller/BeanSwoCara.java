@@ -28,6 +28,7 @@ public class BeanSwoCara implements Serializable {
 		listaCaras = managerCara.findAllCaras();
 		panelColapsado=true;
 		cara =new SwoCara(); 
+		
 	}
 	public void actionListenerColapsarPanel() {
 		panelColapsado=!panelColapsado;
