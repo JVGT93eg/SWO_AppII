@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+	<f:facet name="first">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no"/>
+		<title>Proveedores</title>
+	</f:facet>
+</h:head> 
+<body> 
+	<p:growl>
+		<p:autoUpdate></p:autoUpdate>
+	</p:growl>
+	<h:form>
+		<p:messages>
+			<p:autoUpdate></p:autoUpdate>
+		</p:messages>
+		<p:panel collapsed="#{beanSwoProveedor.panelColapsado}">
+			<f:facet name="header">
+				<p:commandButton value="Nuevo Proveedor" icon="fa fa-plus" update="@form"
+				actionListener="#{beanSwoProveedor.actionListenerColapsarPanel()}"/>
+			</f:facet>
+			<p:panelGrid columns="2">
+				<h:outputLabel value="Nombre" />
+				<p:inputText value="#{beanSwoProveedor.swoProveedor.nombreProv}"/>
+				<h:outputLabel value="E-mail" />
+				<p:inputText value="#{beanSwoProveedor.swoProveedor.emailProv}"/>
+				<h:outputLabel value="Dirección" />
+				<p:inputText value="#{beanSwoProveedor.swoProveedor.direccionProv}"/>
+				<h:outputLabel value="Teléfono" />
+				<p:inputText value="#{beanSwoProveedor.swoProveedor.telefonoProv}"/>
+				<h:outputLabel value="Ciudad" />
+				<p:inputText value="#{beanSwoProveedor.swoProveedor.cuidadProv}"/>
+				<h:outputText value="Descripción" />
+				<p:inputTextarea value="#{beanSwoProveedor.swoProveedor.descripcionProv}" />
+			</p:panelGrid>
+			<p:commandButton value="Guardar" icon="fa fa-save" update="@form,:form2" actionListener="#{beanSwoProveedor.actionListenerInsertarProveedor()}"/>
+		</p:panel>
+	</h:form>
+	<br />
+	<h:form id="form2">
+		<p:panel header="Datos de Proveedores">
+			<p:dataTable value="#{beanSwoProveedor.listaProveedores}" reflow="true" var="pro" paginator="true" rows="5" emptyMessage="Base de datos vacía">
+				<p:column headerText="Nombre" filterBy="#{pro.nombreProv}" priority="1" filterMatchMode="contains" style="width:150px">
+					<h:outputText value="#{pro.nombreProv}" />
+				</p:column>
+				<p:column headerText="E-mail">
+					<h:outputText value="#{pro.emailProv}" />
+				</p:column>
+				<p:column headerText="Dirección" >
+					<h:outputText value="#{pro.direccionProv}" />
+				</p:column>
+				<p:column headerText="Teléfono">
+					<h:outputText value="#{pro.telefonoProv}" />
+				</p:column>
+				<p:column headerText="Ciudad" filterBy="#{pro.cuidadProv}" priority="1" filterMatchMode="contains" style="width:150px">
+					<h:outputText value="#{pro.cuidadProv}" />
+				</p:column>
+				<p:column headerText="OPCIONES" priority="1">
+				<p:commandButton icon="fa fa-close"
+					title="Eliminar" update="@form"
+					actionListener="#{beanSwoProveedor.actionListenerEliminarSwoProveedor(pro.codigoProv)}">
+					<p:confirm header="Confirmación" message="Desea elimnar?"
+						icon="fa fa-exclamation-triangle"></p:confirm>
+				</p:commandButton>
+				<p:commandButton icon="fa fa-edit" title="Editar"
+					actionListener="#{beanSwoProveedor.actionListenerSeleccionarProveedor(pro)}"
+					update=":formEdicion" oncomplete="PF('dlgEdicion').show();"></p:commandButton>
+			</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+	<p:dialog header="Editar información" widgetVar="dlgEdicion" modal="true">
+		<h:form id="formEdicion">
+			<p:growl>
+				<p:autoUpdate />
+			</p:growl>
+			<h:outputText value="Codigo de Proveedor:" />
+			<h:outputText value="#{beanSwoProveedor.swoProveedorSeleccionado.codigoProv}" />
+			<p:panelGrid columns="2">
+				<h:outputLabel value="Nombre" />
+				<p:inputText value="#{beanSwoProveedor.swoProveedorSeleccionado.nombreProv}"/>
+				<h:outputLabel value="E-mail" />
+				<p:inputText value="#{beanSwoProveedor.swoProveedorSeleccionado.emailProv}"/>
+				<h:outputLabel value="Dirección" />
+				<p:inputText value="#{beanSwoProveedor.swoProveedorSeleccionado.direccionProv}"/>
+				<h:outputLabel value="Teléfono" />
+				<p:inputText value="#{beanSwoProveedor.swoProveedorSeleccionado.telefonoProv}"/>
+				<h:outputLabel value="Ciudad" />
+				<p:inputText value="#{beanSwoProveedor.swoProveedorSeleccionado.cuidadProv}"/>
+				<h:outputText value="Descripción" />
+				<p:inputTextarea value="#{beanSwoProveedor.swoProveedorSeleccionado.descripcionProv}" />
+			</p:panelGrid>
+			<p:commandButton value="Actualizar" icon="fa fa-save"
+				update="@form,:form2"
+				actionListener="#{beanSwoProveedor.actionListenerActualizarSwoProveedor()}" />
+		</h:form>
+	</p:dialog>
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+		<p:commandButton value="Si" type="button"
+			styleClass="ui-confirmdialog-yes" icon="fa fa-check"></p:commandButton>
+		<p:commandButton value="No" type="button"
+			styleClass="ui-confirmdialog-no" icon="fa fa-times"></p:commandButton>
+	</p:confirmDialog>
+</body> 
+</html>

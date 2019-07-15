@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+	<f:facet name="first">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no"/>
+		<title>Detalles de Inventario</title>
+	</f:facet>
+</h:head> 
+<body> 
+	<p:growl>
+		<p:autoUpdate></p:autoUpdate>
+	</p:growl>
+	<h:form>
+		<p:messages>
+			<p:autoUpdate></p:autoUpdate>
+		</p:messages>
+		<p:panel collapsed="#{beanSwoDetallesInventario.panelColapsado}">
+			<f:facet name="header">
+				<p:commandButton value="Nuevo Detalle de inventario" icon="fa fa-plus" update="@form"
+				actionListener="#{beanSwoDetallesInventario.actionListenerColapsarPanel()}"/>
+			</f:facet>
+			<p:panelGrid columns="2">
+				<h:outputLabel value="Tipo de Transacción" />
+				<p:selectOneMenu value="#{beanSwoDetallesInventario.codigoTipoTrans}">
+					<f:selectItem itemLabel="--Seleccione--"/>
+					<f:selectItems value="#{beanSwoDetallesInventario.listaTipoTransaccion}"
+					var="tt" itemLabel="#{tt.tipoTrans}" itemValue="#{tt.codigoTipoTrans}"/>
+				</p:selectOneMenu>
+				<h:outputText value="Fecha" />
+				<p:datePicker value="#{beanSwoDetallesInventario.swoDetalles.fechaTrans}"/>
+				<h:outputLabel value="Artículo" />
+				<p:selectOneMenu value="#{beanSwoDetallesInventario.codigoArt}">
+					<f:selectItem itemLabel="--Seleccione--"/>
+					<f:selectItems value="#{beanSwoDetallesInventario.listaArticulo}"
+					var="ar" itemLabel="#{ar.nombreArt}" itemValue="#{ar.codigoArt}"/>
+				</p:selectOneMenu>
+				<h:outputText value="Costo" />
+				<p:inputText value="#{beanSwoDetallesInventario.swoDetalles.precioTrans}" />
+				<h:outputText value="Cantidad" />
+				<p:spinner min="1" value="#{beanSwoDetallesInventario.swoDetalles.cantidadTrans}" />
+				<h:outputLabel value="Proveedor" />
+				<p:selectOneMenu value="#{beanSwoDetallesInventario.codigoProv}">
+					<f:selectItem itemLabel="--Seleccione--"/>
+					<f:selectItems value="#{beanSwoDetallesInventario.listaProveedores}"
+					var="pr" itemLabel="#{pr.nombreProv}" itemValue="#{pr.codigoProv}"/>
+				</p:selectOneMenu>
+				<h:outputText value="Descripción" />
+				<p:inputTextarea value="#{beanSwoDetallesInventario.swoDetalles.descripcionDetInv}" />
+			</p:panelGrid>
+			<p:commandButton value="Guardar" icon="fa fa-save" update="@form,:form2" actionListener="#{beanSwoDetallesInventario.actionListenerInsertarSwoDetalles()}"/>
+		</p:panel>
+	</h:form>
+	<br />
+	<h:form id="form2">
+		<p:panel header="Detalles de Inventarios">
+			<p:dataTable value="#{beanSwoDetallesInventario.listaDetalles}" reflow="true" var="det" paginator="true" rows="5" emptyMessage="Base de datos vacía">
+				<p:column headerText="Tipo" filterBy="#{det.swoTipoTransaccion.tipoTrans}" priority="1" filterMatchMode="contains" style="width:150px">
+					<h:outputText value="#{det.swoTipoTransaccion.tipoTrans}" />
+				</p:column>
+				<p:column headerText="Fecha" filterBy="#{det.fechaTrans}" priority="1" filterMatchMode="contains" style="width:150px">
+					<h:outputText value="#{det.fechaTrans}" />
+				</p:column>
+				<p:column headerText="Artículo" filterBy="#{det.swoArticulo.nombreArt}" priority="1" filterMatchMode="contains" style="width:150px">
+					<h:outputText value="#{det.swoArticulo.nombreArt}" />
+				</p:column>
+				<p:column headerText="Costo">
+					<h:outputText value="#{det.precioTrans}" />
+				</p:column>
+				<p:column headerText="Cantidad">
+					<h:outputText value="#{det.cantidadTrans}" />
+				</p:column>
+				<p:column headerText="Proveedor" filterBy="#{det.swoProveedore.nombreProv}" priority="1" filterMatchMode="contains" style="width:150px">
+					<h:outputText value="#{det.swoProveedore.nombreProv}" />
+				</p:column>
+				<p:column headerText="OPCIONES" priority="1">
+				<p:commandButton icon="fa fa-close"
+					title="Eliminar" update="@form"
+					actionListener="#{beanSwoDetallesInventario.actionListenerEliminarDetalles(det.codigoDetInv)}">
+					<p:confirm header="Confirmación" message="Desea elimnar?"
+						icon="fa fa-exclamation-triangle"></p:confirm>
+				</p:commandButton>
+				<p:commandButton icon="fa fa-edit" title="Editar"
+					actionListener="#{beanSwoDetallesInventario.actionListenerSeleccionarDetalle(det)}"
+					update=":formEdicion" oncomplete="PF('dlgEdicion').show();"></p:commandButton>
+			</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+	<p:dialog header="Editar información" widgetVar="dlgEdicion" modal="true">
+		<h:form id="formEdicion">
+			<p:growl>
+				<p:autoUpdate />
+			</p:growl>
+			<h:outputText value="Codigo de Detalle:" />
+			<h:outputText value="#{beanSwoDetallesInventario.swoDetallesSeleccionado.codigoDetInv}" />
+			<p:panelGrid columns="2">
+				<h:outputLabel value="Tipo de Transacción" />
+				<p:selectOneMenu value="#{beanSwoDetallesInventario.codigoTipoTrans}">
+					<f:selectItem itemLabel="--Seleccione--"/>
+					<f:selectItems value="#{beanSwoDetallesInventario.listaTipoTransaccion}"
+					var="tt" itemLabel="#{tt.tipoTrans}" itemValue="#{tt.codigoTipoTrans}"/>
+				</p:selectOneMenu>
+				<h:outputText value="Fecha" />
+				<p:datePicker value="#{beanSwoDetallesInventario.swoDetallesSeleccionado.fechaTrans}"/>
+				<h:outputLabel value="Artículo" />
+				<p:selectOneMenu value="#{beanSwoDetallesInventario.codigoArt}">
+					<f:selectItem itemLabel="--Seleccione--"/>
+					<f:selectItems value="#{beanSwoDetallesInventario.listaArticulo}"
+					var="ar" itemLabel="#{ar.nombreArt}" itemValue="#{ar.codigoArt}"/>
+				</p:selectOneMenu>
+				<h:outputText value="Costo" />
+				<p:inputText value="#{beanSwoDetallesInventario.swoDetallesSeleccionado.precioTrans}" />
+				<h:outputText value="Cantidad" />
+				<p:spinner min="1" value="#{beanSwoDetallesInventario.swoDetallesSeleccionado.cantidadTrans}" />
+				<h:outputLabel value="Proveedor" />
+				<p:selectOneMenu value="#{beanSwoDetallesInventario.codigoProv}">
+					<f:selectItem itemLabel="--Seleccione--"/>
+					<f:selectItems value="#{beanSwoDetallesInventario.listaProveedores}"
+					var="pr" itemLabel="#{pr.nombreProv}" itemValue="#{pr.codigoProv}"/>
+				</p:selectOneMenu>
+				<h:outputText value="Descripción" />
+				<p:inputTextarea value="#{beanSwoDetallesInventario.swoDetallesSeleccionado.descripcionDetInv}" />
+			</p:panelGrid>
+			<p:commandButton value="Actualizar" icon="fa fa-save"
+				update="@form,:form2"
+				actionListener="#{beanSwoDetallesInventario.actionListenerActualizarDetalles()}" />
+		</h:form>
+	</p:dialog>
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+		<p:commandButton value="Si" type="button"
+			styleClass="ui-confirmdialog-yes" icon="fa fa-check"></p:commandButton>
+		<p:commandButton value="No" type="button"
+			styleClass="ui-confirmdialog-no" icon="fa fa-times"></p:commandButton>
+	</p:confirmDialog>
+</body> 
+</html>

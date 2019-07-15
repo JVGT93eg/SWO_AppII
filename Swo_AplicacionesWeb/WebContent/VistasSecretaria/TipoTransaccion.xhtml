@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+	<f:facet name="first">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no"/>
+		<title>Tipo Transacción</title>
+	</f:facet>
+</h:head> 
+<body> 
+	<p:growl>
+		<p:autoUpdate></p:autoUpdate>
+	</p:growl>
+	<h:form>
+		<p:messages>
+			<p:autoUpdate></p:autoUpdate>
+		</p:messages>
+		<p:panel collapsed="#{beanSwoTipoTratamiento.panelColapsado}">
+			<f:facet name="header">
+				<p:commandButton value="Nuevo Tipo de transacción" icon="fa fa-plus" update="@form"
+				actionListener="#{beanSwoTipoTratamiento.actionListenerColapsarPanel()}"/>
+			</f:facet>
+			<p:panelGrid columns="2">
+				<h:outputLabel value="Tipo" />
+				<p:inputText value="#{beanSwoTipoTratamiento.swoTipoTransaccion.tipoTrans}"/>
+				<h:outputText value="Descripción" />
+				<p:inputTextarea value="#{beanSwoTipoTratamiento.swoTipoTransaccion.descripcionTrans}" />
+			</p:panelGrid>
+			<p:commandButton value="Guardar" icon="fa fa-save" update="@form,:form2" actionListener="#{beanSwoTipoTratamiento.actionListenerInsertarTipoTransaccion()}"/>
+		</p:panel>
+	</h:form>
+	<br />
+	<h:form id="form2">
+		<p:panel header="Datos de Tipos de Transacción">
+			<p:dataTable value="#{beanSwoTipoTratamiento.listaTipoTransaccion}" reflow="true" var="tip" paginator="true" rows="5" emptyMessage="Base de datos vacía">
+				<p:column headerText="Tipo" filterBy="#{tip.tipoTrans}" priority="1" filterMatchMode="contains" style="width:150px">
+					<h:outputText value="#{tip.tipoTrans}" />
+				</p:column>
+				<p:column headerText="Descripción">
+					<h:outputText value="#{tip.descripcionTrans}" />
+				</p:column>
+				<p:column headerText="OPCIONES" priority="1">
+				<p:commandButton icon="fa fa-close"
+					title="Eliminar" update="@form"
+					actionListener="#{beanSwoTipoTratamiento.actionListenerEliminarTipoTransaccion(tip.codigoTipoTrans)}">
+					<p:confirm header="Confirmación" message="Desea elimnar?"
+						icon="fa fa-exclamation-triangle"></p:confirm>
+				</p:commandButton>
+				<p:commandButton icon="fa fa-edit" title="Editar"
+					actionListener="#{beanSwoTipoTratamiento.actionListenerSeleccionarTipoTransaccion(tip)}"
+					update=":formEdicion" oncomplete="PF('dlgEdicion').show();"></p:commandButton>
+			</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+	<p:dialog header="Editar información" widgetVar="dlgEdicion" modal="true">
+		<h:form id="formEdicion">
+			<p:growl>
+				<p:autoUpdate />
+			</p:growl>
+			<h:outputText value="Codigo de Tipo de transacción:" />
+			<h:outputText value="#{beanSwoTipoTratamiento.swoTipoTransSeleccionado.codigoTipoTrans}" />
+			<p:panelGrid columns="2">
+				<h:outputLabel value="Tipo" />
+				<p:inputText value="#{beanSwoTipoTratamiento.swoTipoTransSeleccionado.tipoTrans}"/>
+				<h:outputText value="Descripción" />
+				<p:inputTextarea value="#{beanSwoTipoTratamiento.swoTipoTransSeleccionado.descripcionTrans}" />
+			</p:panelGrid>
+			<p:commandButton value="Actualizar" icon="fa fa-save"
+				update="@form,:form2"
+				actionListener="#{beanSwoTipoTratamiento.actionListenerActualizarSwoTipoTransaccion()}" />
+		</h:form>
+	</p:dialog>
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+		<p:commandButton value="Si" type="button"
+			styleClass="ui-confirmdialog-yes" icon="fa fa-check"></p:commandButton>
+		<p:commandButton value="No" type="button"
+			styleClass="ui-confirmdialog-no" icon="fa fa-times"></p:commandButton>
+	</p:confirmDialog>
+</body> 
+</html>
