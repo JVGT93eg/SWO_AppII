@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+</h:head>
+<body>
+
+<h:form>  
+    <p:growl id="messages"/>
+ 
+    <p:menubar>
+        <p:submenu label="Procedimiento" icon="pi pi-file">
+            <p:submenu label="Nuevo" icon="pi pi-briefcase">
+                <p:menuitem value="Procedimiento" action="registro_Odontograma" />
+                <p:menuitem value="Other" url="#" />
+            </p:submenu>
+            <p:menuitem value="Open" url="#" />
+            <p:separator />
+            <p:menuitem value="Quit" url="#" />
+        </p:submenu>
+ 
+        <p:submenu label="Registro" icon="pi pi-cog">
+            <p:menuitem value="Pacientes" icon="pi pi-clone" action="registro_pacientes" />        
+            <p:menuitem value="Dientes" icon="pi pi-clone" action="index_dientes" />           
+            <p:menuitem value="Caras" icon="pi pi-clone" action="index_cara" />         
+            <p:menuitem value="Género" icon="pi pi-clone" action="registro_genero" />          
+        </p:submenu>
+ 
+      <p:submenu label="Reportes" icon="pi pi-cog">
+            <p:menuitem value="# Atención Diaria" icon="pi pi-clone"  />        
+            <p:menuitem value="Tratamientos " icon="pi pi-clone"  />           
+            <p:menuitem value="Clientes Frecuentes" icon="pi pi-clone" />         
+            <p:menuitem value="Total de remuneración" icon="pi pi-clone"  />          
+        </p:submenu>
+ 
+        <f:facet name="options">
+            <p:inputText style="margin:1px 10px 1px 1px;" placeholder="Search"/>
+            <p:commandButton type="button" value="Logout" icon="pi pi-home" />
+        </f:facet>
+    </p:menubar>
+</h:form>
+
+</body>
+</html>
