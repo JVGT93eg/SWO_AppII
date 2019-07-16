@@ -6,7 +6,6 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 import swo.model.entities.SwoRole;
-import swo.model.entities.SwoUsuario;
 import swo.model.manager.ManagerSwoRole;
 
 import java.io.Serializable;
@@ -61,7 +60,7 @@ public class BeanSwoRole implements Serializable{
 		try {
 			managerSwoRole.actualizarSwoRole(swoRoleSeleccionado);
 			listaSwoRoles=managerSwoRole.findAllSwoRoles();
-			JSFUtil.crearMensajeInfo("Datos Actulizados");
+			JSFUtil.crearMensajeInfo("Datos actulizados");
 		} catch (Exception e) {
 			JSFUtil.crearMensajeError(e.getMessage());
 			e.printStackTrace();
