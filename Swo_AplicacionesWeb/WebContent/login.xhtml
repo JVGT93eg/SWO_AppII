@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+	<p:panel header="Login" style="width:400px">
+		<h:form>
+			<h:panelGrid columns="2">
+				<h:outputText value="Código de usuario:" />
+				<p:inputText required="true"
+					size="20" maxlength="20"
+					requiredMessage="Debe ingresar su codigo de usuario." />
+				<h:outputText value="Clave:" />
+				<p:password required="true" size="20"
+					maxlength="10" requiredMessage="Debe ingresar su contraseña." />
+				<p:commandButton value="Ingresar" icon="fa fa-key"
+					update="mensajes" />
+				<p:messages id="mensajes" />
+			</h:panelGrid>
+		</h:form>
+	</p:panel>
+</body>
+</html>
