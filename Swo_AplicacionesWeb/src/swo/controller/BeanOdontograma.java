@@ -29,7 +29,7 @@ public class BeanOdontograma implements Serializable {
 	private SwoPaciente pacienteSelecionado;
 	
 	//datos para insertar las claves foraneás
-	private String descripción_ate;
+	private String descripcion_ate;
 	private Date fecha_ate;
 	private int codtrata;
 	private int coddie;
@@ -48,7 +48,7 @@ public class BeanOdontograma implements Serializable {
 	
 	public void actionListenerInsertarOdontograma() {
 		try {
-			managerOdontograma.insertarOdontograma(codpac, fecha_ate, descripción_ate, codtrata, coddie, codcar);
+			managerOdontograma.insertarOdontograma(codpac, fecha_ate, descripcion_ate, codtrata, coddie, codcar);
 			listaOdontograma=managerOdontograma.findAllOdontograma();
 			odontograma=new SwoOdontograma();
 			JSFUtil.crearMensajeInfo("Datos de Odontograma Insertados");
@@ -95,12 +95,12 @@ public class BeanOdontograma implements Serializable {
 		this.panelColapsado = panelColapsado;
 	}
 
-	public String getDescripción_ate() {
-		return descripción_ate;
+	public String getDescripcion_ate() {
+		return descripcion_ate;
 	}
 
-	public void setDescripción_ate(String descripción_ate) {
-		this.descripción_ate = descripción_ate;
+	public void setDescripcion_ate(String descripcion_ate) {
+		this.descripcion_ate = descripcion_ate;
 	}
 
 	public Date getFecha_ate() {

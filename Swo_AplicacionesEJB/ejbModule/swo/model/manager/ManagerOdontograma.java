@@ -51,14 +51,14 @@ private EntityManager em;
     }
     
     //metodo para insertar un Odontograma
-    public void insertarOdontograma(int codpac, Date fecha_ate,String descripción_ate,int codtrata,int coddie, int codcar) throws Exception {
+    public void insertarOdontograma(int codpac, Date fecha_ate,String descripcion_ate,int codtrata,int coddie, int codcar) throws Exception {
   	SwoOdontograma odontograma=new SwoOdontograma();
   	SwoPaciente paciente=buscarPorCodigoPac(codpac);
   	SwoDiente diente=buscarPorCodigoDie(coddie);
   	SwoCara cara=buscarPorCodigoCar(codcar);
   	SwoTratamiento trata=buscarPorCodigoTrata(codtrata);
   	
-    odontograma.setDescripcionAte(descripción_ate);
+    odontograma.setDescripcionAte(descripcion_ate);
   	odontograma.setFechaAte(fecha_ate);
   	odontograma.setSwoTratamiento(trata);
   	odontograma.setSwoPaciente(paciente);	
