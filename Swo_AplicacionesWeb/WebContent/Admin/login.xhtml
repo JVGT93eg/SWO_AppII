@@ -29,22 +29,22 @@
 			<p:panelGrid columns="2">
 				<h:outputText value="Seleccione un rol:" />
 
-				<p:selectOneMenu value="#{beanSwoLogin.swoLogin.swoRole}">
+				<p:selectOneMenu value="#{beanSwoLogin.codigoRol}">
 					<f:selectItems value="#{beanSwoLogin.listaSwoRol}" var="sworol"
-						itemValue="" itemLabel="#{sworol.nombreRol}" />
+						itemValue="#{sworol.codigoRol}" itemLabel="#{sworol.nombreRol}" />
 				</p:selectOneMenu>
 				
 				<h:outputText value="Seleccione un usuario:" />
 				
-				<p:selectOneMenu value="#{beanSwoLogin.swoLogin.swoUsuario}">
+				<p:selectOneMenu value="#{beanSwoLogin.codigoUsuario}">
 					<f:selectItems value="#{beanSwoLogin.listaSwoUsuario}" var="swousuario"
-						itemValue="" itemLabel="#{swousuario.nombreUsu}" />
+						itemValue="#{swousuario.codigoUsu}" itemLabel="#{swousuario.nombreUsu}" />
 				</p:selectOneMenu>
 
 
 				<p:commandButton value="Insertar" icon="fa fa-save"
 					update="@form,:form2"
-					actionListener="#{beanProcedimiento.actionListenerInsertarProcedimiento()}"></p:commandButton>
+					actionListener="#{beanSwoLogin.actionListenerInsertarSwoLogin()}"></p:commandButton>
 			</p:panelGrid>
 		</p:panel>
 	</h:form>

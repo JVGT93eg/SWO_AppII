@@ -39,8 +39,13 @@ public class ManagerSwoLogin {
     	return em.find(SwoLogin.class, codigoLogin);
     }
     
-    public void insertarSwoLogin(SwoLogin swoLogin) {
-    	em.persist(swoLogin);   			
+    public void insertarSwoLogin(int codigoRol, int codigoUsuario) {
+    	SwoRole rol=em.find(SwoRole.class, codigoRol);
+    	SwoUsuario usuario=em.find(SwoUsuario.class, codigoUsuario);
+    	SwoLogin log=new SwoLogin();
+    	log.setSwoRole(rol);
+    	log.setSwoUsuario(usuario);
+    	em.persist(log);   			
     }
     
     public void eliminarSwoLogin(Integer codigoLogin) {

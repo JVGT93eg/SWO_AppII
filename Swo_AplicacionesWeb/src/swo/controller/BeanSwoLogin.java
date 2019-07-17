@@ -30,6 +30,10 @@ public class BeanSwoLogin implements Serializable {
 	private SwoRole swoRoleSeleccionado;
 	private SwoUsuario swoUsuarioSeleccionado;
 	
+	//ADD
+	private int codigoRol;
+	private int codigoUsuario;
+	
 	@PostConstruct
 	public void inicializar() {
 		listaSwoLogin=managerSwoLogin.findAllSwoLogin();
@@ -47,7 +51,7 @@ public class BeanSwoLogin implements Serializable {
 	
 	public void actionListenerInsertarSwoLogin() {
 		try {
-			managerSwoLogin.insertarSwoLogin(swoLogin);
+			managerSwoLogin.insertarSwoLogin(codigoRol, codigoUsuario);
 			listaSwoLogin = managerSwoLogin.findAllSwoLogin(); 
 			swoLogin = new SwoLogin();
 			JSFUtil.crearMensajeInfo("Rol insertado");
@@ -165,5 +169,22 @@ public class BeanSwoLogin implements Serializable {
 	public void setSwoUsuarioSeleccionado(SwoUsuario swoUsuarioSeleccionado) {
 		this.swoUsuarioSeleccionado = swoUsuarioSeleccionado;
 	}
+
+	public int getCodigoRol() {
+		return codigoRol;
+	}
+
+	public void setCodigoRol(int codigoRol) {
+		this.codigoRol = codigoRol;
+	}
+
+	public int getCodigoUsuario() {
+		return codigoUsuario;
+	}
+
+	public void setCodigoUsuario(int codigoUsuario) {
+		this.codigoUsuario = codigoUsuario;
+	}
+	
 	
 }
