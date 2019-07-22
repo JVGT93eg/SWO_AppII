@@ -16,20 +16,18 @@ public class SwoRole implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="SWO_ROLES_CODIGOROL_GENERATOR", sequenceName="SEQ_SWO_ROLES", allocationSize = 1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SWO_ROLES_CODIGOROL_GENERATOR")
-	@Column(name="codigo_rol", unique=true, nullable=false)
+	@Column(name="codigo_rol")
 	private Integer codigoRol;
 
-	@Column(name="descripcion_rol", nullable=false, length=2147483647)
+	@Column(name="descripcion_rol")
 	private String descripcionRol;
 
-	@Column(name="nombre_rol", nullable=false, length=50)
+	@Column(name="nombre_rol")
 	private String nombreRol;
 
-	//bi-directional many-to-one association to SwoLogin
+	//bi-directional many-to-one association to SwoUsuario
 	@OneToMany(mappedBy="swoRole")
-	private List<SwoLogin> swoLogins;
+	private List<SwoUsuario> swoUsuarios;
 
 	public SwoRole() {
 	}
@@ -58,26 +56,26 @@ public class SwoRole implements Serializable {
 		this.nombreRol = nombreRol;
 	}
 
-	public List<SwoLogin> getSwoLogins() {
-		return this.swoLogins;
+	public List<SwoUsuario> getSwoUsuarios() {
+		return this.swoUsuarios;
 	}
 
-	public void setSwoLogins(List<SwoLogin> swoLogins) {
-		this.swoLogins = swoLogins;
+	public void setSwoUsuarios(List<SwoUsuario> swoUsuarios) {
+		this.swoUsuarios = swoUsuarios;
 	}
 
-	public SwoLogin addSwoLogin(SwoLogin swoLogin) {
-		getSwoLogins().add(swoLogin);
-		swoLogin.setSwoRole(this);
+	public SwoUsuario addSwoUsuario(SwoUsuario swoUsuario) {
+		getSwoUsuarios().add(swoUsuario);
+		swoUsuario.setSwoRole(this);
 
-		return swoLogin;
+		return swoUsuario;
 	}
 
-	public SwoLogin removeSwoLogin(SwoLogin swoLogin) {
-		getSwoLogins().remove(swoLogin);
-		swoLogin.setSwoRole(null);
+	public SwoUsuario removeSwoUsuario(SwoUsuario swoUsuario) {
+		getSwoUsuarios().remove(swoUsuario);
+		swoUsuario.setSwoRole(null);
 
-		return swoLogin;
+		return swoUsuario;
 	}
 
 }

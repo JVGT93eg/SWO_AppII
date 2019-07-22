@@ -18,60 +18,44 @@ public class SwoUsuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="SWO_USUARIOS_CODIGOUSU_GENERATOR", sequenceName="SEQ_SWO_USUARIOS", allocationSize = 1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SWO_USUARIOS_CODIGOUSU_GENERATOR")
-	@Column(name="codigo_usu", unique=true, nullable=false)
-	private Integer codigoUsu;
-
-	@Column(name="apellido_usu", nullable=false, length=50)
-	private String apellidoUsu;
-
-	@Column(name="cedula_usu", nullable=false, length=20)
+	@Column(name="cedula_usu")
 	private String cedulaUsu;
 
-	@Column(name="clave_usu", nullable=false, length=20)
+	@Column(name="apellido_usu")
+	private String apellidoUsu;
+
+	@Column(name="clave_usu")
 	private String claveUsu;
 
-	@Column(name="direccion_usu", nullable=false, length=2147483647)
+	@Column(name="direccion_usu")
 	private String direccionUsu;
 
-	@Column(name="edad_usu", nullable=false, precision=2)
+	@Column(name="edad_usu")
 	private BigDecimal edadUsu;
 
-	@Column(name="email_usu", nullable=false, length=50)
+	@Column(name="email_usu")
 	private String emailUsu;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="fecha_naci_usu", nullable=false)
+	@Column(name="fecha_naci_usu")
 	private Date fechaNaciUsu;
 
-	@Column(name="nombre_usu", nullable=false, length=50)
+	@Column(name="nombre_usu")
 	private String nombreUsu;
 
-	@Column(name="telefono_usu", length=20)
+	@Column(name="telefono_usu")
 	private String telefonoUsu;
 
-	//bi-directional many-to-one association to SwoLogin
+	//bi-directional many-to-one association to SwoEvento
 	@OneToMany(mappedBy="swoUsuario")
-	private List<SwoLogin> swoLogins;
+	private List<SwoEvento> swoEventos;
+
+	//bi-directional many-to-one association to SwoRole
+	@ManyToOne
+	@JoinColumn(name="codigo_rol_swo_roles")
+	private SwoRole swoRole;
 
 	public SwoUsuario() {
-	}
-
-	public Integer getCodigoUsu() {
-		return this.codigoUsu;
-	}
-
-	public void setCodigoUsu(Integer codigoUsu) {
-		this.codigoUsu = codigoUsu;
-	}
-
-	public String getApellidoUsu() {
-		return this.apellidoUsu;
-	}
-
-	public void setApellidoUsu(String apellidoUsu) {
-		this.apellidoUsu = apellidoUsu;
 	}
 
 	public String getCedulaUsu() {
@@ -80,6 +64,14 @@ public class SwoUsuario implements Serializable {
 
 	public void setCedulaUsu(String cedulaUsu) {
 		this.cedulaUsu = cedulaUsu;
+	}
+
+	public String getApellidoUsu() {
+		return this.apellidoUsu;
+	}
+
+	public void setApellidoUsu(String apellidoUsu) {
+		this.apellidoUsu = apellidoUsu;
 	}
 
 	public String getClaveUsu() {
@@ -138,26 +130,34 @@ public class SwoUsuario implements Serializable {
 		this.telefonoUsu = telefonoUsu;
 	}
 
-	public List<SwoLogin> getSwoLogins() {
-		return this.swoLogins;
+	public List<SwoEvento> getSwoEventos() {
+		return this.swoEventos;
 	}
 
-	public void setSwoLogins(List<SwoLogin> swoLogins) {
-		this.swoLogins = swoLogins;
+	public void setSwoEventos(List<SwoEvento> swoEventos) {
+		this.swoEventos = swoEventos;
 	}
 
-	public SwoLogin addSwoLogin(SwoLogin swoLogin) {
-		getSwoLogins().add(swoLogin);
-		swoLogin.setSwoUsuario(this);
+	public SwoEvento addSwoEvento(SwoEvento swoEvento) {
+		getSwoEventos().add(swoEvento);
+		swoEvento.setSwoUsuario(this);
 
-		return swoLogin;
+		return swoEvento;
 	}
 
-	public SwoLogin removeSwoLogin(SwoLogin swoLogin) {
-		getSwoLogins().remove(swoLogin);
-		swoLogin.setSwoUsuario(null);
+	public SwoEvento removeSwoEvento(SwoEvento swoEvento) {
+		getSwoEventos().remove(swoEvento);
+		swoEvento.setSwoUsuario(null);
 
-		return swoLogin;
+		return swoEvento;
+	}
+
+	public SwoRole getSwoRole() {
+		return this.swoRole;
+	}
+
+	public void setSwoRole(SwoRole swoRole) {
+		this.swoRole = swoRole;
 	}
 
 }
