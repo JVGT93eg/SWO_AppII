@@ -16,6 +16,8 @@ public class SwoCara implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(name="SWO_CARAS_CODIGOCAR_GENERATOR", sequenceName="SEQ_SWO_CARAS", allocationSize = 1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SWO_CARAS_CODIGOCAR_GENERATOR")
 	@Column(name="codigo_car", unique=true, nullable=false)
 	private Integer codigoCar;
 

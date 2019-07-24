@@ -16,20 +16,20 @@ public class SwoEvento implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="codigo_eve", unique=true, nullable=false)
+	@Column(name="codigo_eve")
 	private Integer codigoEve;
 
-	@Column(name="descripcion_eve", nullable=false, length=2147483647)
+	@Column(name="descripcion_eve")
 	private String descripcionEve;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="fecha_eve", nullable=false)
+	@Column(name="fecha_eve")
 	private Date fechaEve;
 
-	@Column(name="ip_eve", nullable=false, length=100)
+	@Column(name="ip_eve")
 	private String ipEve;
 
-	@Column(name="nombre_eve", nullable=false, length=50)
+	@Column(name="nombre_eve")
 	private String nombreEve;
 
 	//bi-directional many-to-one association to SwoUsuario

@@ -15,6 +15,8 @@ public class SwoProceArticulo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(name="SWO_PROCE_ARTICULOS_CODIGOPROART_GENERATOR", sequenceName="SEQ_SWO_PROCE_ARTICULOS", allocationSize = 1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SWO_PROCE_ARTICULOS_CODIGOPROART_GENERATOR")
 	@Column(name="codigo_pro_art", unique=true, nullable=false)
 	private Integer codigoProArt;
 
