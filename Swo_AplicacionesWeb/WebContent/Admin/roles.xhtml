@@ -73,10 +73,81 @@
 		<p:autoUpdate />
 	</p:growl>
 
-
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+	<h:form id="form1">
+		<p:messages>
+			<p:autoUpdate />
+		</p:messages>
+		<p:panel collapsed="#{beanSwoRole.panelColapsado}">
+			<f:facet name="header">
+				<p:commandButton value="Nuevo Rol" icon="fa fa-plus"
+					update="@form" actionListener="#{beanSwoRole.actionListenerColapsarPanel()}"></p:commandButton>
+			</f:facet>
+			<p:panelGrid columns="2">
+				<h:outputText value="Rol:" />
+				<p:inputText value="#{beanSwoRole.swoRole.nombreRol}" />
+				<h:outputText value="Descripción:" />
+				<p:inputText value="#{beanSwoRole.swoRole.descripcionRol}" />
+				<p:commandButton value="Insertar" icon="fa fa-save"
+					update="@form,:form2"
+					actionListener="#{beanSwoRole.actionListenerInsertarSwoRole()}"></p:commandButton>
+			</p:panelGrid>
+		</p:panel>
+	</h:form>
 	<br />
-
-
+	<h:form id="form2">
+		<p:panel header="Datos de los Roles">
+			<p:dataTable value="#{beanSwoRole.listaSwoRoles}"
+				var="sworoles" reflow="true" paginator="true" rows="5">
+				<p:column headerText="ROL" filterBy="#{sworoles.nombreRol}"
+					filterMatchMode="contains" priority="1">
+					<h:outputText value="#{sworoles.nombreRol}" />
+				</p:column>
+				<p:column headerText="DESCRIPCIÓN"
+					filterBy="#{sworoles}" filterMatchMode="contains"
+					priority="2">
+					<h:outputText value="#{sworoles.descripcionRol}" />
+				</p:column>
+				<p:column headerText="OPCIONES" priority="1">
+					<p:commandButton icon="fa fa-trash" title="Eliminar" update="@form"
+						actionListener="#{beanSwoRole.actionListenerEliminarSwoRole(sworoles.codigoRol)}">
+						<p:confirm header="Confirmación" message="Desea eliminar rol?"
+							icon="fa fa-exclamation-triangle"></p:confirm>
+					</p:commandButton>
+					<p:commandButton icon="fa fa-edit" title="Editar"
+						actionListener="#{beanSwoRole.actionListenerSeleccionarSwoRole(sworoles)}"
+						update=":formEdicion" oncomplete="PF('dlgEdicion').show();"></p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+	<p:dialog header="Editar información" widgetVar="dlgEdicion"
+		modal="true">
+		<h:form id="formEdicion">
+			<p:growl>
+				<p:autoUpdate />
+			</p:growl>
+				<p:panelGrid columns="2">
+				<h:outputText value="Rol:" />
+				<p:inputText
+					value="#{beanSwoRole.swoRoleSeleccionado.nombreRol}" />
+				<h:outputText value="Descripción:" />
+				<p:inputText
+					value="#{beanSwoRole.swoRoleSeleccionado.descripcionRol}" />
+			</p:panelGrid>
+			<p:commandButton value="Actualizar" icon="fa fa-save"
+				update="@form,:form2"
+				actionListener="#{beanSwoRole.actionListenerActualizarSwoRole()}" />
+		</h:form>
+	</p:dialog>
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+		<p:commandButton value="Si" type="button"
+			styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+		<p:commandButton value="No" type="button"
+			styleClass="ui-confirmdialog-no" icon="fa fa-times" />
+	</p:confirmDialog>
 
 	</div>
 	<div class="panel panel-container">
