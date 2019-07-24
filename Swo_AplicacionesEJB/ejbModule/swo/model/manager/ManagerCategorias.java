@@ -2,12 +2,13 @@ package swo.model.manager;
 
 import java.util.List;
 
-
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
 
 import swo.model.entities.SwoCategoria;
 
@@ -18,6 +19,8 @@ import swo.model.entities.SwoCategoria;
 public class ManagerCategorias {
 	@PersistenceContext
 	private EntityManager em;
+	@EJB
+	private ManagerDAO managerDAO;
 	
 	public ManagerCategorias() {
 		
@@ -56,4 +59,17 @@ public class ManagerCategorias {
 	    	em.merge(e);
 	    	
 	    }
+		/**
+	  	 * Metodo finder para consulta de productos.
+	  	 * Hace uso del componente {@link marketdemo.model.manager.ManagerDAO ManagerDAO} de la capa model.
+	  	 * @param codigoProducto codigo del producto que se desea buscar.
+	  	 * @return el producto encontrado.
+	  	 * @throws Exception
+	  	 */
+	  	public SwoCategoria findCategoriaById(Integer codigocategor) throws Exception{
+	  		return (SwoCategoria) managerDAO.findById(SwoCategoria.class, codigocategor);
+	  	}
+	    
+	    
+	    
 }

@@ -3,11 +3,13 @@ package swo.model.manager;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
 
 import swo.model.entities.SwoCategoria;
 import swo.model.entities.SwoTratamiento;
@@ -19,7 +21,8 @@ public class ManagerTratamiento {
 	
 	@PersistenceContext
 	private EntityManager em;
-	
+	@EJB
+	private ManagerDAO managerDAO;
 	public ManagerTratamiento() {
 		
 	}
@@ -74,5 +77,26 @@ public class ManagerTratamiento {
 	    	em.merge(e);
 	    	
 	    }
+	    
+	    public SwoTratamiento findTratamientoById(Integer codigotrata) throws Exception{
+	  		return (SwoTratamiento) managerDAO.findById(SwoTratamiento.class, codigotrata);
+	  	} 
+	    
+	    
+		/**
+	  	 * Metodo finder para consulta de Tratamientos.
+	  	 * Hace uso del componente {@link swo.model.manager.ManagerDAO ManagerDAO} de la capa model.
+	  	 * @return listado de Tratamientos ordenados por descripción.
+	  	 */
+	  	@SuppressWarnings("unchecked")
+	  	public List<SwoTratamiento> findAll_Tratamiento(){
+	  		return managerDAO.findAll(SwoTratamiento.class, "o.descripcionTra");
+	  	}
+	  	
+//	  	public int obtenerExistenciaTra(Integer codigotrata) throws Exception{
+//	  		SwoTratamiento t;
+//	  		t=findTratamientoById(codigotrata);
+//	  		return t.getExistencia().intValue();
+//	  	}
 
 }

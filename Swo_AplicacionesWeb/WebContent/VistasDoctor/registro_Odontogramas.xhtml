@@ -1,13 +1,13 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      	xmlns:p="http://primefaces.org/ui">
 
-<h:head></h:head>
-<body>
-	<h:form>
+<h:head></h:head> 
+<body> 
+<h:form>
 		<p:growl id="messages" />
 
 		<p:menubar>
@@ -36,18 +36,19 @@
 			</f:facet>
 		</p:menubar>
 	</h:form>
-
-
+	
+	
 	<p:growl>
 		<p:autoUpdate />
 	</p:growl>
-<h1> Registro de Datos Generales</h1>
+	
+	<h1> Registro de Datos Generales</h1>
 	
 	<p:panel id="panel1">
 		<h:form id="form1">
 			<p:panelGrid columns="2">
 				<p:commandButton action="#{beanOdontograma.crearNuevoOdontograma()}"
-					value="Crear nuevo Odontograma" update="form1 :form3" 
+					value="Crear nuevo Odontograma" update="form1 :form2" 
 					icon="fa fa-file-o" />
 				<h:panelGroup>
 					<p:commandButton value="Guardar factura" icon="fa fa-save"
@@ -81,28 +82,33 @@
 					value="#{beanOdontograma.codigoPac}" />
 			</p:panelGrid>
 		</h:form>
-
-<!-- <h2> Registro de Atención Médica </h2> -->
-
-<!-- 		<h:form id="form2"> -->
-<!-- 			<p:panel header="Detalle del Odontograma"> -->
-<!-- 				<p:panelGrid columns="7" border="1"> -->
-<!-- 					<h:outputText value="Registrar:" /> -->
-<!-- 					<p:selectOneMenu value="#{beanOdontograma.codtrata}"> -->
-<!-- 						<f:selectItem itemLabel="Tratami..." itemValue="-1" -->
+		
+			<h:form id="form2">
+			<p:panel header="Detalle de productos">
+				<p:panelGrid columns="4" border="1">
+					<h:outputText value="Registrar:" />
+					<p:selectOneMenu value="#{beanOdontograma.codtrata}">
+						<f:selectItem itemLabel="Seleccione un procedimiento..." itemValue="-1"
+							noSelectionOption="true" />
+						<f:selectItems value="#{beanOdontograma.listaTratamientoSI}" />
+					</p:selectOneMenu>
+					
+					
+<!-- 					<p:selectOneMenu value="#{beanOdontograma.codArticulo}"> -->
+<!-- 						<f:selectItem itemLabel="Seleccione un Articulo..." itemValue="-1" -->
 <!-- 							noSelectionOption="true" /> -->
-<!-- 						<f:selectItems value="#{beanOdontograma.listaTratamientoSI}"/> -->
+<!-- 						<f:selectItems value="#{beanOdontograma.listaArticulosSI}" /> -->
 <!-- 					</p:selectOneMenu> -->
 					
-					
-<!-- 					<h:outputText value="Cantidad:" /> -->
+					<h:outputText value="Cantidad:" />
 <!-- 					<p:spinner value="#{beanFactura.cantidadProducto}" min="1" /> -->
-<!-- 					<p:commandButton value="adicionar" -->
-<!-- 						action="#{beanFactura.insertarDetalle}" update="form2" -->
-<!-- 						icon="fa fa-plus" /> -->
-<!-- 				</p:panelGrid> -->
-				
-				
+					
+					
+					<p:commandButton value="adicionar"
+						action="#{beanOdontograma.insertarDetalleOdonto()}" update="form2"
+						icon="fa fa-plus" />
+						
+				</p:panelGrid>
 <!-- 				<p:dataTable value="#{beanFactura.facturaCabTmp.facturaDets}" -->
 <!-- 					var="d" id="tablaFacturaDets"> -->
 <!-- 					<f:facet name="header"> -->
@@ -149,80 +155,11 @@
 <!-- 						</f:facet> -->
 <!-- 					</p:column> -->
 <!-- 				</p:dataTable> -->
-<!-- 			</p:panel> -->
-<!-- 		</h:form> -->
-
-
-
-
-
-
-
-
-
-		<br />
-		<h:form id="form3">
-			<p:panel header="Datos Pacientes">
-				<p:dataTable value="#{beanSwoPaciente.listaPacientes}" reflow="true"
-					var="paciente" paginator="true" rows="5">
-
-					<p:column headerText="Código" style="width:50px">
-						<h:outputText value="#{paciente.codigoPac}" />
-					</p:column>
-
-					<p:column headerText="Cédula" filterBy="#{paciente.cedulaPac}"
-						filterMatchMode="contains" priority="1">
-						<h:outputText value="#{paciente.cedulaPac}" />
-					</p:column>
-
-					<p:column headerText="Apellidos" filterBy="#{paciente.apellidoPac}"
-						filterMatchMode="contains" priority="1">
-						<h:outputText value="#{paciente.apellidoPac}" />
-					</p:column>
-
-					<p:column headerText="Nombres" priority="2">
-						<h:outputText value="#{paciente.nombrePac}" />
-					</p:column>
-
-					<p:column headerText="Fecha de Nacimiento">
-						<h:outputText value="#{paciente.fechaNaciPac}" />
-					</p:column>
-
-					<p:column headerText="Dirección">
-						<h:outputText value="#{paciente.direccionPac}" />
-					</p:column>
-
-					<p:column headerText="Teléfono">
-						<h:outputText value="#{paciente.telefonoPac}" />
-					</p:column>
-
-					<p:column headerText="Email" style="width:180px">
-						<h:outputText value="#{paciente.emailPac}" />
-					</p:column>
-
-
-					<p:column headerText="Género">
-						<h:outputText value="#{paciente.swoGenero.descripcionGen}" />
-					</p:column>
-
-					<!-- 				<p:column headerText="OPCIONES" priority="1"> -->
-
-					<!-- 						<p:commandButton icon="pi pi-pencil" title="Editar" -->
-					<!-- 						actionListener="#{beanSwoPaciente.actionListenerSeleccinarPaciente(paciente)}" -->
-					<!-- 						update=":formEdicion" oncomplete="PF('dlgEdicion').show();"> -->
-					<!-- 					</p:commandButton> -->
-
-					<!-- 					<p:commandButton icon="pi pi-times" title="eliminar" update="@form" -->
-					<!-- 						actionListener="#{beanSwoPaciente.actionListenerEliminarPaciente(paciente.codigoPac)}"> -->
-					<!-- 						<p:confirm header="Confirmación" message="Desea eliminar?" -->
-					<!-- 							icon="pi pi-exclamation-circle"></p:confirm> -->
-					<!-- 					</p:commandButton> -->
-
-
-					<!-- 				</p:column> -->
-				</p:dataTable>
 			</p:panel>
 		</h:form>
+		
 		</p:panel>
-</body>
+	
+	
+</body> 
 </html>
