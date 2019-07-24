@@ -16,8 +16,6 @@ public class SwoProveedore implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="SWO_PROVEEDORES_CODIGOPROV_GENERATOR", sequenceName="SEQ_SWO_PROVEEDORES", allocationSize = 1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SWO_PROVEEDORES_CODIGOPROV_GENERATOR")
 	@Column(name="codigo_prov", unique=true, nullable=false)
 	private Integer codigoProv;
 

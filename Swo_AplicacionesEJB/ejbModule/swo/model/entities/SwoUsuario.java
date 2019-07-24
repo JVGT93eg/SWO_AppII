@@ -18,32 +18,32 @@ public class SwoUsuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="cedula_usu")
+	@Column(name="cedula_usu", unique=true, nullable=false, length=20)
 	private String cedulaUsu;
 
-	@Column(name="apellido_usu")
+	@Column(name="apellido_usu", nullable=false, length=50)
 	private String apellidoUsu;
 
-	@Column(name="clave_usu")
+	@Column(name="clave_usu", nullable=false, length=20)
 	private String claveUsu;
 
-	@Column(name="direccion_usu")
+	@Column(name="direccion_usu", nullable=false, length=2147483647)
 	private String direccionUsu;
 
-	@Column(name="edad_usu")
+	@Column(name="edad_usu", nullable=false, precision=2)
 	private BigDecimal edadUsu;
 
-	@Column(name="email_usu")
+	@Column(name="email_usu", nullable=false, length=50)
 	private String emailUsu;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="fecha_naci_usu")
+	@Column(name="fecha_naci_usu", nullable=false)
 	private Date fechaNaciUsu;
 
-	@Column(name="nombre_usu")
+	@Column(name="nombre_usu", nullable=false, length=50)
 	private String nombreUsu;
 
-	@Column(name="telefono_usu")
+	@Column(name="telefono_usu", length=20)
 	private String telefonoUsu;
 
 	//bi-directional many-to-one association to SwoEvento

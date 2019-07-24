@@ -16,8 +16,6 @@ public class SwoDetallesInventario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="SWO_DETALLES_INVENTARIO_CODIGODETINV_GENERATOR", sequenceName="SEQ_SWO_DETALLES_INVENTARIO", allocationSize = 1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SWO_DETALLES_INVENTARIO_CODIGODETINV_GENERATOR")
 	@Column(name="codigo_det_inv", unique=true, nullable=false)
 	private Integer codigoDetInv;
 

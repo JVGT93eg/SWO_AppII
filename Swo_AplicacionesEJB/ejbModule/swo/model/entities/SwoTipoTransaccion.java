@@ -16,8 +16,6 @@ public class SwoTipoTransaccion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="SWO_TIPO_TRANSACCION_CODIGOTIPOTRANS_GENERATOR", sequenceName="SEQ_SWO_TIPO_TRANSACCION", allocationSize = 1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SWO_TIPO_TRANSACCION_CODIGOTIPOTRANS_GENERATOR")
 	@Column(name="codigo_tipo_trans", unique=true, nullable=false)
 	private Integer codigoTipoTrans;
 
