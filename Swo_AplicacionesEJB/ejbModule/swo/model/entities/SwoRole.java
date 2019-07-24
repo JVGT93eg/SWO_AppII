@@ -16,13 +16,13 @@ public class SwoRole implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="codigo_rol")
+	@Column(name="codigo_rol", unique=true, nullable=false)
 	private Integer codigoRol;
 
-	@Column(name="descripcion_rol")
+	@Column(name="descripcion_rol", nullable=false, length=2147483647)
 	private String descripcionRol;
 
-	@Column(name="nombre_rol")
+	@Column(name="nombre_rol", nullable=false, length=50)
 	private String nombreRol;
 
 	//bi-directional many-to-one association to SwoUsuario

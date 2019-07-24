@@ -16,8 +16,6 @@ public class SwoTratamiento implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="SWO_TRATAMIENTOS_CODIGOTRA_GENERATOR", sequenceName="SEQ_SWO_TRATAMIENTOS",allocationSize = 1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SWO_TRATAMIENTOS_CODIGOTRA_GENERATOR")
 	@Column(name="codigo_tra", unique=true, nullable=false)
 	private Integer codigoTra;
 

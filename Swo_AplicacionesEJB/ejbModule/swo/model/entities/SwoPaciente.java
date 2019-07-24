@@ -17,8 +17,6 @@ public class SwoPaciente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="SWO_PACIENTES_CODIGOPAC_GENERATOR", sequenceName="SEQ_SWO_PACIENTES", allocationSize = 1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SWO_PACIENTES_CODIGOPAC_GENERATOR")
 	@Column(name="codigo_pac", unique=true, nullable=false)
 	private Integer codigoPac;
 
