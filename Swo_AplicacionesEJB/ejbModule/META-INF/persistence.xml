@@ -2,21 +2,21 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="bddswoDS" transaction-type="JTA">
 	<jta-data-source>java:/bddswoDS</jta-data-source>
-		<class>swo.model.entities.SwoArticulo</class>
-		<class>swo.model.entities.SwoCara</class>
-		<class>swo.model.entities.SwoCategoria</class>
-		<class>swo.model.entities.SwoDetallesInventario</class>
-		<class>swo.model.entities.SwoDiente</class>
-		<class>swo.model.entities.SwoGenero</class>
-		<class>swo.model.entities.SwoOdontograma</class>
-		<class>swo.model.entities.SwoPaciente</class>
-		<class>swo.model.entities.SwoProceArticulo</class>
-		<class>swo.model.entities.SwoProcedimiento</class>
-		<class>swo.model.entities.SwoProveedore</class>
-		<class>swo.model.entities.SwoTipoTransaccion</class>
-		<class>swo.model.entities.SwoTratamiento</class>
-		<class>swo.model.entities.SwoEvento</class>
-		<class>swo.model.entities.SwoRole</class>
-		<class>swo.model.entities.SwoUsuario</class>
+	<class>swo.model.entities.SwoArticulo</class>
+	<class>swo.model.entities.SwoCara</class>
+	<class>swo.model.entities.SwoCategoria</class>
+	<class>swo.model.entities.SwoDetallesInventario</class>
+	<class>swo.model.entities.SwoDiente</class>
+	<class>swo.model.entities.SwoEvento</class>
+	<class>swo.model.entities.SwoGenero</class>
+	<class>swo.model.entities.SwoOdontograma</class>
+	<class>swo.model.entities.SwoPaciente</class>
+	<class>swo.model.entities.SwoProceArticulo</class>
+	<class>swo.model.entities.SwoProcedimiento</class>
+	<class>swo.model.entities.SwoProveedore</class>
+	<class>swo.model.entities.SwoRole</class>
+	<class>swo.model.entities.SwoTipoTransaccion</class>
+	<class>swo.model.entities.SwoTratamiento</class>
+	<class>swo.model.entities.SwoUsuario</class>
 	</persistence-unit>
 </persistence>
