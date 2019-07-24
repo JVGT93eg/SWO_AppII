@@ -1,18 +1,26 @@
 package swo.model.manager;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.wildfly.security.password.TwoWayPassword;
+
+import swo.model.entities.SwoArticulo;
 import swo.model.entities.SwoCara;
+import swo.model.entities.SwoCategoria;
 import swo.model.entities.SwoDiente;
 import swo.model.entities.SwoOdontograma;
 import swo.model.entities.SwoPaciente;
+import swo.model.entities.SwoProceArticulo;
+import swo.model.entities.SwoProcedimiento;
 import swo.model.entities.SwoTratamiento;
 
 
@@ -29,6 +37,14 @@ import swo.model.entities.SwoTratamiento;
 public class ManagerOdontograma {
 @PersistenceContext
 private EntityManager em;
+@EJB
+private ManagerDAO managerDAO;
+@EJB
+private MangerPaciente managerPacientes;
+@EJB
+private ManagerTratamiento managertratamiento;
+@EJB
+private ManagerCategorias managerCategoria;
     /**
      * Default constructor. 
      */
@@ -61,7 +77,7 @@ private EntityManager em;
     odontograma.setDescripcionAte(descripcion_ate);
   	odontograma.setFechaAte(fecha_ate);
   	odontograma.setSwoTratamiento(trata);
-  	odontograma.setSwoPaciente(paciente);	
+  // odontograma.setSwoPaciente(paciente);	
    odontograma.setSwoDiente(diente);
    odontograma.setSwoCara(cara);
 
@@ -118,4 +134,78 @@ private EntityManager em;
 			return q.getResultList();
 
 		}
+		/**
+		 * Crea una nueva cabecera de factura temporal, para que desde el programa
+		 * cliente pueda manipularla y llenarle con la informacion respectiva.
+		 * Esta informacion solo se mantiene en memoria.
+		 * @return la nueva factura temporal.
+		 */
+		public SwoOdontograma crearOdontogramaTmp(){
+			SwoOdontograma OdontogramaCabTmp=new SwoOdontograma();
+			OdontogramaCabTmp.setFechaAte(new Date());
+	//		OdontogramaCabTmp.setSwoTratamiento(new ArrayList<SwoTratamiento>());
+			return OdontogramaCabTmp;
+		}
+		
+		public void asignarPacienteOdontogramaTemp(SwoOdontograma odontogramacabTemp, int codigoPac)  throws Exception
+		{
+				SwoPaciente paciente=null;
+			if(codigoPac==0 ) 
+			      throw new Exception("Error debe especificar el codigo del Paciente");
+			try   {
+			paciente = managerPacientes.finPacientes_ById(codigoPac);
+			if(paciente==null)
+				throw new Exception(codigoPac+ "Error al asignar paciente."+paciente);
+			odontogramacabTemp.setSwoPaciente(paciente);
+			}catch (Exception e) {
+				e.printStackTrace();
+				throw new Exception("Error al asignar paciente:"+e.getMessage());
+			}
+			
+		}
+		/**
+		 * Adiciona un item detalle a una factura temporal. Estos valores permanecen
+		 * en memoria. 
+		 * @param codigoProducto codigo del producto.
+		 * @param cantidad cantidad del producto.
+		 * @throws Exception problemas ocurridos al momento de insertar el item detalle.
+		 */
+		public void agregarDetalleOdontogramaTmp(SwoOdontograma OdontogramaCabTmp,Integer codigocatego,Integer codArticulo, Integer cantidad, Integer precio) throws Exception{
+			SwoCategoria ca;
+			SwoOdontograma od;	
+			SwoTratamiento tr;
+			SwoProcedimiento pr;
+			SwoProceArticulo prar;
+			SwoArticulo ar;
+			
+			
+			if(OdontogramaCabTmp==null)
+				throw new Exception("Error primero debe crear una nueva Odontograma.");
+			if(codigocatego==null||codigocatego.intValue()<0)
+				throw new Exception("Error debe especificar el codigo del tratamiento.");
+			if(codArticulo==null||codArticulo.intValue()<0)
+				throw new Exception("Error debe especificar el codigo del Diente.");
+			if(cantidad==null||cantidad.intValue()<0)
+				throw new Exception("Error debe especificar el codigo de la cara.");
+			if(precio==null||precio.intValue()<=0)
+				throw new Exception("Error debe especificar la cantidad del precio.");
+			
+			//buscamos la categoria:
+			ca=managerCategoria.findCategoriaById(codigocatego);
+			//creamos un nuevo tratamiento y llenamos sus propiedades:
+			tr=new SwoTratamiento();
+			tr.setPrecioTra(precio);
+			
+			//creamos un nuevo procedimiento
+			pr=new SwoProcedimiento();
+			pr.setCantidadProc(cantidad);
+			
+			//Creamos un nuevo Articulos
+			ar=new SwoArticulo();
+			ar.setCodigoArt(codArticulo);
+			
+			//verificamos los campos calculados:
+	//		calcularFacturaTmp(facturaCabTmp);
+		}
+		
 }
