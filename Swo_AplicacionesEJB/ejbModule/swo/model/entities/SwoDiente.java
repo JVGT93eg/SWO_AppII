@@ -16,6 +16,8 @@ public class SwoDiente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(name="SWO_DIENTES_CODIGODIE_GENERATOR", sequenceName="SEQ_SWO_DIENTES", allocationSize = 1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SWO_DIENTES_CODIGODIE_GENERATOR")
 	@Column(name="codigo_die", unique=true, nullable=false)
 	private Integer codigoDie;
 

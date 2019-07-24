@@ -16,6 +16,8 @@ public class SwoOdontograma implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(name="SWO_ODONTOGRAMA_CODIGOATE_GENERATOR", sequenceName="SEQ_SWO_ODONTOGRAMA", allocationSize = 1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SWO_ODONTOGRAMA_CODIGOATE_GENERATOR")
 	@Column(name="codigo_ate", unique=true, nullable=false)
 	private Integer codigoAte;
 
