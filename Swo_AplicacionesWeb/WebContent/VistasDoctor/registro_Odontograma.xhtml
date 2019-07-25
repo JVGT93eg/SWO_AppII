@@ -82,25 +82,52 @@
 			</p:panelGrid>
 		</h:form>
 
-<!-- <h2> Registro de Atención Médica </h2> -->
+<h2> Registro de Atención Médica </h2>
 
-<!-- 		<h:form id="form2"> -->
-<!-- 			<p:panel header="Detalle del Odontograma"> -->
-<!-- 				<p:panelGrid columns="7" border="1"> -->
-<!-- 					<h:outputText value="Registrar:" /> -->
-<!-- 					<p:selectOneMenu value="#{beanOdontograma.codtrata}"> -->
-<!-- 						<f:selectItem itemLabel="Tratami..." itemValue="-1" -->
-<!-- 							noSelectionOption="true" /> -->
-<!-- 						<f:selectItems value="#{beanOdontograma.listaTratamientoSI}"/> -->
-<!-- 					</p:selectOneMenu> -->
+		<h:form id="form2">
+			<p:panel header="Detalle del Odontograma">
+				<p:panelGrid columns="8" border="1">
+					<h:outputText value="Registrar:" />
+					<p:selectOneMenu value="#{beanOdontograma.codtrata}">
+						<f:selectItem itemLabel="Tratami..." itemValue="-1"
+							noSelectionOption="true" />
+						<f:selectItems value="#{beanOdontograma.listaTratamientoSI}"/>
+					</p:selectOneMenu>
+					
+					<p:selectOneMenu value="#{beanOdontograma.codCategoria}">
+					<f:selectItems value="#{beanOdontograma.listaCategoria}" var="a"
+						 itemLabel="#{a.nombreCat}"
+						itemValue="#{a.codigoCat}" />
+				</p:selectOneMenu>
 					
 					
-<!-- 					<h:outputText value="Cantidad:" /> -->
-<!-- 					<p:spinner value="#{beanFactura.cantidadProducto}" min="1" /> -->
+					<p:selectOneMenu value="#{beanOdontograma.coddie}">
+					<f:selectItems value="#{beanOdontograma.listaDientes}" var="a"
+						 itemLabel="#{a.nombreDie}"
+						itemValue="#{a.codigoDie}" />
+				</p:selectOneMenu>
+				
+					<p:selectOneMenu value="#{beanOdontograma.codcar}">
+					<f:selectItems value="#{beanOdontograma.listaCara}" var="a"
+						 itemLabel="#{a.nombreCar}"
+						itemValue="#{a.codigoCar}" />
+				</p:selectOneMenu>
+				
+				
+					<p:selectOneMenu value="#{beanOdontograma.codArticulo}">
+					<f:selectItems value="#{beanOdontograma.listaArticulos}" var="a"
+						 itemLabel="#{a.nombreArt}"
+						itemValue="#{a.codigoArt}" />
+				</p:selectOneMenu>
+				
+					
+					<h:outputText value="Cantidad:" />
+					<p:spinner value="#{beanOdontograma.cantidad}" min="1" />
 <!-- 					<p:commandButton value="adicionar" -->
 <!-- 						action="#{beanFactura.insertarDetalle}" update="form2" -->
 <!-- 						icon="fa fa-plus" /> -->
-<!-- 				</p:panelGrid> -->
+						
+				</p:panelGrid>
 				
 				
 <!-- 				<p:dataTable value="#{beanFactura.facturaCabTmp.facturaDets}" -->
@@ -149,8 +176,8 @@
 <!-- 						</f:facet> -->
 <!-- 					</p:column> -->
 <!-- 				</p:dataTable> -->
-<!-- 			</p:panel> -->
-<!-- 		</h:form> -->
+			</p:panel>
+		</h:form>
 
 
 
