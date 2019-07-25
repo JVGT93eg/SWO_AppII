@@ -208,4 +208,28 @@ private ManagerCategorias managerCategoria;
 	//		calcularFacturaTmp(facturaCabTmp);
 		}
 		
+		public List<SwoArticulo> listarArticulo(){
+			String sentencia = "SELECT s FROM SwoArticulo s";
+			Query q = em.createQuery(sentencia,SwoArticulo.class);
+			return q.getResultList();
+		}
+		 // Método que retorna la lista de  la tabla Dientes
+	    public List<SwoDiente> findAllDientes(){
+	    	String consulta=("SELECT s FROM SwoDiente s");
+	    	Query q=em.createQuery(consulta,SwoDiente.class);
+	    	return q.getResultList();
+	    }
+	    // Método que retorna la lista de  la tabla Cara
+	    public List<SwoCara> findAllCaras(){
+	    	String consulta=("SELECT s FROM SwoCara s");
+	    	Query q=em.createQuery(consulta,SwoCara.class);
+	    	return q.getResultList();
+	    }
+		
+	    public List<SwoCategoria> listarCategorias(){
+			Query q;
+			String sentencia = "SELECT s FROM SwoCategoria s";
+			q = em.createQuery(sentencia,SwoCategoria.class);
+			return q.getResultList();
+		}
 }

@@ -83,6 +83,7 @@ private ManagerDAO managerDAO;
 		public List<SwoArticulo> findAll_Articulos(){
 	  		return managerDAO.findAll(SwoArticulo.class, "o.nombreArt");
 	  	}
+	  	
 	  	 
 	    
 
