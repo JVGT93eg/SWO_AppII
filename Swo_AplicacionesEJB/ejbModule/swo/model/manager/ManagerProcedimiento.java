@@ -1,6 +1,5 @@
 package swo.model.manager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.LocalBean;

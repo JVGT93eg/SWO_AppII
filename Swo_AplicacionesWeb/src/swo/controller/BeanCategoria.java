@@ -42,7 +42,8 @@ public class BeanCategoria implements Serializable{
 	}
     public void actionListenerInsertarCategoria() {
     	managerCategoria.insertarCategoria(nombreCat, descripcionCat);
-    	lista = managerCategoria.listarCategorias();  	
+    	lista = managerCategoria.listarCategorias();
+    	JSFUtil.crearMensajeInfo("Tratamiento insertado");
     	
     }
 	
