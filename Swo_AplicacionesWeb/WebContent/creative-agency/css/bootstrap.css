@@ -512,6 +512,7 @@ mark,
 .img-fluid {
 
   height: 280px;
+  width: 200px;
 }
 
 .img-thumbnail {
@@ -520,7 +521,7 @@ mark,
   border: 1px solid #ddd;
   border-radius: 0.25rem;
   transition: all 0.2s ease-in-out;
-  max-width: 100%;
+  max-width: 50%;
   height: auto;
 }
 
@@ -4742,7 +4743,7 @@ button.close {
   position: relative;
   display: none;
   align-items: center;
-  width: 100%;
+  width: 1000%;
   transition: transform 0.6s ease;
   backface-visibility: hidden;
   perspective: 1000px;

@@ -4,16 +4,16 @@ package swo.model.manager;
 import java.util.Date;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import swo.model.entities.SwoArticulo;
-import swo.model.entities.SwoCategoria;
 import swo.model.entities.SwoGenero;
 import swo.model.entities.SwoPaciente;
+
 
 /**
  * Session Bean implementation class MangerPaciente
@@ -21,6 +21,8 @@ import swo.model.entities.SwoPaciente;
 @Stateless
 @LocalBean
 public class MangerPaciente {
+	@EJB
+	private ManagerDAO managerDAO;
 	@PersistenceContext
 	private EntityManager em;
 
@@ -31,13 +33,26 @@ public class MangerPaciente {
 		// TODO Auto-generated constructor stub
 	}
 
-	// Método que retorna la lista de la tabla Pacientes
+//Método que retorna la lista de la tabla Pacientes
 	public List<SwoPaciente> findAllPacientes() {
 		String consulta = ("SELECT s FROM SwoPaciente s");
 		Query q = em.createQuery(consulta, SwoPaciente.class);
 		return q.getResultList();
 
 	}
+	
+	//método para retornar los datos a la vista de Odontograma
+	
+ 	/**
+  	 * Metodo finder para consulta de productos.
+  	 * Hace uso del componente {@link marketdemo.model.manager.ManagerDAO ManagerDAO} de la capa model.
+  	 * @return listado de Productos ordenados por nombre.
+  	 */
+  	@SuppressWarnings("unchecked")
+  	public List<SwoPaciente> findAllPacientesDao(){
+  		return managerDAO.findAll(SwoPaciente.class, "o.apellidoPac");
+  	}
+	
 	 public SwoGenero buscarPorCodigoG(int codGenero) {
 		   SwoGenero genero = em.find(SwoGenero.class, codGenero);
 		   return genero;
@@ -64,6 +79,17 @@ public class MangerPaciente {
 		return em.find(SwoPaciente.class, codigo_pacie);
 
 	}
+	public SwoPaciente finPacientes_ById(int codigoPac) throws Exception{
+  		SwoPaciente paciente=null;
+  		try {
+  			paciente=(SwoPaciente)managerDAO.findById(SwoPaciente.class, codigoPac);
+  		} catch (Exception e) {
+  			e.printStackTrace();
+  			throw new Exception("Error al buscar Paciente: "+e.getMessage());
+  		}
+  		return paciente;
+  	}
+	
 
 	// métod para eliminar
 	public void eliminarPaciente(Integer codigo_pacie) {

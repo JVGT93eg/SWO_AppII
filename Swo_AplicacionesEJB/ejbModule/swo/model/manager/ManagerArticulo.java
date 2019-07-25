@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -11,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import swo.model.entities.SwoArticulo;
+import swo.model.entities.SwoTratamiento;
 
 @Stateless
 @LocalBean
@@ -18,6 +20,8 @@ public class ManagerArticulo {
 
 @PersistenceContext
 private EntityManager em;
+@EJB
+private ManagerDAO managerDAO;
 	
 	public ManagerArticulo() {
  	
@@ -73,5 +77,13 @@ private EntityManager em;
 	    	e.setStockArt(articulo.getStockArt());
 	    	em.merge(e);	
 	    }
+	   
+	  	
+	  	@SuppressWarnings("unchecked")
+		public List<SwoArticulo> findAll_Articulos(){
+	  		return managerDAO.findAll(SwoArticulo.class, "o.nombreArt");
+	  	}
+	  	 
+	    
 
 }

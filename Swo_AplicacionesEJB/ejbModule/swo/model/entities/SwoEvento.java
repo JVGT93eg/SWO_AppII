@@ -2,7 +2,6 @@ package swo.model.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.sql.Time;
 import java.util.Date;
 
 
@@ -17,31 +16,26 @@ public class SwoEvento implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="SWO_EVENTOS_CODIGOEVE_GENERATOR", sequenceName="SEQ_SWO_EVENTOS", allocationSize = 1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SWO_EVENTOS_CODIGOEVE_GENERATOR")
-	@Column(name="codigo_eve", unique=true, nullable=false)
+	@Column(name="codigo_eve")
 	private Integer codigoEve;
 
-	@Column(name="descripcion_eve", nullable=false, length=2147483647)
+	@Column(name="descripcion_eve")
 	private String descripcionEve;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="fecha_eve", nullable=false)
+	@Column(name="fecha_eve")
 	private Date fechaEve;
 
-	@Column(name="hora_eve", nullable=false)
-	private Time horaEve;
-
-	@Column(name="ip_eve", nullable=false, length=100)
+	@Column(name="ip_eve")
 	private String ipEve;
 
-	@Column(name="nombre_eve", nullable=false, length=50)
+	@Column(name="nombre_eve")
 	private String nombreEve;
 
-	//bi-directional many-to-one association to SwoLogin
+	//bi-directional many-to-one association to SwoUsuario
 	@ManyToOne
-	@JoinColumn(name="codigo_login_swo_login")
-	private SwoLogin swoLogin;
+	@JoinColumn(name="cedula_usu_swo_usuarios")
+	private SwoUsuario swoUsuario;
 
 	public SwoEvento() {
 	}
@@ -70,14 +64,6 @@ public class SwoEvento implements Serializable {
 		this.fechaEve = fechaEve;
 	}
 
-	public Time getHoraEve() {
-		return this.horaEve;
-	}
-
-	public void setHoraEve(Time horaEve) {
-		this.horaEve = horaEve;
-	}
-
 	public String getIpEve() {
 		return this.ipEve;
 	}
@@ -94,12 +80,12 @@ public class SwoEvento implements Serializable {
 		this.nombreEve = nombreEve;
 	}
 
-	public SwoLogin getSwoLogin() {
-		return this.swoLogin;
+	public SwoUsuario getSwoUsuario() {
+		return this.swoUsuario;
 	}
 
-	public void setSwoLogin(SwoLogin swoLogin) {
-		this.swoLogin = swoLogin;
+	public void setSwoUsuario(SwoUsuario swoUsuario) {
+		this.swoUsuario = swoUsuario;
 	}
 
 }

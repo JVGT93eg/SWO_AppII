@@ -41,52 +41,127 @@
 	<p:growl>
 		<p:autoUpdate />
 	</p:growl>
-<h1> Aqui se esta haciendo para el registro de Atención médica</h1>
+<h1> Registro de Datos Generales</h1>
 	
-<!-- 	<p:panel id="panel1"> -->
-<!-- 		<h:form id="form1"> -->
-<!-- 			<p:panelGrid columns="2"> -->
-<!-- 				<p:commandButton action="#{beanFactura.crearNuevaFactura()}" -->
-<!-- 					value="Crear nueva factura" update="form1 :form2" -->
-<!-- 					icon="fa fa-file-o" /> -->
-<!-- 				<h:panelGroup> -->
-<!-- 					<p:commandButton value="Guardar factura" icon="fa fa-save" -->
-<!-- 						action="#{beanFactura.guardarFactura()}" update="@form" /> -->
-<!-- 					<p:commandButton value="Imprimir" -->
-<!-- 						rendered="#{beanFactura.facturaCabTmpGuardada}" type="button" -->
-<!-- 						icon="fa fa-print"> -->
-<!-- 						<p:printer target=":panel1" /> -->
-<!-- 					</p:commandButton> -->
-<!-- 				</h:panelGroup> -->
-<!-- 				<h:outputText value="Nro. de factura:" style="font-weight: bold" /> -->
-<!-- 				<h:outputText value="#{beanFactura.facturaCabTmp.numeroFactura}" /> -->
-<!-- 				<h:outputText value="Fecha de la factura:" style="font-weight: bold" /> -->
-<!-- 				<h:outputText value="#{beanFactura.facturaCabTmp.fechaEmision}"> -->
-<!-- 					<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" /> -->
-<!-- 				</h:outputText> -->
-<!-- 				<h:outputText value="Seleccione el cliente:" -->
-<!-- 					style="font-weight: bold" /> -->
-<!-- 				<h:panelGroup> -->
-<!-- 					<p:selectOneMenu value="#{beanFactura.cedulaCliente}" filter="true" -->
-<!-- 						filterMatchMode="contains"> -->
-<!-- 						<f:selectItem itemLabel="Seleccione..." itemValue="" -->
+	<p:panel id="panel1">
+		<h:form id="form1">
+			<p:panelGrid columns="2">
+				<p:commandButton action="#{beanOdontograma.crearNuevoOdontograma()}"
+					value="Crear nuevo Odontograma" update="form1 :form3" 
+					icon="fa fa-file-o" />
+				<h:panelGroup>
+					<p:commandButton value="Guardar factura" icon="fa fa-save"
+						action="#{beanFactura.guardarFactura()}" update="@form" />
+					<p:commandButton value="Imprimir"
+						rendered="#{beanFactura.facturaCabTmpGuardada}" type="button"
+						icon="fa fa-print">
+						<p:printer target=":panel1" />
+					</p:commandButton>
+				</h:panelGroup>
+				<h:outputText value="Nro. de factura:" style="font-weight: bold" />
+				<h:outputText value="#{beanOdontograma.odontogramaCabTmp.codigoAte}" />
+				<h:outputText value="Fecha Creación:" style="font-weight: bold" />
+				<h:outputText value="#{beanOdontograma.odontogramaCabTmp.fechaAte}">
+					<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+				</h:outputText>
+				<h:outputText value="Seleccione el Paciente:"
+					style="font-weight: bold" />
+				<h:panelGroup>
+					<p:selectOneMenu value="#{beanOdontograma.codigoPac}" filter="true"
+						filterMatchMode="contains">
+						<f:selectItem itemLabel="Seleccione..." itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems value="#{beanOdontograma.listaPAciente_SI}"/>
+						<p:ajax update="cedulaCliente"
+							listener="#{beanOdontograma.asignarPaciente()}"></p:ajax>
+					</p:selectOneMenu>
+				</h:panelGroup>
+				<h:outputText value="Codigo del Paciente:" style="font-weight: bold" />
+				<h:outputText id="cedulaCliente"
+					value="#{beanOdontograma.codigoPac}" />
+			</p:panelGrid>
+		</h:form>
+
+<!-- <h2> Registro de Atención Médica </h2> -->
+
+<!-- 		<h:form id="form2"> -->
+<!-- 			<p:panel header="Detalle del Odontograma"> -->
+<!-- 				<p:panelGrid columns="7" border="1"> -->
+<!-- 					<h:outputText value="Registrar:" /> -->
+<!-- 					<p:selectOneMenu value="#{beanOdontograma.codtrata}"> -->
+<!-- 						<f:selectItem itemLabel="Tratami..." itemValue="-1" -->
 <!-- 							noSelectionOption="true" /> -->
-<!-- 						<f:selectItems value="#{beanFactura.listaClientesSI}" /> -->
-<!-- 						<p:ajax update="cedulaCliente" -->
-<!-- 							listener="#{beanFactura.asignarCliente()}"></p:ajax> -->
+<!-- 						<f:selectItems value="#{beanOdontograma.listaTratamientoSI}"/> -->
 <!-- 					</p:selectOneMenu> -->
-<!-- 				</h:panelGroup> -->
-<!-- 				<h:outputText value="Codigo del cliente:" style="font-weight: bold" /> -->
-<!-- 				<h:outputText id="cedulaCliente" -->
-<!-- 					value="#{beanFactura.cedulaCliente}" /> -->
-<!-- 			</p:panelGrid> -->
+					
+					
+<!-- 					<h:outputText value="Cantidad:" /> -->
+<!-- 					<p:spinner value="#{beanFactura.cantidadProducto}" min="1" /> -->
+<!-- 					<p:commandButton value="adicionar" -->
+<!-- 						action="#{beanFactura.insertarDetalle}" update="form2" -->
+<!-- 						icon="fa fa-plus" /> -->
+<!-- 				</p:panelGrid> -->
+				
+				
+<!-- 				<p:dataTable value="#{beanFactura.facturaCabTmp.facturaDets}" -->
+<!-- 					var="d" id="tablaFacturaDets"> -->
+<!-- 					<f:facet name="header"> -->
+<!-- 						<h:outputText value="Detalle de productos:" /> -->
+<!-- 					</f:facet> -->
+<!-- 					<p:column style="width:60px" headerText="CODIGO"> -->
+<!-- 						<h:outputText value="#{d.producto.codigoProducto}" /> -->
+<!-- 					</p:column> -->
+<!-- 					<p:column headerText="PRODUCTO"> -->
+<!-- 						<h:outputText value="#{d.producto.nombre}" /> -->
+<!-- 					</p:column> -->
+<!-- 					<p:column headerText="DESCRIPCION"> -->
+<!-- 						<h:outputText value="#{d.producto.descripcion}" /> -->
+<!-- 					</p:column> -->
+<!-- 					<p:column style="width:100px" headerText="P/U"> -->
+<!-- 						<h:outputText value="#{d.precioUnitarioVenta}" /> -->
+<!-- 					</p:column> -->
+<!-- 					<p:column style="width:40px" headerText="CANT"> -->
+<!-- 						<h:outputText value="#{d.cantidad}" /> -->
+<!-- 					</p:column> -->
+<!-- 					<p:column style="width:160px;text-align:right" -->
+<!-- 						headerText="SUBTOTAL"> -->
+<!-- 						<h:outputText value="#{d.precioUnitarioVenta * d.cantidad}" -->
+<!-- 							style="text-align:right" /> -->
+<!-- 						<f:facet name="footer"> -->
+<!-- 							<h:panelGrid columns="2" -->
+<!-- 								style="font-weight: bold; text-align:right"> -->
+<!-- 								<h:outputText value="SUMA:" /> -->
+<!-- 								<h:outputText value="#{beanFactura.facturaCabTmp.subtotal}"> -->
+<!-- 									<f:convertNumber maxFractionDigits="2" minFractionDigits="2" -->
+<!-- 										currencySymbol="$" /> -->
+<!-- 								</h:outputText> -->
+<!-- 								<h:outputText value="IVA:" /> -->
+<!-- 								<h:outputText value="#{beanFactura.facturaCabTmp.valorIva}"> -->
+<!-- 									<f:convertNumber maxFractionDigits="2" minFractionDigits="2" -->
+<!-- 										currencySymbol="$" /> -->
+<!-- 								</h:outputText> -->
+<!-- 								<h:outputText value="TOTAL:" /> -->
+<!-- 								<h:outputText value="#{beanFactura.facturaCabTmp.total}"> -->
+<!-- 									<f:convertNumber maxFractionDigits="2" minFractionDigits="2" -->
+<!-- 										currencySymbol="$" /> -->
+<!-- 								</h:outputText> -->
+<!-- 							</h:panelGrid> -->
+<!-- 						</f:facet> -->
+<!-- 					</p:column> -->
+<!-- 				</p:dataTable> -->
+<!-- 			</p:panel> -->
 <!-- 		</h:form> -->
 
 
 
 
+
+
+
+
+
 		<br />
-		<h:form id="form2">
+		<h:form id="form3">
 			<p:panel header="Datos Pacientes">
 				<p:dataTable value="#{beanSwoPaciente.listaPacientes}" reflow="true"
 					var="paciente" paginator="true" rows="5">
@@ -148,5 +223,6 @@
 				</p:dataTable>
 			</p:panel>
 		</h:form>
+		</p:panel>
 </body>
 </html>
