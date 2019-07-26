@@ -46,18 +46,12 @@
 	<p:panel id="panel1">
 		<h:form id="form1">
 			<p:panelGrid columns="2">
+			<h:outputText value="Crear:" style="font-weight: bold" />
 				<p:commandButton action="#{beanOdontograma.crearNuevoOdontograma()}"
-					value="Crear nuevo Odontograma" update="form1 :form3" 
+					value="Nuevo Odontograma" update="form1 :form2" 
 					icon="fa fa-file-o" />
-				<h:panelGroup>
-					<p:commandButton value="Guardar factura" icon="fa fa-save"
-						action="#{beanFactura.guardarFactura()}" update="@form" />
-					<p:commandButton value="Imprimir"
-						rendered="#{beanFactura.facturaCabTmpGuardada}" type="button"
-						icon="fa fa-print">
-						<p:printer target=":panel1" />
-					</p:commandButton>
-				</h:panelGroup>
+			
+				
 				<h:outputText value="Nro. de factura:" style="font-weight: bold" />
 				<h:outputText value="#{beanOdontograma.odontogramaCabTmp.codigoAte}" />
 				<h:outputText value="Fecha Creación:" style="font-weight: bold" />
@@ -79,6 +73,31 @@
 				<h:outputText value="Codigo del Paciente:" style="font-weight: bold" />
 				<h:outputText id="cedulaCliente"
 					value="#{beanOdontograma.codigoPac}" />
+					
+						<h:outputText value="Tratamiento:" style="font-weight: bold" />
+						<p:selectOneMenu value="#{beanOdontograma.codCategoria}">
+					<f:selectItems value="#{beanOdontograma.listaCategoria}" var="a"
+						 itemLabel="#{a.nombreCat}"
+						itemValue="#{a.codigoCat}" />
+				</p:selectOneMenu>
+							
+					
+						<h:outputText value="Diente:" style="font-weight: bold" />
+					<p:selectOneMenu value="#{beanOdontograma.coddie}">
+					<f:selectItems value="#{beanOdontograma.listaDientes}" var="a"
+						 itemLabel="#{a.nombreDie}"
+						itemValue="#{a.codigoDie}" />
+				</p:selectOneMenu>
+				
+				<h:outputText value="Cara:" style="font-weight: bold" />
+					<p:selectOneMenu value="#{beanOdontograma.codcar}">
+					<f:selectItems value="#{beanOdontograma.listaCara}" var="a"
+						 itemLabel="#{a.nombreCar}"
+						itemValue="#{a.codigoCar}" />
+				</p:selectOneMenu>
+					
+				<h:outputText value="Descripción:" style="font-weight: bold" />	
+					<p:inputText type="text" value="#{beanOdontograma.descripcion_ate}" size="30" style="width:300px"/>	
 			</p:panelGrid>
 		</h:form>
 
@@ -87,33 +106,15 @@
 		<h:form id="form2">
 			<p:panel header="Detalle del Odontograma">
 				<p:panelGrid columns="8" border="1">
-					<h:outputText value="Registrar:" />
-					<p:selectOneMenu value="#{beanOdontograma.codtrata}">
-						<f:selectItem itemLabel="Tratami..." itemValue="-1"
-							noSelectionOption="true" />
-						<f:selectItems value="#{beanOdontograma.listaTratamientoSI}"/>
+				
+					<h:outputText value="Categoria" style="font-weight: bold" />
+						<p:selectOneMenu value="#{beanOdontograma.codtrata}">
+					<f:selectItems value="#{beanOdontograma.listaTratamiento}" var="a"
+						 itemLabel="#{a.descripcionTra}"
+						itemValue="#{a.codigoTra}" />
 					</p:selectOneMenu>
-					
-					<p:selectOneMenu value="#{beanOdontograma.codCategoria}">
-					<f:selectItems value="#{beanOdontograma.listaCategoria}" var="a"
-						 itemLabel="#{a.nombreCat}"
-						itemValue="#{a.codigoCat}" />
-				</p:selectOneMenu>
-					
-					
-					<p:selectOneMenu value="#{beanOdontograma.coddie}">
-					<f:selectItems value="#{beanOdontograma.listaDientes}" var="a"
-						 itemLabel="#{a.nombreDie}"
-						itemValue="#{a.codigoDie}" />
-				</p:selectOneMenu>
-				
-					<p:selectOneMenu value="#{beanOdontograma.codcar}">
-					<f:selectItems value="#{beanOdontograma.listaCara}" var="a"
-						 itemLabel="#{a.nombreCar}"
-						itemValue="#{a.codigoCar}" />
-				</p:selectOneMenu>
-				
-				
+							
+					<h:outputText value="Producto:" />															
 					<p:selectOneMenu value="#{beanOdontograma.codArticulo}">
 					<f:selectItems value="#{beanOdontograma.listaArticulos}" var="a"
 						 itemLabel="#{a.nombreArt}"
@@ -121,135 +122,29 @@
 				</p:selectOneMenu>
 				
 					
-					<h:outputText value="Cantidad:" />
-					<p:spinner value="#{beanOdontograma.cantidad}" min="1" />
-<!-- 					<p:commandButton value="adicionar" -->
-<!-- 						action="#{beanFactura.insertarDetalle}" update="form2" -->
-<!-- 						icon="fa fa-plus" /> -->
+					<h:outputText value="Costo:" />
+			<p:inputText value="#{beanOdontograma.costo}" />
+										
+						
+						
+						<h:panelGroup>
+					<p:commandButton value="Guardar Odontograma" icon="fa fa-save"
+						action="#{beanOdontograma.actionListenerInsertarOdontograma()}" update="@form" />
+					
+				
+				</h:panelGroup>
 						
 				</p:panelGrid>
 				
 				
-<!-- 				<p:dataTable value="#{beanFactura.facturaCabTmp.facturaDets}" -->
-<!-- 					var="d" id="tablaFacturaDets"> -->
-<!-- 					<f:facet name="header"> -->
-<!-- 						<h:outputText value="Detalle de productos:" /> -->
-<!-- 					</f:facet> -->
-<!-- 					<p:column style="width:60px" headerText="CODIGO"> -->
-<!-- 						<h:outputText value="#{d.producto.codigoProducto}" /> -->
-<!-- 					</p:column> -->
-<!-- 					<p:column headerText="PRODUCTO"> -->
-<!-- 						<h:outputText value="#{d.producto.nombre}" /> -->
-<!-- 					</p:column> -->
-<!-- 					<p:column headerText="DESCRIPCION"> -->
-<!-- 						<h:outputText value="#{d.producto.descripcion}" /> -->
-<!-- 					</p:column> -->
-<!-- 					<p:column style="width:100px" headerText="P/U"> -->
-<!-- 						<h:outputText value="#{d.precioUnitarioVenta}" /> -->
-<!-- 					</p:column> -->
-<!-- 					<p:column style="width:40px" headerText="CANT"> -->
-<!-- 						<h:outputText value="#{d.cantidad}" /> -->
-<!-- 					</p:column> -->
-<!-- 					<p:column style="width:160px;text-align:right" -->
-<!-- 						headerText="SUBTOTAL"> -->
-<!-- 						<h:outputText value="#{d.precioUnitarioVenta * d.cantidad}" -->
-<!-- 							style="text-align:right" /> -->
-<!-- 						<f:facet name="footer"> -->
-<!-- 							<h:panelGrid columns="2" -->
-<!-- 								style="font-weight: bold; text-align:right"> -->
-<!-- 								<h:outputText value="SUMA:" /> -->
-<!-- 								<h:outputText value="#{beanFactura.facturaCabTmp.subtotal}"> -->
-<!-- 									<f:convertNumber maxFractionDigits="2" minFractionDigits="2" -->
-<!-- 										currencySymbol="$" /> -->
-<!-- 								</h:outputText> -->
-<!-- 								<h:outputText value="IVA:" /> -->
-<!-- 								<h:outputText value="#{beanFactura.facturaCabTmp.valorIva}"> -->
-<!-- 									<f:convertNumber maxFractionDigits="2" minFractionDigits="2" -->
-<!-- 										currencySymbol="$" /> -->
-<!-- 								</h:outputText> -->
-<!-- 								<h:outputText value="TOTAL:" /> -->
-<!-- 								<h:outputText value="#{beanFactura.facturaCabTmp.total}"> -->
-<!-- 									<f:convertNumber maxFractionDigits="2" minFractionDigits="2" -->
-<!-- 										currencySymbol="$" /> -->
-<!-- 								</h:outputText> -->
-<!-- 							</h:panelGrid> -->
-<!-- 						</f:facet> -->
-<!-- 					</p:column> -->
-<!-- 				</p:dataTable> -->
+				
+				
+
 			</p:panel>
 		</h:form>
-
-
-
-
-
-
-
 
 
 		<br />
-		<h:form id="form3">
-			<p:panel header="Datos Pacientes">
-				<p:dataTable value="#{beanSwoPaciente.listaPacientes}" reflow="true"
-					var="paciente" paginator="true" rows="5">
-
-					<p:column headerText="Código" style="width:50px">
-						<h:outputText value="#{paciente.codigoPac}" />
-					</p:column>
-
-					<p:column headerText="Cédula" filterBy="#{paciente.cedulaPac}"
-						filterMatchMode="contains" priority="1">
-						<h:outputText value="#{paciente.cedulaPac}" />
-					</p:column>
-
-					<p:column headerText="Apellidos" filterBy="#{paciente.apellidoPac}"
-						filterMatchMode="contains" priority="1">
-						<h:outputText value="#{paciente.apellidoPac}" />
-					</p:column>
-
-					<p:column headerText="Nombres" priority="2">
-						<h:outputText value="#{paciente.nombrePac}" />
-					</p:column>
-
-					<p:column headerText="Fecha de Nacimiento">
-						<h:outputText value="#{paciente.fechaNaciPac}" />
-					</p:column>
-
-					<p:column headerText="Dirección">
-						<h:outputText value="#{paciente.direccionPac}" />
-					</p:column>
-
-					<p:column headerText="Teléfono">
-						<h:outputText value="#{paciente.telefonoPac}" />
-					</p:column>
-
-					<p:column headerText="Email" style="width:180px">
-						<h:outputText value="#{paciente.emailPac}" />
-					</p:column>
-
-
-					<p:column headerText="Género">
-						<h:outputText value="#{paciente.swoGenero.descripcionGen}" />
-					</p:column>
-
-					<!-- 				<p:column headerText="OPCIONES" priority="1"> -->
-
-					<!-- 						<p:commandButton icon="pi pi-pencil" title="Editar" -->
-					<!-- 						actionListener="#{beanSwoPaciente.actionListenerSeleccinarPaciente(paciente)}" -->
-					<!-- 						update=":formEdicion" oncomplete="PF('dlgEdicion').show();"> -->
-					<!-- 					</p:commandButton> -->
-
-					<!-- 					<p:commandButton icon="pi pi-times" title="eliminar" update="@form" -->
-					<!-- 						actionListener="#{beanSwoPaciente.actionListenerEliminarPaciente(paciente.codigoPac)}"> -->
-					<!-- 						<p:confirm header="Confirmación" message="Desea eliminar?" -->
-					<!-- 							icon="pi pi-exclamation-circle"></p:confirm> -->
-					<!-- 					</p:commandButton> -->
-
-
-					<!-- 				</p:column> -->
-				</p:dataTable>
-			</p:panel>
-		</h:form>
 		</p:panel>
 </body>
 </html>

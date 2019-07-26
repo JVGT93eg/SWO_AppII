@@ -44,6 +44,7 @@ public class BeanOdontograma implements Serializable {
 	private List <SwoDiente> listaDientes;
 	private List <SwoCara>   listaCara;
 	private List <SwoCategoria> listaCategoria;
+	private List <SwoTratamiento> listaTratamiento;
 	private SwoPaciente paciente;
 	private SwoOdontograma odontograma;
 	private boolean panelColapsado;
@@ -64,7 +65,7 @@ public class BeanOdontograma implements Serializable {
 	private Integer codCategoria;
 	private Integer codArticulo;
 	private Integer cantidad;
-	private Integer costo;
+	private double costo;
 
 	@PostConstruct
    public void inicializar() {
@@ -74,6 +75,7 @@ public class BeanOdontograma implements Serializable {
 	listaDientes= managerOdontograma.findAllDientes();
 	listaCara= managerOdontograma.findAllCaras();
 	listaCategoria= managerOdontograma.listarCategorias();
+	listaTratamiento=managerOdontograma.listarTratamiento();
 	odontograma=new SwoOdontograma();
 	paciente=new SwoPaciente();
 	panelColapsado=true;
@@ -164,26 +166,26 @@ public class BeanOdontograma implements Serializable {
 	 * Hace uso del componente {@link model.manager.ManagerFacturacion ManagerFacturacion} de la capa model.
 	 * @return
 	 */
-	public String insertarDetalleOdonto(){
-		if(OdontogramaCabTmpGuardada==true){
-			JSFUtil.crearMensajeWarning("El Odontograma ya fue guardado.");
-			return "";
-		}
-		try {
-			managerOdontograma.agregarDetalleOdontogramaTmp(OdontogramaCabTmp,codCategoria,codArticulo,cantidad,costo);
-			codCategoria=0;
-			codArticulo=0;
-			cantidad=0;
-			costo=0;
-		} catch (Exception e) {
-			JSFUtil.crearMensajeError(e.getMessage());
-		}		
-		return "";
-	}
+//	public String insertarDetalleOdonto(){
+//		if(OdontogramaCabTmpGuardada==true){
+//			JSFUtil.crearMensajeWarning("El Odontograma ya fue guardado.");
+//			return "";
+//		}
+//		try {
+//			managerOdontograma.agregarDetalleOdontogramaTmp(OdontogramaCabTmp,codCategoria,codArticulo,cantidad,costo);
+//			codCategoria=0;
+//			codArticulo=0;
+//			cantidad=0;
+//			costo=0;
+//		} catch (Exception e) {
+//			JSFUtil.crearMensajeError(e.getMessage());
+//		}		
+//		return "";
+//	}
 	
 	public void actionListenerInsertarOdontograma() {
 		try {
-			managerOdontograma.insertarOdontograma(codpac, fecha_ate, descripcion_ate, codtrata, coddie, codcar);
+			managerOdontograma.insertarOdontograma(OdontogramaCabTmp,codpac, descripcion_ate, codtrata, coddie, codcar,codCategoria,codArticulo,costo);
 			listaOdontograma=managerOdontograma.findAllOdontograma();
 			odontograma=new SwoOdontograma();
 			JSFUtil.crearMensajeInfo("Datos de Odontograma Insertados");
@@ -330,11 +332,13 @@ public class BeanOdontograma implements Serializable {
 		this.cantidad = cantidad;
 	}
 
-	public Integer getCosto() {
+	
+
+	public double getCosto() {
 		return costo;
 	}
 
-	public void setCosto(Integer costo) {
+	public void setCosto(double costo) {
 		this.costo = costo;
 	}
 
@@ -368,6 +372,14 @@ public class BeanOdontograma implements Serializable {
 
 	public void setListaCategoria(List<SwoCategoria> listaCategoria) {
 		this.listaCategoria = listaCategoria;
+	}
+
+	public List<SwoTratamiento> getListaTratamiento() {
+		return listaTratamiento;
+	}
+
+	public void setListaTratamiento(List<SwoTratamiento> listaTratamiento) {
+		this.listaTratamiento = listaTratamiento;
 	}
 	
 	
