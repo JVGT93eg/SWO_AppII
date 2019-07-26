@@ -52,7 +52,7 @@
 					icon="fa fa-file-o" />
 			
 				
-				<h:outputText value="Nro. de factura:" style="font-weight: bold" />
+				<h:outputText value="Nro. de Odontograma:" style="font-weight: bold" />
 				<h:outputText value="#{beanOdontograma.odontogramaCabTmp.codigoAte}" />
 				<h:outputText value="Fecha Creación:" style="font-weight: bold" />
 				<h:outputText value="#{beanOdontograma.odontogramaCabTmp.fechaAte}">
@@ -71,29 +71,28 @@
 					</p:selectOneMenu>
 				</h:panelGroup>
 				<h:outputText value="Codigo del Paciente:" style="font-weight: bold" />
-				<h:outputText id="cedulaCliente"
-					value="#{beanOdontograma.codigoPac}" />
+				<h:outputText id="cedulaCliente" value="#{beanOdontograma.codigoPac}" />
 					
 						<h:outputText value="Tratamiento:" style="font-weight: bold" />
 						<p:selectOneMenu value="#{beanOdontograma.codCategoria}">
-					<f:selectItems value="#{beanOdontograma.listaCategoria}" var="a"
-						 itemLabel="#{a.nombreCat}"
-						itemValue="#{a.codigoCat}" />
+					<f:selectItems value="#{beanOdontograma.listaCategoria}" var="c"
+						 itemLabel="#{c.nombreCat}"
+						itemValue="#{c.codigoCat}" />
 				</p:selectOneMenu>
 							
 					
 						<h:outputText value="Diente:" style="font-weight: bold" />
 					<p:selectOneMenu value="#{beanOdontograma.coddie}">
-					<f:selectItems value="#{beanOdontograma.listaDientes}" var="a"
-						 itemLabel="#{a.nombreDie}"
-						itemValue="#{a.codigoDie}" />
+					<f:selectItems value="#{beanOdontograma.listaDientes}" var="d"
+						 itemLabel="#{d.nombreDie}"
+						itemValue="#{d.codigoDie}" />
 				</p:selectOneMenu>
 				
 				<h:outputText value="Cara:" style="font-weight: bold" />
 					<p:selectOneMenu value="#{beanOdontograma.codcar}">
-					<f:selectItems value="#{beanOdontograma.listaCara}" var="a"
-						 itemLabel="#{a.nombreCar}"
-						itemValue="#{a.codigoCar}" />
+					<f:selectItems value="#{beanOdontograma.listaCara}" var="ca"
+						 itemLabel="#{ca.nombreCar}"
+						itemValue="#{ca.codigoCar}" />
 				</p:selectOneMenu>
 					
 				<h:outputText value="Descripción:" style="font-weight: bold" />	
@@ -105,12 +104,9 @@
 						 itemLabel="#{a.descripcionTra}"
 						itemValue="#{a.codigoTra}" />
 					</p:selectOneMenu>
-									
-						
-					
+
 					<p:commandButton value="Guardar Odontograma" icon="fa fa-save"
-						action="#{beanOdontograma.actionListenerInsertarOdontograma()}" update="@form" />	
-			
+						action="#{beanOdontograma.actionListenerInsertarOdontograma()}" update="@form" />		
 			</p:panelGrid>
 		</h:form>
 

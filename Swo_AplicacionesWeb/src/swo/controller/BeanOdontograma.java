@@ -190,7 +190,7 @@ public class BeanOdontograma implements Serializable {
 			odontograma=new SwoOdontograma();
 			JSFUtil.crearMensajeInfo("Datos de Odontograma Insertados");
 		} catch (Exception e) {
-			JSFUtil.crearMensajeError(e.getMessage()+"en Bean");
+			JSFUtil.crearMensajeError(e.getMessage()+" en Bean");
 			e.printStackTrace();
 		}
 	}
