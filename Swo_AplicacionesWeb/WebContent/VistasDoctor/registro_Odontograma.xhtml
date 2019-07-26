@@ -98,53 +98,75 @@
 					
 				<h:outputText value="Descripción:" style="font-weight: bold" />	
 					<p:inputText type="text" value="#{beanOdontograma.descripcion_ate}" size="30" style="width:300px"/>	
-			</p:panelGrid>
-		</h:form>
-
-<h2> Registro de Atención Médica </h2>
-
-		<h:form id="form2">
-			<p:panel header="Detalle del Odontograma">
-				<p:panelGrid columns="8" border="1">
-				
-					<h:outputText value="Categoria" style="font-weight: bold" />
+			
+			<h:outputText value="Categoria" style="font-weight: bold" />
 						<p:selectOneMenu value="#{beanOdontograma.codtrata}">
 					<f:selectItems value="#{beanOdontograma.listaTratamiento}" var="a"
 						 itemLabel="#{a.descripcionTra}"
 						itemValue="#{a.codigoTra}" />
 					</p:selectOneMenu>
-							
-					<h:outputText value="Producto:" />															
-					<p:selectOneMenu value="#{beanOdontograma.codArticulo}">
-					<f:selectItems value="#{beanOdontograma.listaArticulos}" var="a"
-						 itemLabel="#{a.nombreArt}"
-						itemValue="#{a.codigoArt}" />
-				</p:selectOneMenu>
-				
+									
+						
 					
-					<h:outputText value="Costo:" />
-			<p:inputText value="#{beanOdontograma.costo}" />
-										
-						
-						
-						<h:panelGroup>
 					<p:commandButton value="Guardar Odontograma" icon="fa fa-save"
-						action="#{beanOdontograma.actionListenerInsertarOdontograma()}" update="@form" />
-					
-				
-				</h:panelGroup>
-						
-				</p:panelGrid>
-				
-				
-				
-				
-
-			</p:panel>
+						action="#{beanOdontograma.actionListenerInsertarOdontograma()}" update="@form" />	
+			
+			</p:panelGrid>
 		</h:form>
-
 
 		<br />
 		</p:panel>
+		<br />
+		
+		
+		
+	<h:form id="form2">
+		<p:panel header="Datos Odontograma">
+			<p:dataTable value="#{beanOdontograma.listaOdontograma}" reflow="true"
+				var="odon" paginator="true" rows="5">
+
+				<p:column headerText="Fecha" style="width:50px">
+					<h:outputText value="#{odon.fechaAte}" />
+				</p:column>
+
+				<p:column headerText="Paciente" 
+					filterMatchMode="contains" priority="1">
+					<h:outputText value="#{odon.swoPaciente.nombrePac}" />
+			</p:column>
+
+				<p:column headerText="Tratamiento" 
+					filterMatchMode="contains" priority="1">
+					<h:outputText value="#{odon.swoTratamiento.descripcionTra}" />
+				</p:column>
+
+				<p:column headerText="Precio" priority="2">
+					<h:outputText value="#{odon.swoTratamiento.precioTra}" />
+				</p:column>
+
+				<p:column headerText="Estado">
+					<h:outputText  value="#{odon.swoTratamiento.estadoTra}" />
+				</p:column>
+
+<!-- 				<p:column headerText="OPCIONES" priority="1"> -->
+
+<!-- 						<p:commandButton icon="pi pi-pencil" title="Editar" -->
+<!-- 						actionListener="#{beanSwoPaciente.actionListenerSeleccinarPaciente(paciente)}" -->
+<!-- 						update=":formEdicion" oncomplete="PF('dlgEdicion').show();"> -->
+<!-- 					</p:commandButton> -->
+					
+<!-- 					<p:commandButton icon="pi pi-times" title="eliminar" update="@form" -->
+<!-- 						actionListener="#{beanSwoPaciente.actionListenerEliminarPaciente(paciente.codigoPac)}"> -->
+<!-- 						<p:confirm header="Confirmación" message="Desea eliminar?" -->
+<!-- 							icon="pi pi-exclamation-circle"></p:confirm> -->
+<!-- 					</p:commandButton> -->
+				
+
+<!-- 				</p:column> -->
+
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+		
+		
 </body>
 </html>

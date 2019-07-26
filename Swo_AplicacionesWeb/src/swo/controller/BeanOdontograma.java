@@ -185,12 +185,12 @@ public class BeanOdontograma implements Serializable {
 	
 	public void actionListenerInsertarOdontograma() {
 		try {
-			managerOdontograma.insertarOdontograma(OdontogramaCabTmp,codpac, descripcion_ate, codtrata, coddie, codcar,codCategoria,codArticulo,costo);
+			managerOdontograma.insertarOdontograma(OdontogramaCabTmp,codpac, descripcion_ate, codtrata, coddie, codcar);
 			listaOdontograma=managerOdontograma.findAllOdontograma();
 			odontograma=new SwoOdontograma();
 			JSFUtil.crearMensajeInfo("Datos de Odontograma Insertados");
 		} catch (Exception e) {
-			JSFUtil.crearMensajeError(e.getMessage());
+			JSFUtil.crearMensajeError(e.getMessage()+"en Bean");
 			e.printStackTrace();
 		}
 	}

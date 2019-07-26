@@ -67,14 +67,13 @@ private ManagerCategorias managerCategoria;
     }
     
     //metodo para insertar un Odontograma
-    public void insertarOdontograma(SwoOdontograma odontogramacabTemp, int codpac,String descripcion_ate,int codtrata,int coddie, int codcar, int codCategoria,int codArticulo,double costo) throws Exception {
+    public void insertarOdontograma(SwoOdontograma odontogramacabTemp, int codpac,String descripcion_ate,int codtrata,int coddie, int codcar) throws Exception {
   	
 
     	SwoOdontograma odontograma=new SwoOdontograma();
-    	SwoCategoria categoria=new SwoCategoria();
-    	SwoArticulo articulo=new SwoArticulo();
-    	SwoTratamiento tratamiento=new SwoTratamiento();
+
   	SwoPaciente paciente=buscarPorCodigoPac(codpac);
+  	
   	SwoDiente diente=buscarPorCodigoDie(coddie);
   	SwoCara cara=buscarPorCodigoCar(codcar);
   	SwoTratamiento trata=buscarPorCodigoTrata(codtrata);
@@ -86,14 +85,10 @@ private ManagerCategorias managerCategoria;
    odontograma.setSwoDiente(diente);
    odontograma.setSwoCara(cara);
    
-  categoria.setCodigoCat(codCategoria);
-  articulo.setCodigoArt(codArticulo);
-  tratamiento.setPrecioTra(costo);
+
   
    em.persist(odontograma);
-   em.persist(categoria);
-   em.persist(tratamiento);
-   em.persist(articulo);
+
     }
     
     //métod para eliminar
