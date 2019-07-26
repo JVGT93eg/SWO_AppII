@@ -26,7 +26,7 @@ public class ManagerSwoRole {
     }
     
     public List<SwoRole> findAllSwoRoles(){
-    	String consulta="SELECT s FROM SwoRole s ";
+    	String consulta="SELECT s FROM SwoRole s  order by s.nombreRol";
     	Query q=em.createQuery(consulta, SwoRole.class);
     	return q.getResultList();
     }

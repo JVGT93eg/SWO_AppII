@@ -71,25 +71,21 @@
 			<ol class="breadcrumb">
 				<li><a href="#"> <em class="fa fa-briefcase"></em>
 				</a></li>
-				<li class="active">Roles</li>
+				<li class="active">Manejo de datos de roles</li>
 			</ol>
 			<p:growl>
 				<p:autoUpdate />
 			</p:growl>
 
 
-
 			<h:form id="form1">
-				<p:messages>
-					<p:autoUpdate />
-				</p:messages>
 				<p:panel collapsed="#{beanSwoRole.panelColapsado}">
 					<f:facet name="header">
 						<p:commandButton value="Nuevo Rol" icon="fa fa-plus"
 							update="@form"
 							actionListener="#{beanSwoRole.actionListenerColapsarPanel()}"></p:commandButton>
 					</f:facet>
-					<p:panelGrid columns="2">
+					<p:panelGrid columns="5">
 						<h:outputText value="Rol:" />
 						<p:inputText value="#{beanSwoRole.swoRole.nombreRol}" />
 						<h:outputText value="Descripción:" />
@@ -120,7 +116,7 @@
 							filterMatchMode="contains" priority="2">
 							<h:outputText value="#{sworoles.descripcionRol}" />
 						</p:column>
-						<p:column headerText="OPCIONES" priority="1">
+						<p:column headerText="OPCIONES" style="width:75px" priority="1">
 							<p:commandButton icon="fa fa-trash" title="Eliminar"
 								update="@form"
 								actionListener="#{beanSwoRole.actionListenerEliminarSwoRole(sworoles.codigoRol)}">

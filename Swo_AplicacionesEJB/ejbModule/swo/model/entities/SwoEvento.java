@@ -16,7 +16,7 @@ public class SwoEvento implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="SWO_EVENTOS_CODIGOEVE_GENERATOR", sequenceName="SEQ_SWO_EVENTOS")
+	@SequenceGenerator(name="SWO_EVENTOS_CODIGOEVE_GENERATOR", sequenceName="SEQ_SWO_EVENTOS", allocationSize = 1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SWO_EVENTOS_CODIGOEVE_GENERATOR")
 	@Column(name="codigo_eve", unique=true, nullable=false)
 	private Integer codigoEve;
