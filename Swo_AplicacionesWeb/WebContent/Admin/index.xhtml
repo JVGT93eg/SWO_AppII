@@ -67,11 +67,32 @@
 			<ol class="breadcrumb">
 				<li><a href="#"> <em class="fa fa-calendar"></em>
 				</a></li>
-				<li class="active">Auditoría</li>
+				<li class="active">Auditoría Sistema Web Odontológico</li>
 			</ol>
 	<p:growl>
 		<p:autoUpdate />
 	</p:growl>
+
+<h:form id="form">
+		<p:dataTable border="1" value="#{beanSwoAuditoria.listaSwoEventos}"
+			var="a" paginator="true" rows="6" id="tabla1" reflow="true">
+			<p:column headerText="FECHA">
+				<h:outputText value="#{a.fechaEve}"></h:outputText>
+			</p:column>
+			<p:column headerText="MÉTODO" >
+				<h:outputText value="#{a.nombreEve}"></h:outputText>
+			</p:column>
+			<p:column headerText="IP" >
+				<h:outputText value="#{a.ipEve}"></h:outputText>
+			</p:column>
+			<p:column headerText="DESCRIPCIÓN" >
+				<h:outputText value="#{a.descripcionEve}"></h:outputText>
+			</p:column>
+			<p:column headerText="USUARIO" >
+				<h:outputText value="#{a.swoUsuario.cedulaUsu}"></h:outputText>
+			</p:column>
+		</p:dataTable>
+	</h:form>
 
 
 	<br />

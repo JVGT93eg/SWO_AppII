@@ -67,21 +67,28 @@ private ManagerCategorias managerCategoria;
     }
     
     //metodo para insertar un Odontograma
-    public void insertarOdontograma(int codpac, Date fecha_ate,String descripcion_ate,int codtrata,int coddie, int codcar) throws Exception {
-  	SwoOdontograma odontograma=new SwoOdontograma();
+    public void insertarOdontograma(SwoOdontograma odontogramacabTemp, int codpac,String descripcion_ate,int codtrata,int coddie, int codcar) throws Exception {
+  	
+
+    	SwoOdontograma odontograma=new SwoOdontograma();
+
   	SwoPaciente paciente=buscarPorCodigoPac(codpac);
+  	
   	SwoDiente diente=buscarPorCodigoDie(coddie);
   	SwoCara cara=buscarPorCodigoCar(codcar);
   	SwoTratamiento trata=buscarPorCodigoTrata(codtrata);
   	
     odontograma.setDescripcionAte(descripcion_ate);
-  	odontograma.setFechaAte(fecha_ate);
+  	odontograma.setFechaAte(odontogramacabTemp.getFechaAte());
   	odontograma.setSwoTratamiento(trata);
-  // odontograma.setSwoPaciente(paciente);	
+   odontograma.setSwoPaciente(paciente);	
    odontograma.setSwoDiente(diente);
    odontograma.setSwoCara(cara);
+   
 
+  
    em.persist(odontograma);
+
     }
     
     //métod para eliminar
@@ -170,42 +177,71 @@ private ManagerCategorias managerCategoria;
 		 * @param cantidad cantidad del producto.
 		 * @throws Exception problemas ocurridos al momento de insertar el item detalle.
 		 */
-		public void agregarDetalleOdontogramaTmp(SwoOdontograma OdontogramaCabTmp,Integer codigocatego,Integer codArticulo, Integer cantidad, Integer precio) throws Exception{
-			SwoCategoria ca;
-			SwoOdontograma od;	
-			SwoTratamiento tr;
-			SwoProcedimiento pr;
-			SwoProceArticulo prar;
-			SwoArticulo ar;
-			
-			
-			if(OdontogramaCabTmp==null)
-				throw new Exception("Error primero debe crear una nueva Odontograma.");
-			if(codigocatego==null||codigocatego.intValue()<0)
-				throw new Exception("Error debe especificar el codigo del tratamiento.");
-			if(codArticulo==null||codArticulo.intValue()<0)
-				throw new Exception("Error debe especificar el codigo del Diente.");
-			if(cantidad==null||cantidad.intValue()<0)
-				throw new Exception("Error debe especificar el codigo de la cara.");
-			if(precio==null||precio.intValue()<=0)
-				throw new Exception("Error debe especificar la cantidad del precio.");
-			
-			//buscamos la categoria:
-			ca=managerCategoria.findCategoriaById(codigocatego);
-			//creamos un nuevo tratamiento y llenamos sus propiedades:
-			tr=new SwoTratamiento();
-			tr.setPrecioTra(precio);
-			
-			//creamos un nuevo procedimiento
-			pr=new SwoProcedimiento();
-			pr.setCantidadProc(cantidad);
-			
-			//Creamos un nuevo Articulos
-			ar=new SwoArticulo();
-			ar.setCodigoArt(codArticulo);
-			
-			//verificamos los campos calculados:
-	//		calcularFacturaTmp(facturaCabTmp);
-		}
+//		public void agregarDetalleOdontogramaTmp(SwoOdontograma OdontogramaCabTmp,Integer codigocatego,Integer codArticulo, Integer cantidad, Integer precio) throws Exception{
+//			SwoCategoria ca;
+//			SwoOdontograma od;	
+//			SwoTratamiento tr;
+//			SwoProcedimiento pr;
+//			SwoProceArticulo prar;
+//			SwoArticulo ar;
+//			
+//			
+//			if(OdontogramaCabTmp==null)
+//				throw new Exception("Error primero debe crear una nueva Odontograma.");
+//			if(codigocatego==null||codigocatego.intValue()<0)
+//				throw new Exception("Error debe especificar el codigo del tratamiento.");
+//			if(codArticulo==null||codArticulo.intValue()<0)
+//				throw new Exception("Error debe especificar el codigo del Diente.");
+//			if(cantidad==null||cantidad.intValue()<0)
+//				throw new Exception("Error debe especificar el codigo de la cara.");
+//			if(precio==null||precio.intValue()<=0)
+//				throw new Exception("Error debe especificar la cantidad del precio.");
+//			
+//			//buscamos la categoria:
+//			ca=managerCategoria.findCategoriaById(codigocatego);
+//			//creamos un nuevo tratamiento y llenamos sus propiedades:
+//			tr=new SwoTratamiento();
+//			tr.setPrecioTra(precio);
+//			
+//			//creamos un nuevo procedimiento
+//			pr=new SwoProcedimiento();
+//			pr.setCantidadProc(cantidad);
+//			
+//			//Creamos un nuevo Articulos
+//			ar=new SwoArticulo();
+//			ar.setCodigoArt(codArticulo);
+//			
+//			//verificamos los campos calculados:
+//	//		calcularFacturaTmp(facturaCabTmp);
+//		}
 		
+		public List<SwoArticulo> listarArticulo(){
+			String sentencia = "SELECT s FROM SwoArticulo s";
+			Query q = em.createQuery(sentencia,SwoArticulo.class);
+			return q.getResultList();
+		}
+		 // Método que retorna la lista de  la tabla Dientes
+	    public List<SwoDiente> findAllDientes(){
+	    	String consulta=("SELECT s FROM SwoDiente s");
+	    	Query q=em.createQuery(consulta,SwoDiente.class);
+	    	return q.getResultList();
+	    }
+	    // Método que retorna la lista de  la tabla Cara
+	    public List<SwoCara> findAllCaras(){
+	    	String consulta=("SELECT s FROM SwoCara s");
+	    	Query q=em.createQuery(consulta,SwoCara.class);
+	    	return q.getResultList();
+	    }
+		
+	    public List<SwoCategoria> listarCategorias(){
+			Query q;
+			String sentencia = "SELECT s FROM SwoCategoria s";
+			q = em.createQuery(sentencia,SwoCategoria.class);
+			return q.getResultList();
+		}
+	    public List<SwoTratamiento> listarTratamiento(){
+			String sentencia = "SELECT s FROM SwoTratamiento s";
+			Query q = em.createQuery(sentencia,SwoTratamiento.class);
+			return q.getResultList();
+		}
 }

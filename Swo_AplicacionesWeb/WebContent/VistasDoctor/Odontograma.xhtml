@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+
+
+
+	<h:form>
+		<p:growl id="messages" />
+
+		<p:menubar>
+			<p:menuitem value="Inicio" action="Menu_Doctor" icon="fa fa-home"></p:menuitem>
+
+			<p:submenu label="Registro" icon="pi pi-cog">
+				<p:menuitem value="Pacientes" icon="pi pi-clone"
+					action="registro_pacientes" />
+				<p:menuitem value="Dientes" icon="pi pi-clone"
+					action="index_dientes" />
+				<p:menuitem value="Caras" icon="pi pi-clone" action="index_cara" />
+				<p:menuitem value="Género" icon="pi pi-clone"
+					action="registro_genero" />
+			</p:submenu>
+
+			<p:submenu label="Certificados" icon="pi pi-cog">
+				<p:menuitem value="Atención en Establecimiento" icon="pi pi-clone" />
+				<p:menuitem value="" icon="pi pi-clone" />
+				<p:menuitem value="" icon="pi pi-clone" />
+				<p:menuitem value="" icon="pi pi-clone" />
+			</p:submenu>
+
+			<f:facet name="options">
+				<p:inputText style="margin:1px 10px 1px 1px;" placeholder="Search" />
+				<p:commandButton type="button" value="Logout" icon="pi pi-home" />
+			</f:facet>
+		</p:menubar>
+	</h:form>
+
+
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+<h1> Registro de Datos Generales</h1>
+	
+	<p:panel id="panel1">
+		<h:form id="form1">
+			<p:panelGrid columns="2">
+			<h:outputText value="Crear:" style="font-weight: bold" />
+				<p:commandButton action="#{beanOdontograma.crearNuevoOdontograma()}"
+					value="Nuevo Odontograma" update="form1 :form2" 
+					icon="fa fa-file-o" />
+			
+				
+				<h:outputText value="Nro. de Odontograma:" style="font-weight: bold" />
+				<h:outputText value="#{beanOdontograma.odontogramaCabTmp.codigoAte}" />
+				<h:outputText value="Fecha Creación:" style="font-weight: bold" />
+				<h:outputText value="#{beanOdontograma.odontogramaCabTmp.fechaAte}">
+					<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+				</h:outputText>
+				<h:outputText value="Seleccione el Paciente:"
+					style="font-weight: bold" />
+				<h:panelGroup>
+					<p:selectOneMenu value="#{beanOdontograma.codigoPac}" filter="true"
+						filterMatchMode="contains">
+						<f:selectItem itemLabel="Seleccione..." itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems value="#{beanOdontograma.listaPAciente_SI}"/>
+						<p:ajax update="cedulaCliente"
+							listener="#{beanOdontograma.asignarPaciente()}"></p:ajax>
+					</p:selectOneMenu>
+				</h:panelGroup>
+				<h:outputText value="Codigo del Paciente:" style="font-weight: bold" />
+				<h:outputText id="cedulaCliente" value="#{beanOdontograma.codigoPac}" />
+					
+						<h:outputText value="Tratamiento:" style="font-weight: bold" />
+						<p:selectOneMenu value="#{beanOdontograma.codCategoria}">
+					<f:selectItems value="#{beanOdontograma.listaCategoria}" var="c"
+						 itemLabel="#{c.nombreCat}"
+						itemValue="#{c.codigoCat}" />
+				</p:selectOneMenu>
+							
+					
+						<h:outputText value="Diente:" style="font-weight: bold" />
+					<p:selectOneMenu value="#{beanOdontograma.coddie}">
+					<f:selectItems value="#{beanOdontograma.listaDientes}" var="d"
+						 itemLabel="#{d.nombreDie}"
+						itemValue="#{d.codigoDie}" />
+				</p:selectOneMenu>
+				
+				<h:outputText value="Cara:" style="font-weight: bold" />
+					<p:selectOneMenu value="#{beanOdontograma.codcar}">
+					<f:selectItems value="#{beanOdontograma.listaCara}" var="ca"
+						 itemLabel="#{ca.nombreCar}"
+						itemValue="#{ca.codigoCar}" />
+				</p:selectOneMenu>
+					
+				<h:outputText value="Descripción:" style="font-weight: bold" />	
+					<p:inputText type="text" value="#{beanOdontograma.descripcion_ate}" size="30" style="width:300px"/>	
+			
+			<h:outputText value="Categoria" style="font-weight: bold" />
+						<p:selectOneMenu value="#{beanOdontograma.codtrata}">
+					<f:selectItems value="#{beanOdontograma.listaTratamiento}" var="a"
+						 itemLabel="#{a.descripcionTra}"
+						itemValue="#{a.codigoTra}" />
+					</p:selectOneMenu>
+
+					<p:commandButton value="Guardar Odontograma" icon="fa fa-save"
+						action="#{beanOdontograma.actionListenerInsertarOdontograma()}" update="@form" />		
+			</p:panelGrid>
+		</h:form>
+
+		<br />
+		</p:panel>
+		<br />
+		
+		
+		
+	<h:form id="form2">
+		<p:panel header="Datos Odontograma">
+			<p:dataTable value="#{beanOdontograma.listaOdontograma}" reflow="true"
+				var="odon" paginator="true" rows="5">
+
+				<p:column headerText="Fecha" style="width:50px">
+					<h:outputText value="#{odon.fechaAte}" />
+				</p:column>
+
+				<p:column headerText="Paciente" 
+					filterMatchMode="contains" priority="1">
+					<h:outputText value="#{odon.swoPaciente.nombrePac}" />
+			</p:column>
+
+				<p:column headerText="Tratamiento" 
+					filterMatchMode="contains" priority="1">
+					<h:outputText value="#{odon.swoTratamiento.descripcionTra}" />
+				</p:column>
+
+				<p:column headerText="Precio" priority="2">
+					<h:outputText value="#{odon.swoTratamiento.precioTra}" />
+				</p:column>
+
+				<p:column headerText="Estado">
+					<h:outputText  value="#{odon.swoTratamiento.estadoTra}" />
+				</p:column>
+
+<!-- 				<p:column headerText="OPCIONES" priority="1"> -->
+
+<!-- 						<p:commandButton icon="pi pi-pencil" title="Editar" -->
+<!-- 						actionListener="#{beanSwoPaciente.actionListenerSeleccinarPaciente(paciente)}" -->
+<!-- 						update=":formEdicion" oncomplete="PF('dlgEdicion').show();"> -->
+<!-- 					</p:commandButton> -->
+					
+<!-- 					<p:commandButton icon="pi pi-times" title="eliminar" update="@form" -->
+<!-- 						actionListener="#{beanSwoPaciente.actionListenerEliminarPaciente(paciente.codigoPac)}"> -->
+<!-- 						<p:confirm header="Confirmación" message="Desea eliminar?" -->
+<!-- 							icon="pi pi-exclamation-circle"></p:confirm> -->
+<!-- 					</p:commandButton> -->
+				
+
+<!-- 				</p:column> -->
+
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+		
+		
+</body>
+</html>

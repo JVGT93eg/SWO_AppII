@@ -1,9 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      	  xmlns:p="http://primefaces.org/ui">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -42,8 +42,9 @@
 	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 		<div class="profile-sidebar">
 			<div class="profile-userpic">
-				<img src="https://i2.wp.com/media.self.com/photos/5acbdce8dbf9c97076ae8211/4:3/w_728,c_limit/tooth.gif" class="img-responsive"
-					alt="" />
+				<img
+					src="https://i2.wp.com/media.self.com/photos/5acbdce8dbf9c97076ae8211/4:3/w_728,c_limit/tooth.gif"
+					class="img-responsive" alt="" />
 			</div>
 			<div class="profile-usertitle">
 				<div class="profile-usertitle-name">Henry</div>
@@ -56,35 +57,190 @@
 		<div class="divider"></div>
 
 		<ul class="nav menu">
-			<li><a href="index.xhtml"><em class="fa fa-calendar">&nbsp;</em> Auditoría</a></li>
-			<li class="active"><a href="usuarios.xhtml"><em class="fa fa-user">&nbsp;</em>Usuarios</a></li>
-			<li><a href="roles.xhtml"><em class="fa fa-briefcase">&nbsp;</em>Roles</a></li><br></br>
-			
+			<li><a href="index.xhtml"><em class="fa fa-calendar">&nbsp;</em>
+					Auditoría</a></li>
+			<li class="active"><a href="usuarios.xhtml"><em
+					class="fa fa-user">&nbsp;</em>Usuarios</a></li>
+			<li><a href="roles.xhtml"><em class="fa fa-briefcase">&nbsp;</em>Roles</a></li>
+			<br></br>
+
 		</ul>
 	</div>
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
-	<div class="row">
+		<div class="row">
 			<ol class="breadcrumb">
 				<li><a href="#"> <em class="fa fa-user"></em>
 				</a></li>
-				<li class="active">Usuarios</li>
+				<li class="active">Manejo de datos de los suarios</li>
 			</ol>
-	<p:growl>
-		<p:autoUpdate />
-	</p:growl>
+			<p:growl>
+				<p:autoUpdate />
+			</p:growl>
 
 
-	<br />
+			<h:form id="form1">
+				<p:panel collapsed="#{beanSwoUsuario.panelColapsado}">
+					<f:facet name="header">
+						<p:commandButton value="Nuevo Usuario" icon="fa fa-plus"
+							update="@form"
+							actionListener="#{beanSwoUsuario.actionListenerColapsarPanel()}"></p:commandButton>
+					</f:facet>
+					<p:panelGrid columns="2">
+						<h:outputText value="Cédula:" />
+						<p:inputText value="#{beanSwoUsuario.swoUsuario.cedulaUsu}" />
+						<h:outputText value="Nombre:" />
+						<p:inputText value="#{beanSwoUsuario.swoUsuario.nombreUsu}" />
+						<h:outputText value="Apellido:" />
+						<p:inputText value="#{beanSwoUsuario.swoUsuario.apellidoUsu}" />
+						<h:outputText value="Edad:" />
+						<p:spinner value="#{beanSwoUsuario.swoUsuario.edadUsu}" />
+						<h:outputText value="Clave:" />
+						<p:password value="#{beanSwoUsuario.swoUsuario.claveUsu}" />
+						<h:outputText value="Dirección:" />
+						<p:inputText value="#{beanSwoUsuario.swoUsuario.direccionUsu}" />
+						<h:outputText value="Teléfono:" />
+						<p:inputText value="#{beanSwoUsuario.swoUsuario.telefonoUsu}" />
+						<h:outputText value="Email:" />
+						<p:inputText value="#{beanSwoUsuario.swoUsuario.emailUsu}" />
+						<h:outputText value="Fecha Nacimiento:" />
+						<p:datePicker value="#{beanSwoUsuario.swoUsuario.fechaNaciUsu}" />
+						<h:outputText value="Seleccione un rol:" />
+
+						<p:selectOneMenu value="#{beanSwoUsuario.codigoRol}">
+							<f:selectItems value="#{beanSwoUsuario.listaSwoRoles}"
+								var="sworoles" itemValue="#{sworoles.codigoRol}"
+								itemLabel="#{sworoles.nombreRol}" />
+						</p:selectOneMenu>
+
+						<p:commandButton value="Insertar" icon="fa fa-save"
+							update="@form,:form2"
+							actionListener="#{beanSwoUsuario.actionListenerInsertarSwoUsuario()}"></p:commandButton>
+					</p:panelGrid>
+				</p:panel>
+			</h:form>
+
+			<br />
+
+			<h:form id="form2">
+				<p:panel header="Datos de los Usuarios">
+					<p:dataTable value="#{beanSwoUsuario.listaSwoUsuarios}"
+						var="swousuarios" reflow="true" paginator="true" rows="5">
+
+						<p:column headerText="ROL"
+							filterBy="#{swousuarios.swoRole.nombreRol}"
+							filterMatchMode="contains" priority="2">
+							<h:outputText value="#{swousuarios.swoRole.nombreRol}" />
+						</p:column>
+
+						<p:column headerText="CÉDULA" filterBy="#{swousuarios.cedulaUsu}"
+							filterMatchMode="contains" priority="1">
+							<h:outputText value="#{swousuarios.cedulaUsu}" />
+						</p:column>
+						<p:column headerText="NOMBRE" filterBy="#{swousuarios.nombreUsu}"
+							filterMatchMode="contains" priority="2">
+							<h:outputText value="#{swousuarios.nombreUsu}" />
+						</p:column>
+						<p:column headerText="APELLIDO"
+							filterBy="#{swousuarios.apellidoUsu}" filterMatchMode="contains"
+							priority="2">
+							<h:outputText value="#{swousuarios.apellidoUsu}" />
+						</p:column>
+						<p:column headerText="EMAIL" priority="2">
+							<h:outputText value="#{swousuarios.emailUsu}" />
+						</p:column>
+						<p:column headerText="CLAVE" priority="3">
+							<h:outputText value="#{swousuarios.claveUsu}" />
+						</p:column>
+						<p:column headerText="TELÉFONO" priority="4">
+							<h:outputText value="#{swousuarios.telefonoUsu}" />
+						</p:column>
+						<p:column headerText="EDAD" sortBy="#{swousuarios.edadUsu}"
+							style="width:50px" priority="3">
+							<h:outputText value="#{swousuarios.edadUsu}" />
+						</p:column>
+						<p:column headerText="FECHA NACIMIENTO" priority="4">
+							<h:outputText value="#{swousuarios.fechaNaciUsu}" />
+						</p:column>
+						<p:column headerText="DIRECCIÓN" priority="4">
+							<h:outputText value="#{swousuarios.direccionUsu}" />
+						</p:column>
+						<p:column headerText="OPCIONES" priority="1">
+							<p:commandButton icon="fa fa-trash" title="Eliminar"
+								update="@form"
+								actionListener="#{beanSwoUsuario.actionListenerEliminarSwoUsuario(swousuarios.cedulaUsu)}">
+								<p:confirm header="Confirmación"
+									message="Desea eliminar usuario?"
+									icon="fa fa-exclamation-triangle"></p:confirm>
+							</p:commandButton>
+							<p:commandButton icon="fa fa-edit" title="Editar"
+								actionListener="#{beanSwoUsuario.actionListenerSeleccionarSwoUsuario(swousuarios)}"
+								update=":formEdicion" oncomplete="PF('dlgEdicion').show();"></p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</p:panel>
+			</h:form>
+			<p:dialog header="Editar información" widgetVar="dlgEdicion"
+				modal="true">
+				<h:form id="formEdicion">
+					<p:growl>
+						<p:autoUpdate />
+					</p:growl>
+					<p:panelGrid columns="2">
+						<h:outputText value="Cédula:" />
+						<p:inputText
+							value="#{beanSwoUsuario.swoUsuarioSeleccionado.cedulaUsu}" />
+						<h:outputText value="Nombre:" />
+						<p:inputText
+							value="#{beanSwoUsuario.swoUsuarioSeleccionado.nombreUsu}" />
+						<h:outputText value="Apellido:" />
+						<p:inputText
+							value="#{beanSwoUsuario.swoUsuarioSeleccionado.apellidoUsu}" />
+						<h:outputText value="Edad:" />
+						<p:spinner
+							value="#{beanSwoUsuario.swoUsuarioSeleccionado.edadUsu}" />
+						<h:outputText value="Clave:" />
+						<p:password
+							value="#{beanSwoUsuario.swoUsuarioSeleccionado.claveUsu}" />
+						<h:outputText value="Dirección:" />
+						<p:inputText
+							value="#{beanSwoUsuario.swoUsuarioSeleccionado.direccionUsu}" />
+						<h:outputText value="Teléfono:" />
+						<p:inputText
+							value="#{beanSwoUsuario.swoUsuarioSeleccionado.telefonoUsu}" />
+						<h:outputText value="Email:" />
+						<p:inputText
+							value="#{beanSwoUsuario.swoUsuarioSeleccionado.emailUsu}" />
+						<h:outputText value="Fecha Nacimiento:" />
+						<p:datePicker
+							value="#{beanSwoUsuario.swoUsuarioSeleccionado.fechaNaciUsu}" />
+							
+						<h:outputText value="Seleccione un rol:" />
+						<p:selectOneMenu value="#{beanSwoUsuario.codigoRol}">
+							<f:selectItems value="#{beanSwoUsuario.listaSwoRoles}" var="sworoles"
+							
+								itemValue="#{sworoles.codigoRol}" itemLabel="#{sworoles.nombreRol}" />
+						</p:selectOneMenu>
+					</p:panelGrid>
+					<p:commandButton value="Actualizar" icon="fa fa-save"
+						update="@form,:form2"
+						actionListener="#{beanSwoUsuario.actionListenerActualizarSwoUsuario()}" />
+				</h:form>
+			</p:dialog>
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<p:commandButton value="Si" type="button"
+					styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+				<p:commandButton value="No" type="button"
+					styleClass="ui-confirmdialog-no" icon="fa fa-times" />
+			</p:confirmDialog>
 
 
-
-	</div>
-	<div class="panel panel-container">
+		</div>
+		<div class="panel panel-container">
 			<div class="row"></div>
 			<!--/.row-->
 
 
 		</div>
-		</div>
-</body>  
+	</div>
+</body>
 </html>
