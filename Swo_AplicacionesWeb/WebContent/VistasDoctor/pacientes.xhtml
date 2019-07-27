@@ -5,41 +5,78 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-
 <h:head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Admin</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet" />
+	<link href="css/font-awesome.min.css" rel="stylesheet" />
+	<link href="css/datepicker3.css" rel="stylesheet" />
+	<link href="css/styles.css" rel="stylesheet" />
 
-	<meta name="viewport"
-		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
+	<!--Custom Font-->
+	<link
+		href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i"
+		rel="stylesheet" />
+	<!--[if lt IE 9]>
+	<script src="js/html5shiv.js"></script>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
 </h:head>
 <body>
+	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#sidebar-collapse">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#"><span>Médico</span> BBBK </a>
+			<ul class="nav navbar-top-links navbar-right">
 
-<h:form>  
-    <p:growl id="messages"/>
- 
-    <p:menubar>
-     <p:menuitem value="Inicio" action="Menu_Doctor" icon="fa fa-home"></p:menuitem>
- 
-        <p:submenu label="Registro" icon="pi pi-cog">
-            <p:menuitem value="Pacientes" icon="pi pi-clone" action="registro_pacientes" />        
-            <p:menuitem value="Dientes" icon="pi pi-clone" action="index_dientes" />           
-            <p:menuitem value="Caras" icon="pi pi-clone" action="index_cara" />         
-            <p:menuitem value="Género" icon="pi pi-clone" action="registro_genero" />          
-        </p:submenu>
- 
-      <p:submenu label="Reportes" icon="pi pi-cog">
-            <p:menuitem value="# Atención Diaria" icon="pi pi-clone"  />        
-            <p:menuitem value="Tratamientos " icon="pi pi-clone"  />           
-            <p:menuitem value="Clientes Frecuentes" icon="pi pi-clone" />         
-            <p:menuitem value="Total de remuneración" icon="pi pi-clone"  />          
-        </p:submenu>
- 
-        <f:facet name="options">
-            <p:inputText style="margin:1px 10px 1px 1px;" placeholder="Search"/>
-            <p:commandButton type="button" value="Logout" icon="pi pi-home" />
-        </f:facet>
-    </p:menubar>
-</h:form>
+			</ul>
+		</div>
+	</div>
+	<!-- /.container-fluid --> </nav>
+	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+		<div class="profile-sidebar">
+			<div class="profile-userpic">
+				<img src="https://i2.wp.com/media.self.com/photos/5acbdce8dbf9c97076ae8211/4:3/w_728,c_limit/tooth.gif" class="img-responsive"
+					alt="" />
+			</div>
+			<div class="profile-usertitle">
+				<div class="profile-usertitle-name">Luis</div>
+				<div class="profile-usertitle-status">
+					<span class="indicator label-success"></span>Online
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="divider"></div>
+
+		<ul class="nav menu">
+			<li class="active"><a href="index.xhtml"><em class="fa fa-calendar">&nbsp;</em>Odontograma</a></li>
+			<li><a href="pacientes.xhtml"><em class="fa fa-user">&nbsp;</em>Pacientes</a></li>
+			<li><a href="dientes.xhtml"><em class="fa fa-briefcase">&nbsp;</em>Dientes</a></li><br></br>
+			<li><a href="cara.xhtml"><em class="fa fa-briefcase">&nbsp;</em>Caras</a></li><br></br>
+			<li><a href="genero.xhtml"><em class="fa fa-briefcase">&nbsp;</em>Genero</a></li><br></br>
+			
+			
+		</ul>
+	</div>
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+	<div class="row">
+			<ol class="breadcrumb">
+				<li><a href="#"> <em class="fa fa-calendar"></em>
+				</a></li>
+				<li class="active">Pacientes</li>
+			</ol>
+				
+		
+		
+
 
 
 <p:growl>
@@ -54,8 +91,7 @@
 					actionListener="#{beanSwoPaciente.actionListenerColapsarPanel()}"></p:commandButton>
 			</f:facet>
 			<br />		
-			<h:panelGrid columns="2">
-				
+			<h:panelGrid columns="2">	
 					<h:outputText value="Cédula" />
 					<p:inputText value="#{beanSwoPaciente.cedula}" />
 					<h:outputText value="Nombres" />
@@ -63,21 +99,20 @@
 					<h:outputText value="Apellidos" />
 					<p:inputText value="#{beanSwoPaciente.apellido}" />
 					<h:outputText value="Fecha de Nacimiento" />
-					<p:datePicker value="#{beanSwoPaciente.fecha_naci}"/> 
-					<h:outputText value="Género" />	
-				
+					<p:datePicker value="#{beanSwoPaciente.fecha_naci}"/> 	
+					<h:outputText value="Dirección" />								
+					<p:inputText  value="#{beanSwoPaciente.direccion}"/>								
+					<h:outputText value="Teléfono" />						
+					<p:inputText value="#{beanSwoPaciente.telefono}"/>
+					<h:outputText value="Correo Electrónico" />
+				<p:inputText value="#{beanSwoPaciente.email}"/>
+				<h:outputText value="Género" />	
 					<p:selectOneMenu value="#{beanSwoPaciente.codgenero}">
 						<f:selectItems value="#{beanSwoPaciente.listaG}" var="a"
 						 itemLabel="#{a.descripcionGen}"
 						itemValue="#{a.codigoGen}" />
 					</p:selectOneMenu>
-							
-					<h:outputText value="Dirección" />								
-					<h:inputText  value="#{beanSwoPaciente.direccion}"/>								
-					<h:outputText value="Teléfono" />						
-					<h:inputText value="#{beanSwoPaciente.telefono}"/>
-					<h:outputText value="Correo Electrónico" />
-				<h:inputText value="#{beanSwoPaciente.email}"/>
+				
 				<p:commandButton value="Registrar" icon="ui-icon-pencil"
 				update="@form,:form2"
 				actionListener="#{beanSwoPaciente.actionListenerInsertarPaciente()}" ></p:commandButton>
@@ -198,6 +233,18 @@
 		<p:commandButton value="No" type="button"
 			styleClass="ui-confirmdialog-no" icon="pi pi-times" />
 	</p:confirmDialog>
+
+
+			
+			</div>
+	<div class="panel panel-container">
+			<div class="row"></div>
+			<!--/.row-->
+
+
+		</div>
+		</div>
+
 
 </body>
 </html>
