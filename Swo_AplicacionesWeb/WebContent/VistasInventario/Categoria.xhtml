@@ -105,11 +105,7 @@
 		<p:dataTable value="#{beanCategoria.lista}" reflow="true"
 			var="c" paginator="true" rows="5">
 			<!-- paginator para crear paginacion de la pag web y rows: cuantas lines de la tabla quiero q se muetren por pagina-->
-			<p:column headerText="Codigo Categoria" filterBy="#{c.codigoCat}"
-				priority="1" filterMatchMode="contains">
-				<!-- filterBy :realizar busquedas  -->
-				<h:outputText value="#{c.codigoCat}" />
-			</p:column>
+			
 			<p:column headerText="Nombre Categoria" filterBy="#{c.nombreCat}"
 				priority="1" filterMatchMode="contains">
 				<h:outputText value="#{c.nombreCat}" />

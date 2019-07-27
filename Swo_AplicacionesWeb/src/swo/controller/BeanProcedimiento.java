@@ -32,15 +32,7 @@ public class BeanProcedimiento implements Serializable{
     private int cantidadProc;
     private int codigoTra;
     
-//    @PostConstruct
-//    public void inicializar() {
-//    	lista = managerProcedimiento.listarProcedimiento();
-//    	listaT = managerProcedimiento.listarTratamiento();
-//    	procedimiento = new SwoProcedimiento();
-//    	tratamiento = new SwoTratamiento();
-//    	panelColapso = true;
-//    }
-//    
+ 
     @PostConstruct
     public void inicio() {
     	lista = managerProcedimiento.listarProcedimiento();

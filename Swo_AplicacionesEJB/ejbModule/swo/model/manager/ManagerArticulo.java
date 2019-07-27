@@ -76,6 +76,7 @@ private ManagerDAO managerDAO;
 	    	e.setMinArt(articulo.getMinArt());
 	    	e.setStockArt(articulo.getStockArt());
 	    	em.merge(e);	
+	    	
 	    }
 	   
 	  	
