@@ -13,7 +13,6 @@ import swo.model.entities.SwoTratamiento;
 import swo.model.manager.ManagerTratamiento;
 
 
-
 @Named
 @SessionScoped
 public class BeanTratamiento implements Serializable{
@@ -32,16 +31,16 @@ public class BeanTratamiento implements Serializable{
     private double precioTra;
     private int cod_Categoria;
     private SwoCategoria categoria; 
-    
-    
+
     
     @PostConstruct
-    public void inicializar() {
+    public void inicio() {
     	lista = managerTratamiento.listarTratamiento();
     	listaC = managerTratamiento.listarCategorias();
     	tratamiento = new SwoTratamiento();
     	categoria = new SwoCategoria();
     	panelColapso = true;
+    			
     }
     
     public void actionListenerColapsarPanel() {
