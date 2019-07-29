@@ -35,6 +35,9 @@ public class BeanSwoUsuario implements Serializable {
 		swoUsuario = new SwoUsuario();
 		panelColapsado=true;
 	}
+	public void actualizarListas() {
+		
+	}
 	
 	public void actionListenerColapsarPanel() {
 		panelColapsado=!panelColapsado;
@@ -60,6 +63,7 @@ public class BeanSwoUsuario implements Serializable {
 	}
 	
 	public void actionListenerSeleccionarSwoUsuario(SwoUsuario swoUsuario) {
+		listaSwoRoles=managerSwoRole.findAllSwoRoles();
 		swoUsuarioSeleccionado=swoUsuario;
 	}
 	

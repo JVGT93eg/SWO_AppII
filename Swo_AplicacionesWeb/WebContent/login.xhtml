@@ -5,26 +5,60 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head></h:head>
+<h:head>
+ <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Iniciar Sesión</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="resources/fonts/material-icon/css/material-design-iconic-font.min.css"/>
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="resources/css/style.css"/>
+    </h:head>
 <body>
 	<p:growl>
 		<p:autoUpdate />
 	</p:growl>
-	<p:panel header="Login" style="width:400px">
+	<div class="container">
+                <div class="signin-content">
+                    <div class="signin-image">
+                        <figure><img src="resources/images/signin-image.jpg" alt="sing up image"/></figure>
+                        
+                    </div>
+
+                    <div class="signin-form">
+                        <h2 class="form-title">Iniciar Sesión</h2>
+                        
+	<center>
+	
+		<center>
+
+					<div>
+						<h1 style="background-color: #669999;">Sistema BBBK</h1>
+					</div>
+				</center>
+	<p:panel >
 		<h:form>
 			<h:panelGrid columns="2">
 				<h:outputText value="Código de usuario:" />
-				<p:inputText required="true"
+				<p:inputText value="#{beanSwoLogin.codigoUsuario}" required="true"
 					size="20" maxlength="20"
 					requiredMessage="Debe ingresar su codigo de usuario." />
 				<h:outputText value="Clave:" />
-				<p:password required="true" size="20"
-					maxlength="10" requiredMessage="Debe ingresar su contraseña." />
+				<p:password value="#{beanSwoLogin.clave}" required="true" size="20"
+					maxlength="20" requiredMessage="Debe ingresar su contraseña." />
 				<p:commandButton value="Ingresar" icon="fa fa-key"
-					update="mensajes" />
+				action="#{beanSwoLogin.accederSistema()}"	update="mensajes" />
 				<p:messages id="mensajes" />
 			</h:panelGrid>
 		</h:form>
 	</p:panel>
+	</center>
+	</div>
+                    </div>
+                </div>
+            
 </body>
 </html>

@@ -5,7 +5,9 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-
+<f:metadata>
+	  	<f:event listener="#{beanSwoLogin.actionVerificar()}" type="preRenderView"></f:event>
+	  </f:metadata>
  
 
 <h:head>
@@ -60,11 +62,12 @@
 		<div class="divider"></div>
 
 		<ul class="nav menu">
-			<li class="active"><a href="index.xhtml"><em class="fa fa-calendar">&nbsp;</em>Odontograma</a></li>
-			<li><a href="pacientes.xhtml"><em class="fa fa-user">&nbsp;</em>Pacientes</a></li>
-			<li><a href="dientes.xhtml"><em class="fa fa-briefcase">&nbsp;</em>Dientes</a></li><br></br>
-			<li><a href="cara.xhtml"><em class="fa fa-briefcase">&nbsp;</em>Caras Dentales</a></li><br></br>
-			<li><a href="genero.xhtml"><em class="fa fa-briefcase">&nbsp;</em>Genero</a></li><br></br>
+			<li ><a href="index.xhtml"><em class="fa fa-medkit">&nbsp;</em>Odontograma</a></li>
+			<li><a href="pacientes.xhtml"><em class="fa fa-female">&nbsp;</em>Pacientes</a></li>
+			<li><a href="dientes.xhtml"><em class="fa fa-slideshare">&nbsp;</em>Dientes</a></li>
+			<li><a href="cara.xhtml"><em class="fa fa-life-bouy">&nbsp;</em>Caras</a></li>
+			<li class="active"><a href="genero.xhtml"><em class="fa fa-venus-mars">&nbsp;</em>Genero</a></li><br></br>
+			<li><p:commandButton value="Salir" action="#{beanSwoLogin.salirSistema()}" icon="fa fa-sign-out" /></li>
 			
 			
 		</ul>

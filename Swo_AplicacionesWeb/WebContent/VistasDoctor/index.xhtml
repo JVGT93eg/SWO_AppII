@@ -4,6 +4,9 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
 	  xmlns:p="http://primefaces.org/ui">
+	  <f:metadata>
+	  	<f:event listener="#{beanSwoLogin.actionVerificar()}" type="preRenderView"></f:event>
+	  </f:metadata>
 <h:head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -56,12 +59,12 @@
 		<div class="divider"></div>
 
 		<ul class="nav menu">
-			<li class="active"><a href="Odontograma.xhtml"><em class="fa fa-calendar">&nbsp;</em>Odontograma</a></li>
-			<li><a href="pacientes.xhtml"><em class="fa fa-user">&nbsp;</em>Pacientes</a></li>
-			<li><a href="dientes.xhtml"><em class="fa fa-briefcase">&nbsp;</em>Dientes</a></li><br></br>
-			<li><a href="cara.xhtml"><em class="fa fa-briefcase">&nbsp;</em>Caras</a></li><br></br>
-			<li><a href="genero.xhtml"><em class="fa fa-briefcase">&nbsp;</em>Genero</a></li><br></br>
-			
+			<li class="active"><a href="index.xhtml"><em class="fa fa-medkit">&nbsp;</em>Odontograma</a></li>
+			<li><a href="pacientes.xhtml"><em class="fa fa-female">&nbsp;</em>Pacientes</a></li>
+			<li><a href="dientes.xhtml"><em class="fa fa-slideshare">&nbsp;</em>Dientes</a></li>
+			<li><a href="cara.xhtml"><em class="fa fa-life-bouy">&nbsp;</em>Caras</a></li>
+			<li><a href="genero.xhtml"><em class="fa fa-venus-mars">&nbsp;</em>Genero</a></li><br></br>
+			<li><p:commandButton value="Salir" action="#{beanSwoLogin.salirSistema()}" icon="fa fa-sign-out" /></li>
 			
 		</ul>
 	</div>
@@ -81,6 +84,11 @@
 	<p:growl>
 		<p:autoUpdate />
 	</p:growl>
+	<center>		
+<img src="img/odontograma_bbk.jpg">
+
+</img>
+</center>
 <h1> Registro de Datos Generales</h1>
 	
 	<p:panel id="panel1">
@@ -147,7 +155,7 @@
 		<br />
 		</p:panel>
 		<br />
-		
+
 		
 		
 	<h:form id="form2">
@@ -177,19 +185,19 @@
 					<h:outputText  value="#{odon.swoTratamiento.estadoTra}" />
 				</p:column>
 
-<!-- 				<p:column headerText="OPCIONES" priority="1"> -->
+				<p:column headerText="OPCIONES" priority="1">
 
 <!-- 						<p:commandButton icon="pi pi-pencil" title="Editar" -->
 <!-- 						actionListener="#{beanOdontograma.actionListenerSeleccinarPaciente(paciente)}" -->
 <!-- 						update=":formEdicion" oncomplete="PF('dlgEdicion').show();"> -->
 <!-- 					</p:commandButton> -->
 					
-<!-- 					<p:commandButton icon="pi pi-times" title="eliminar" update="@form" -->
-<!-- 						actionListener="#{beanOdontograma.actionListenerEliminarOdontograma(odon.codigoAte)}"> -->
-<!-- 						<p:confirm header="Confirmación" message="Desea eliminar?" -->
-<!-- 							icon="pi pi-exclamation-circle"></p:confirm> -->
-<!-- 					</p:commandButton> -->
-<!-- 				</p:column> -->
+					<p:commandButton icon="pi pi-times" title="eliminar" update="@form"
+						actionListener="#{beanOdontograma.actionListenerEliminarOdontograma(odon.codigoAte)}">
+						<p:confirm header="Confirmación" message="Desea eliminar?"
+							icon="pi pi-exclamation-circle"></p:confirm>
+					</p:commandButton>
+				</p:column>
 
 			</p:dataTable>
 		</p:panel>
@@ -197,16 +205,13 @@
 		
 		
 		
-<!-- 	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"> -->
-<!-- 		<p:commandButton value="Sí" type="button" -->
-<!-- 			styleClass="ui-confirmdialog-yes" icon="pi pi-check" /> -->
-<!-- 		<p:commandButton value="No" type="button" -->
-<!-- 			styleClass="ui-confirmdialog-no" icon="pi pi-times" /> -->
-<!-- 	</p:confirmDialog> -->
-		
-		
-		
-			
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+		<p:commandButton value="Sí" type="button"
+			styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+		<p:commandButton value="No" type="button"
+			styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+	</p:confirmDialog>
+
 			</div>
 	<div class="panel panel-container">
 			<div class="row"></div>
@@ -215,6 +220,10 @@
 
 		</div>
 		</div>
+		
+		
+		
+		
 </body>     
       
       
