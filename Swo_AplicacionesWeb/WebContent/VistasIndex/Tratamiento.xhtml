@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+<meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Pratt - Free Bootstrap 3 Theme"/>
+    <meta name="author" content="Alvarez.is - BlackTie.co"/>
+    <link rel="shortcut icon" href="assets/ico/favicon.png"/>
+
+    <title>Pratt - Free Bootstrap 3 Theme</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet"/>
+
+    <!-- Custom styles for this template -->
+    <link href="assets/css/main.css" rel="stylesheet"/>
+    
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'/>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'/>
+    
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/smoothscroll.js"></script>
+
+</h:head> 
+
+<body> 
+<div id="headerwrap">
+	    <div class="container">
+	    	<div class="row centered">
+	    		<div class="col-lg-12">
+					<h1>Bienvenidos <b>G-DENT</b></h1>
+					<h3>A continuación mostraremos la información de las tatamientos.</h3>
+					<br/>
+	    		</div>
+	    	</div>
+	    </div> <!--/ .container -->
+	</div><!--/ #headerwrap -->
+
+
+<div>
+		<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+	<br/>
+	<br/>
+	
+	<h:form>
+		<p:panel header="Datos Tratamientos" />
+		<p:dataTable value="#{beanTratamiento.lista}" reflow="true" var="t"
+			paginator="true" rows="5">
+			<!-- paginator para crear paginacion de la pag web y rows: cuantas lines de la tabla quiero q se muetren por pagina-->
+			<p:column headerText="Descripcion" priority="1" >
+				<h:outputText value="#{t.descripcionTra}" />
+			</p:column>
+			<p:column headerText="Categoria" priority="2">
+				<h:outputText value="#{t.swoCategoria.nombreCat}" />
+			</p:column>
+			<p:column headerText="Precio" priority="2">
+				<h:outputText value="#{t.precioTra}" />
+			</p:column>
+		</p:dataTable>
+	</h:form>
+	</div>
+</body> 
+</html>

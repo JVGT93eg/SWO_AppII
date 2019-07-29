@@ -73,7 +73,6 @@ public class BeanTratamiento implements Serializable{
 			e.printStackTrace();
 		}
 	}
-
 /////////////////////////////////////////////////////////////	
 	public List<SwoTratamiento> getLista() {
 		return lista;
