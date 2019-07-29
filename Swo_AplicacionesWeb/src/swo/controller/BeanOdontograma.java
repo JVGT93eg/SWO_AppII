@@ -143,11 +143,13 @@ public class BeanOdontograma implements Serializable {
 		
 	}
 	
-	
-//	public List<SelectItem> getlistaArticulosSI(){
-//		
-//	}
-	
+
+	public void actionListenerEliminarOdontograma(Integer codigo_Odontogr) {
+		managerOdontograma.eliminarOdontograma(codigo_Odontogr);
+		listaOdontograma=managerOdontograma.findAllOdontograma();
+		JSFUtil.crearMensajeInfo("Proceso eliminado");
+
+	}
 	
 	
 	

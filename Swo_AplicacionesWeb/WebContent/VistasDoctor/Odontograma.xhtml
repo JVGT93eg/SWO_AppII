@@ -61,20 +61,14 @@
 				<h:outputText value="#{beanOdontograma.odontogramaCabTmp.fechaAte}">
 					<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
 				</h:outputText>
-				<h:outputText value="Seleccione el Paciente:"
-					style="font-weight: bold" />
-				<h:panelGroup>
-					<p:selectOneMenu value="#{beanOdontograma.codigoPac}" filter="true"
-						filterMatchMode="contains">
-						<f:selectItem itemLabel="Seleccione..." itemValue=""
-							noSelectionOption="true" />
-						<f:selectItems value="#{beanOdontograma.listaPAciente_SI}"/>
-						<p:ajax update="cedulaCliente"
-							listener="#{beanOdontograma.asignarPaciente()}"></p:ajax>
+				
+				<h:outputText value="Seleccione el Paciente:" style="font-weight: bold" />
+					<p:selectOneMenu value="#{beanOdontograma.codpac}">
+					<f:selectItems value="#{beanOdontograma.listaPaciente}" var="a"
+						 itemLabel="#{a.nombrePac } #{ a.apellidoPac}"
+						itemValue="#{a.codigoPac}" />
 					</p:selectOneMenu>
-				</h:panelGroup>
-				<h:outputText value="Codigo del Paciente:" style="font-weight: bold" />
-				<h:outputText id="cedulaCliente" value="#{beanOdontograma.codigoPac}" />
+				
 					
 						<h:outputText value="Tratamiento:" style="font-weight: bold" />
 						<p:selectOneMenu value="#{beanOdontograma.codCategoria}">
@@ -124,7 +118,7 @@
 			<p:dataTable value="#{beanOdontograma.listaOdontograma}" reflow="true"
 				var="odon" paginator="true" rows="5">
 
-				<p:column headerText="Fecha" style="width:50px">
+				<p:column headerText="Fecha" style="width:80px">
 					<h:outputText value="#{odon.fechaAte}" />
 				</p:column>
 
