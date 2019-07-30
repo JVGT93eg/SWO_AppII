@@ -16,7 +16,7 @@ public class SwoRole implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="SWO_ROLES_CODIGOROL_GENERATOR", sequenceName="SEQ_SWO_ROLES")
+	@SequenceGenerator(name="SWO_ROLES_CODIGOROL_GENERATOR", sequenceName="SEQ_SWO_ROLES", allocationSize = 1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SWO_ROLES_CODIGOROL_GENERATOR")
 	@Column(name="codigo_rol", unique=true, nullable=false)
 	private Integer codigoRol;

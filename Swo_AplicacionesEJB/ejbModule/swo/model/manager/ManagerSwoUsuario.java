@@ -35,7 +35,9 @@ public class ManagerSwoUsuario {
     public SwoUsuario findSwoUsuarioByCedulaUsu(String cedulaUsu) {
     	return em.find(SwoUsuario.class, cedulaUsu);
     }
-    
+    public void validarSwoUusuario() {
+    	
+    }
     public void insertarSwoUsuario(SwoUsuario swoUsuario, Integer codigoRol) {
     	SwoRole swoRoles=em.find(SwoRole.class, codigoRol);
     	swoUsuario.setSwoRole(swoRoles);

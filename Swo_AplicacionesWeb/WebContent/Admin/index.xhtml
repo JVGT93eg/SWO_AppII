@@ -63,7 +63,7 @@
 			<li class="active"><a href="index.xhtml"><em class="fa fa-calendar">&nbsp;</em> Auditoría</a></li>
 			<li><a href="usuarios.xhtml"><em class="fa fa-user">&nbsp;</em>Usuarios</a></li>
 			<li><a href="roles.xhtml"><em class="fa fa-briefcase">&nbsp;</em>Roles</a></li><br></br>
-			<li><p:commandButton value="Log Out" action="#{beanSwoLogin.salirSistema()}" icon="fa fa-sign-out" /></li>
+			<li><p:commandButton value="Salir" action="#{beanSwoLogin.salirSistema()}" icon="fa fa-sign-out" /></li>
 		</ul>
 	</div>
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
@@ -79,21 +79,24 @@
 
 <h:form id="form">
 		<p:dataTable border="1" value="#{beanSwoAuditoria.listaSwoEventos}"
-			var="a" paginator="true" rows="6" id="tabla1" reflow="true">
-			<p:column headerText="FECHA">
+			var="a" paginator="true" rows="15" id="tabla1" reflow="true">
+			<p:column headerText="CODIGO"  style="width:50px">
+				<h:outputText value="#{a.codigoEve}"></h:outputText>
+			</p:column>
+			<p:column headerText="USUARIO" >
+				<h:outputText value="#{a.swoUsuario.cedulaUsu} - #{a.swoUsuario.nombreUsu}"></h:outputText>
+			</p:column>
+			<p:column headerText="DESCRIPCIÓN" >
+				<h:outputText value="#{a.descripcionEve}"></h:outputText>
+			</p:column>
+			<p:column headerText="FECHA"  style="width:100px">
 				<h:outputText value="#{a.fechaEve}"></h:outputText>
 			</p:column>
 			<p:column headerText="MÉTODO" >
 				<h:outputText value="#{a.nombreEve}"></h:outputText>
 			</p:column>
-			<p:column headerText="IP" >
+			<p:column headerText="IP"  style="width:100px">
 				<h:outputText value="#{a.ipEve}"></h:outputText>
-			</p:column>
-			<p:column headerText="DESCRIPCIÓN" >
-				<h:outputText value="#{a.descripcionEve}"></h:outputText>
-			</p:column>
-			<p:column headerText="USUARIO" >
-				<h:outputText value="#{a.swoUsuario.cedulaUsu}"></h:outputText>
 			</p:column>
 		</p:dataTable>
 	</h:form>

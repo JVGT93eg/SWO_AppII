@@ -36,7 +36,7 @@ public class SwoEvento implements Serializable {
 
 	//bi-directional many-to-one association to SwoUsuario
 	@ManyToOne
-	@JoinColumn(name="cedula_usu_swo_usuarios")
+	@JoinColumn(name="cedula_usu_swo_usuarios", nullable=false)
 	private SwoUsuario swoUsuario;
 
 	public SwoEvento() {

@@ -4,7 +4,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
-	<f:metadata>
+ <f:metadata>
 	  	<f:event listener="#{beanSwoLogin.actionVerificar()}" type="preRenderView"></f:event>
 	  </f:metadata>
 <h:head>
@@ -66,6 +66,7 @@
 			<li class="active"><a href="roles.xhtml"><em
 					class="fa fa-briefcase">&nbsp;</em>Roles</a></li>
 			<br></br>
+			<li><p:commandButton value="Salir" action="#{beanSwoLogin.salirSistema()}" icon="fa fa-sign-out" /></li>
 
 		</ul>
 	</div>
