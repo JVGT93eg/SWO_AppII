@@ -4,9 +4,11 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"> 
-<f:metadata>
+
+ <f:metadata>
 	  	<f:event listener="#{beanSwoLogin.actionVerificar()}" type="preRenderView"></f:event>
 	  </f:metadata>
+
 <h:head>
 
 
@@ -64,8 +66,8 @@
 		<div class="divider"></div>
 
 		<ul class="nav menu">
-			<li class="active"><a href="index.xhtml"><em class="fa fa-home">&nbsp;</em>Inicio</a></li>
-			<li><a href="Proveedor.xhtml"><em class="fa fa-group">&nbsp;</em>Proveedores</a></li>
+			<li ><a href="index.xhtml"><em class="fa fa-home">&nbsp;</em>Inicio</a></li>
+			<li class="active"><a href="Proveedor.xhtml"><em class="fa fa-group">&nbsp;</em>Proveedores</a></li>
 			<li><a href="DetallesInventario.xhtml"><em class="fa fa-list-ol">&nbsp;</em>Detalles de Inventarios</a></li>
 			<li><a href="TipoTransaccion.xhtml"><em class="fa fa-sitemap">&nbsp;</em>Tipo de Transacciones</a></li><br></br>
 			<li><p:commandButton value="Salir" action="#{beanSwoLogin.salirSistema()}" icon="fa fa-sign-out" /></li>

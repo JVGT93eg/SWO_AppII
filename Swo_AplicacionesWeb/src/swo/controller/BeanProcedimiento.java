@@ -64,7 +64,7 @@ public class BeanProcedimiento implements Serializable{
 	
 	public void actionListenerActualizarProcedimiento() {
 		try {
-			managerProcedimiento.actualizarProcedimiento(procedimientoSeleccionado);
+			managerProcedimiento.actualizarProcedimiento(procedimientoSeleccionado, codigoTra);
 			lista = managerProcedimiento.listarProcedimiento();
 			JSFUtil.crearMensajeInfo("Datos Actualizados");
 		} catch (Exception e) {

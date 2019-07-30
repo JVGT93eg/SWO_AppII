@@ -65,7 +65,7 @@ public class BeanTratamiento implements Serializable{
 	
 	public void actionListenerActualizarTratamiento() {
 		try {
-			managerTratamiento.actualizarTratamiento(tratamientoSeleccionado);
+			managerTratamiento.actualizarTratamiento(tratamientoSeleccionado, cod_Categoria);
 			lista = managerTratamiento.listarTratamiento();
 			JSFUtil.crearMensajeInfo("Datos Actualizados");
 		} catch (Exception e) {

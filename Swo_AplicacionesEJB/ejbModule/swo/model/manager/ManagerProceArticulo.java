@@ -79,12 +79,14 @@ public class ManagerProceArticulo{
 	    		em.remove(procedimiento);
 	    }
 	    
-	    public void actualizarProceArticulo(SwoProceArticulo procedimiento) throws Exception {
+	    public void actualizarProceArticulo(SwoProceArticulo procedimiento, int codigoArt, int codigoPro) throws Exception {
 	    	SwoProceArticulo e = buscarporProceArticulo(procedimiento.getCodigoProArt());
 	    	if(e==null)
 	    		throw new Exception("No existe el tratamiento especificada.");
-	    	e.setSwoArticulo(procedimiento.getSwoArticulo());
-	    	e.setSwoProcedimiento(procedimiento.getSwoProcedimiento());
+	    	SwoArticulo articulo=em.find(SwoArticulo.class, codigoArt);
+	    	e.setSwoArticulo(articulo);
+	    	SwoProcedimiento proced=em.find(SwoProcedimiento.class, codigoPro);
+	    	e.setSwoProcedimiento(proced);
 	    	em.merge(e);
 	    	
 	    }

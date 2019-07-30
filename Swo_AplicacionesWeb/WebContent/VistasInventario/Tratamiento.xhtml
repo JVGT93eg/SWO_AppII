@@ -161,13 +161,11 @@
 					value="#{beanTratamiento.tratamientoSeleccionado.estadoTra}" />
 				<h:outputText value="Categoria:" />
 		
-					<p:selectOneMenu value="#{beanTratamiento.cod_Categoria}">
+				<p:selectOneMenu value="#{beanTratamiento.cod_Categoria}">
 					<f:selectItems value="#{beanTratamiento.listaC}" var="tc"
 						itemLabel="#{tc.nombreCat}" 
 						itemValue="#{tc.codigoCat}" />
 				</p:selectOneMenu>
-				
-				
 				
 				<h:outputText value="Precio:" />
 				<p:inputText

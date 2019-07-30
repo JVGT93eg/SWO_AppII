@@ -46,6 +46,7 @@ public class BeanProceArticulo implements Serializable{
     	procedimiento = new SwoProcedimiento();
     	panelColapso = true;
     }
+
     
     public void actionListenerColapsarPanel() {
 		panelColapso=!panelColapso;
@@ -69,7 +70,7 @@ public class BeanProceArticulo implements Serializable{
 	
 	public void actionListenerActualizarProceArticulo() {
 		try {
-			managerProceArticulo.actualizarProceArticulo(proceArticuloSeleccionado);
+			managerProceArticulo.actualizarProceArticulo(proceArticuloSeleccionado, codArticulo, codProcedimiento);
 			lista = managerProceArticulo.listarProceArticulo();
 			JSFUtil.crearMensajeInfo("Datos Actualizados");
 		} catch (Exception e) {

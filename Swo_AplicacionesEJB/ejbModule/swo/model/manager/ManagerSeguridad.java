@@ -45,13 +45,13 @@ public class ManagerSeguridad {
 		loginDTO.setCodigoUsuario(usuario.getCedulaUsu());
 		
 		//dependiendo del tipo de usuario, configuramos la ruta de acceso a las pags web:
-		if(usuario.getSwoRole().getCodigoRol()==1)
+		if(usuario.getSwoRole().getNombreRol().equals("Administrador"))
 			loginDTO.setRutaAcceso("/Admin/index.xhtml");
-		else if(usuario.getSwoRole().getCodigoRol()==2)
+		else if(usuario.getSwoRole().getNombreRol().equals("Doctor"))
 			loginDTO.setRutaAcceso("/VistasDoctor/index.xhtml");
-		else if(usuario.getSwoRole().getCodigoRol()==3)
+		else if(usuario.getSwoRole().getNombreRol().equals("Secretario"))
 			loginDTO.setRutaAcceso("/VistasSecretaria/index.xhtml");
-		else if(usuario.getSwoRole().getCodigoRol()==4)
+		else if(usuario.getSwoRole().getNombreRol().equals("Inventariado"))
 			loginDTO.setRutaAcceso("/VistasInventario/index.xhtml");
 		return loginDTO;
 	}

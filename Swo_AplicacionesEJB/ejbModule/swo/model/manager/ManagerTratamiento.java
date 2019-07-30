@@ -65,13 +65,14 @@ public class ManagerTratamiento {
 	    		em.remove(tratamiento);
 	    }
 	    
-	    public void actualizarTratamiento(SwoTratamiento tratamiento) throws Exception {
+	    public void actualizarTratamiento(SwoTratamiento tratamiento, int cod_Categoria) throws Exception {
 	    	SwoTratamiento e = buscarporCodigo(tratamiento.getCodigoTra());
 	    	if(e==null)
 	    		throw new Exception("No existe el tratamiento especificada.");
 	    	e.setDescripcionTra(tratamiento.getDescripcionTra());
 	    	e.setEstadoTra(tratamiento.getEstadoTra());
-	    	e.setSwoCategoria(tratamiento.getSwoCategoria());
+	    	SwoCategoria cat=em.find(SwoCategoria.class, cod_Categoria);
+	    	e.setSwoCategoria(cat);
 	    	e.setPrecioTra(tratamiento.getPrecioTra());
 	    	em.merge(e);
 	    	
