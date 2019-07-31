@@ -51,7 +51,7 @@ public class BeanSwoLogin implements Serializable  {
 			//verificamos el acceso del usuario:
 			tipoUsuario=loginDTO.getTipoUsuario();
 			//redireccion dependiendo del tipo de usuario:
-			managerAuditoria.crearEvento(codigoUsuario, this.getClass(), "accederSistema", "Acceso a login");
+			managerAuditoria.crearEvento(codigoUsuario, this.getClass(), "accederSistema", "Inicia Sesión");
 			System.out.println(loginDTO.getRutaAcceso());
 			return loginDTO.getRutaAcceso()+"?faces-redirect=true";
 		} catch (Exception e) {
@@ -62,6 +62,12 @@ public class BeanSwoLogin implements Serializable  {
 	}
 
 	public String salirSistema() {
+		System.out.println("salirSistema");
+		try {
+			managerAuditoria.crearEvento(loginDTO.getCodigoUsuario(), this.getClass(), "salisSistema", "Cerra Sesión");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 		return "/Index.html?faces-redirect=true";
 	}
@@ -81,9 +87,16 @@ public class BeanSwoLogin implements Serializable  {
 					return;
 				if(req.contains("/VistasInventario") && loginDTO.getRutaAcceso().startsWith("/VistasInventario"))
 					return;
+				System.out.println("sinLogin");
+				try {
+					managerAuditoria.crearEvento(loginDTO.getCodigoUsuario(), this.getClass(), "sinLogin", "Acceso Denegado");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				ec.redirect(ec.getRequestContextPath() + "/Index.html");
 			}
 		}catch(IOException e) {
-			
+			e.printStackTrace();
 		}
 	}
 
