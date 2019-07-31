@@ -63,7 +63,11 @@
 			<li class="active"><a href="index.xhtml"><em class="fa fa-calendar">&nbsp;</em> Auditoría</a></li>
 			<li><a href="usuarios.xhtml"><em class="fa fa-user">&nbsp;</em>Usuarios</a></li>
 			<li><a href="roles.xhtml"><em class="fa fa-briefcase">&nbsp;</em>Roles</a></li><br></br>
+			<h:form>
+ 			<li><p:commandButton value="Reporte" action="#{beanReportes.actionReporteAuditoria()}" icon="fa fa-print" ajax="false" /></li>
+			<br />
 			<li><p:commandButton value="Salir" action="#{beanSwoLogin.salirSistema()}" icon="fa fa-sign-out" /></li>
+			</h:form>
 		</ul>
 	</div>
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
@@ -79,7 +83,7 @@
 
 <h:form id="form">
 		<p:dataTable border="1" value="#{beanSwoAuditoria.listaSwoEventos}"
-			var="a" paginator="true" rows="15" id="tabla1" reflow="true">
+			var="a" paginator="true" rows="14" id="tabla1" reflow="true">
 			<p:column headerText="CODIGO"  style="width:50px">
 				<h:outputText value="#{a.codigoEve}"></h:outputText>
 			</p:column>

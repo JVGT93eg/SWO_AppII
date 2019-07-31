@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AuditoriaR" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e0d4d72e-e259-4a31-8b10-ba3d0c7d3da1">
+	<property name="template.engine" value="tabular_template"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Reporte"/>
+	<style name="Title" fontName="Caladea" fontSize="26" isBold="true"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Caladea" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Caladea" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Caladea" fontSize="12"/>
+	<style name="Table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+			<topPen lineWidth="1.0" lineColor="#000000"/>
+			<leftPen lineWidth="1.0" lineColor="#000000"/>
+			<bottomPen lineWidth="1.0" lineColor="#000000"/>
+			<rightPen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="tableDataset" uuid="0cdd8477-a07e-4e3e-8e3a-07ac89bd9b7f">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Reporte"/>
+		<queryString language="SQL">
+			<![CDATA[select * from swo_eventos]]>
+		</queryString>
+		<field name="codigo_eve" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="codigo_eve"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="swo_eventos"/>
+		</field>
+		<field name="fecha_eve" class="java.sql.Date">
+			<property name="com.jaspersoft.studio.field.label" value="fecha_eve"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="swo_eventos"/>
+		</field>
+		<field name="nombre_eve" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="nombre_eve"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="swo_eventos"/>
+		</field>
+		<field name="ip_eve" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="ip_eve"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="swo_eventos"/>
+		</field>
+		<field name="descripcion_eve" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="descripcion_eve"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="swo_eventos"/>
+		</field>
+		<field name="cedula_usu_swo_usuarios" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="cedula_usu_swo_usuarios"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="swo_eventos"/>
+		</field>
+	</subDataset>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<title>
+		<band height="70" splitType="Stretch">
+			<image>
+				<reportElement x="275" y="0" width="300" height="64" uuid="269d6e4b-c795-405c-82e2-e94921fd4c24"/>
+				<imageExpression><![CDATA["leaf_banner_violet.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Title" x="0" y="13" width="263" height="33" uuid="eb5e714c-7e75-449b-8ab4-3eee7bd15220"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Reporte Auditoria]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="63" y="46" width="200" height="22" uuid="451ded6c-9af3-40b6-a683-85adf965354c"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="9d3c821c-e3a1-4b42-88bc-922ae0739207"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="970aa0c8-b090-4cc8-b7b4-d6b059107bb8"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="5876962d-615a-4415-be7d-06601fef506b"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="200" splitType="Stretch">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<componentElement>
+				<reportElement x="0" y="0" width="555" height="200" uuid="11991dbb-a7fd-4887-a625-f379d1360816">
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="tableDataset" uuid="ee5c9e83-982e-4418-a9d0-df91a9bbe0e4">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="90" uuid="b06eeadc-be63-4c0b-a1d5-6917bd7d1bfc">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:tableFooter style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement key="" style="SubTitle" x="0" y="0" width="90" height="30" forecolor="#727272" uuid="5effd477-0d9e-417b-b0ff-d552d8bd4f11"/>
+								<box leftPadding="2"/>
+								<textElement>
+									<font fontName="Caladea" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Codigo]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement style="Detail" x="0" y="0" width="90" height="30" uuid="31fe28f3-3aff-40be-b39d-d50dd34a935b"/>
+								<box leftPadding="2"/>
+								<textElement>
+									<font fontName="Caladea" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{codigo_eve}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="9962b21d-b544-492e-b0b5-9139fc15f063">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:tableFooter style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement key="" style="SubTitle" x="0" y="0" width="90" height="30" forecolor="#727272" uuid="e26e446e-be93-4a83-a92b-0f4aaf5bc74b"/>
+								<box leftPadding="2"/>
+								<textElement>
+									<font fontName="Caladea" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Fecha Ingreso]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement style="Detail" x="0" y="0" width="90" height="30" uuid="55aa1847-02a1-4799-9860-c50aeaddb7ad"/>
+								<box leftPadding="2"/>
+								<textElement>
+									<font fontName="Caladea" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{fecha_eve}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="431dc495-fdb1-4869-a61a-382cadc7a256">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:tableFooter style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement key="" style="SubTitle" x="0" y="0" width="90" height="30" forecolor="#727272" uuid="b228c3b5-3287-40e2-9a7a-1963bb46b1ed"/>
+								<box leftPadding="2"/>
+								<textElement>
+									<font fontName="Caladea" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Nombre Evento]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement style="Detail" x="0" y="0" width="90" height="30" uuid="81502d3b-a281-43cc-8dd9-b6736125e305"/>
+								<box leftPadding="2"/>
+								<textElement>
+									<font fontName="Caladea" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{nombre_eve}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="06c3dd30-898f-4a37-8c97-a2691ce58539">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:tableFooter style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement key="" style="SubTitle" x="0" y="0" width="90" height="30" forecolor="#727272" uuid="e716b58e-18c7-47b1-ada5-6508ac658f37"/>
+								<box leftPadding="2"/>
+								<textElement>
+									<font fontName="Caladea" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Ip Evento]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement style="Detail" x="0" y="0" width="90" height="30" uuid="54bef614-056c-495f-aacd-f24655bd500d"/>
+								<box leftPadding="2"/>
+								<textElement>
+									<font fontName="Caladea" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{ip_eve}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="4a246382-8e52-4a0b-acc4-ceb10871192c">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+						<jr:tableFooter style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement key="" style="SubTitle" x="0" y="0" width="90" height="30" forecolor="#727272" uuid="feec1f59-eee9-4402-9116-4a0605c77e59"/>
+								<box leftPadding="2"/>
+								<textElement>
+									<font fontName="Caladea" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Descripción]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement style="Detail" x="0" y="0" width="90" height="30" uuid="55d3e3c9-9438-479c-b5b9-99155b0bed8a"/>
+								<box leftPadding="2"/>
+								<textElement>
+									<font fontName="Caladea" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{descripcion_eve}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="200f6d4f-19a4-4dd0-b1fe-6bbf37cfedc0">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
+						<jr:tableFooter style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement key="" style="SubTitle" x="0" y="0" width="90" height="30" forecolor="#727272" uuid="c0659e33-1ca7-4468-8134-e80ada1d3bb9"/>
+								<box leftPadding="2"/>
+								<textElement>
+									<font fontName="Caladea" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Cedula Usuario]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement style="Detail" x="0" y="0" width="90" height="30" uuid="b441e61c-5e10-4639-89fd-70ec343dab86"/>
+								<box leftPadding="2"/>
+								<textElement>
+									<font fontName="Caladea" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{cedula_usu_swo_usuarios}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>

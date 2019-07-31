@@ -10,7 +10,7 @@
 <h:head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>Admin</title>
+	<title>Doctor</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet" />
 	<link href="css/font-awesome.min.css" rel="stylesheet" />
 	<link href="css/datepicker3.css" rel="stylesheet" />
@@ -63,9 +63,12 @@
 			<li><a href="pacientes.xhtml"><em class="fa fa-female">&nbsp;</em>Pacientes</a></li>
 			<li><a href="dientes.xhtml"><em class="fa fa-slideshare">&nbsp;</em>Dientes</a></li>
 			<li><a href="cara.xhtml"><em class="fa fa-life-bouy">&nbsp;</em>Caras</a></li>
-			<li><a href="genero.xhtml"><em class="fa fa-venus-mars">&nbsp;</em>Genero</a></li><br></br>
+			<li><a href="genero.xhtml"><em class="fa fa-venus-mars">&nbsp;</em>Genero</a></li>
+ 			<h:form>
+ 			<li><p:commandButton value="Reporte" action="#{beanReportes.actionReporte()}" icon="fa fa-print" ajax="false" /></li>
+			<br />
 			<li><p:commandButton value="Salir" action="#{beanSwoLogin.salirSistema()}" icon="fa fa-sign-out" /></li>
-			
+			</h:form>
 		</ul>
 	</div>
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
@@ -183,20 +186,6 @@
 
 				<p:column headerText="Estado">
 					<h:outputText  value="#{odon.swoTratamiento.estadoTra}" />
-				</p:column>
-
-				<p:column headerText="OPCIONES" priority="1">
-
-<!-- 						<p:commandButton icon="pi pi-pencil" title="Editar" -->
-<!-- 						actionListener="#{beanOdontograma.actionListenerSeleccinarPaciente(paciente)}" -->
-<!-- 						update=":formEdicion" oncomplete="PF('dlgEdicion').show();"> -->
-<!-- 					</p:commandButton> -->
-					
-					<p:commandButton icon="pi pi-times" title="eliminar" update="@form"
-						actionListener="#{beanOdontograma.actionListenerEliminarOdontograma(odon.codigoAte)}">
-						<p:confirm header="Confirmación" message="Desea eliminar?"
-							icon="pi pi-exclamation-circle"></p:confirm>
-					</p:commandButton>
 				</p:column>
 
 			</p:dataTable>
