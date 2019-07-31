@@ -4,9 +4,10 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
- <f:metadata>
-	  	<f:event listener="#{beanSwoLogin.actionVerificar()}" type="preRenderView"></f:event>
-	  </f:metadata>
+<f:metadata>
+	<f:event listener="#{beanSwoLogin.actionVerificar()}"
+		type="preRenderView"></f:event>
+</f:metadata>
 <h:head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -66,7 +67,8 @@
 					class="fa fa-user">&nbsp;</em>Usuarios</a></li>
 			<li><a href="roles.xhtml"><em class="fa fa-briefcase">&nbsp;</em>Roles</a></li>
 			<br></br>
-			<li><p:commandButton value="Salir" action="#{beanSwoLogin.salirSistema()}" icon="fa fa-sign-out" /></li>
+			<li><p:commandButton value="Salir"
+					action="#{beanSwoLogin.salirSistema()}" icon="fa fa-sign-out" /></li>
 		</ul>
 	</div>
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
@@ -88,7 +90,15 @@
 							update="@form"
 							actionListener="#{beanSwoUsuario.actionListenerColapsarPanel()}"></p:commandButton>
 					</f:facet>
-					<p:panelGrid columns="2">
+					<p:panelGrid columns="2" cellpadding="5">
+
+						<h:outputText value="Seleccione un rol:" />
+						<p:selectOneMenu value="#{beanSwoUsuario.codigoRol}" >
+							<f:selectItems value="#{beanSwoUsuario.listaSwoRoles}"
+								var="sworoles" itemValue="#{sworoles.codigoRol}"
+								itemLabel="#{sworoles.nombreRol}"  />
+						</p:selectOneMenu>
+
 						<h:outputText value="Cédula:" />
 						<p:inputText value="#{beanSwoUsuario.swoUsuario.cedulaUsu}" />
 						<h:outputText value="Nombre:" />
@@ -96,9 +106,8 @@
 						<h:outputText value="Apellido:" />
 						<p:inputText value="#{beanSwoUsuario.swoUsuario.apellidoUsu}" />
 						<h:outputText value="Edad:" />
-						<p:spinner value="#{beanSwoUsuario.swoUsuario.edadUsu}" />
-						<h:outputText value="Clave:" />
-						<p:password value="#{beanSwoUsuario.swoUsuario.claveUsu}" />
+						<p:spinner value="#{beanSwoUsuario.swoUsuario.edadUsu}" min="20"
+							max="60" />
 						<h:outputText value="Dirección:" />
 						<p:inputText value="#{beanSwoUsuario.swoUsuario.direccionUsu}" />
 						<h:outputText value="Teléfono:" />
@@ -107,13 +116,19 @@
 						<p:inputText value="#{beanSwoUsuario.swoUsuario.emailUsu}" />
 						<h:outputText value="Fecha Nacimiento:" />
 						<p:datePicker value="#{beanSwoUsuario.swoUsuario.fechaNaciUsu}" />
-						<h:outputText value="Seleccione un rol:" />
 
-						<p:selectOneMenu value="#{beanSwoUsuario.codigoRol}">
-							<f:selectItems value="#{beanSwoUsuario.listaSwoRoles}"
-								var="sworoles" itemValue="#{sworoles.codigoRol}"
-								itemLabel="#{sworoles.nombreRol}" />
-						</p:selectOneMenu>
+						<h:outputText for="pwd1" value="Clave:" />
+						<p:password id="pwd1"
+							value="#{beanSwoUsuario.swoUsuario.claveUsu}" match="pwd2"
+							label="Clave" feedback="true" promptLabel="Nueva Clave"
+							weakLabel="Debil" goodLabel="Medio" strongLabel="Seguro" />
+
+						<h:outputText for="pwd2" value="Confirmar Clave:" />
+						<p:password id="pwd2"
+							value="#{beanSwoUsuario.swoUsuario.claveUsu}"
+							label="Confirmar Clave" feedback="true"
+							promptLabel="Repita Clave" weakLabel="Debil" goodLabel="Medio"
+							strongLabel="Seguro" />
 
 						<p:commandButton value="Insertar" icon="fa fa-save"
 							update="@form,:form2"
@@ -210,18 +225,24 @@
 						<h:outputText value="Teléfono:" />
 						<p:inputText
 							value="#{beanSwoUsuario.swoUsuarioSeleccionado.telefonoUsu}" />
-						<h:outputText value="Email:" />
-						<p:inputText
-							value="#{beanSwoUsuario.swoUsuarioSeleccionado.emailUsu}" />
+						
+						<p:inputText id="email" label="email" requiredMessage="Ingrese su correo." 
+						validatorMessage="Formato Inválidado" value="#{beanSwoUsuario.swoUsuario.emailUsu}" >
+						<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+						</p:inputText>
+						<p:watermark for="email" value="Correo" />
+						<p:message for="email" />						
+						
+						
 						<h:outputText value="Fecha Nacimiento:" />
 						<p:datePicker
 							value="#{beanSwoUsuario.swoUsuarioSeleccionado.fechaNaciUsu}" />
-							
+
 						<h:outputText value="Seleccione un rol:" />
 						<p:selectOneMenu value="#{beanSwoUsuario.codigoRol}">
-							<f:selectItems value="#{beanSwoUsuario.listaSwoRoles}" var="sworoles"
-							
-								itemValue="#{sworoles.codigoRol}" itemLabel="#{sworoles.nombreRol}" />
+							<f:selectItems value="#{beanSwoUsuario.listaSwoRoles}"
+								var="sworoles" itemValue="#{sworoles.codigoRol}"
+								itemLabel="#{sworoles.nombreRol}" />
 						</p:selectOneMenu>
 					</p:panelGrid>
 					<p:commandButton value="Actualizar" icon="fa fa-save"
@@ -245,5 +266,6 @@
 
 		</div>
 	</div>
+
 </body>
 </html>
